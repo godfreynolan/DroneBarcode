@@ -7,16 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004DC137DB2204AB78228D68 /* Pods_DroneBarcodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */; };
+		4F39F3EC88339F367F308A03 /* Pods_DroneBarcodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */; };
+		EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */; };
+		FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */; };
+		FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */; };
+		FFA8B7C22064056100676B06 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7C12064056100676B06 /* ScanViewController.swift */; };
+		FFA8B7E02064092800676B06 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFA8B7DF2064091800676B06 /* VideoPreviewer.framework */; };
+		FFA8B7E12064092800676B06 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FFA8B7DF2064091800676B06 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FFCDE08C2062A2CC00F885B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE08B2062A2CC00F885B3 /* AppDelegate.swift */; };
-		FFCDE08E2062A2CC00F885B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE08D2062A2CC00F885B3 /* ViewController.swift */; };
 		FFCDE0912062A2CC00F885B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCDE08F2062A2CC00F885B3 /* Main.storyboard */; };
 		FFCDE0932062A2CC00F885B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCDE0922062A2CC00F885B3 /* Assets.xcassets */; };
-		FFCDE0962062A2CC00F885B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFCDE0942062A2CC00F885B3 /* LaunchScreen.storyboard */; };
 		FFCDE0A12062A2CC00F885B3 /* DroneBarcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE0A02062A2CC00F885B3 /* DroneBarcodeTests.swift */; };
 		FFCDE0AC2062A2CD00F885B3 /* DroneBarcodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE0AB2062A2CD00F885B3 /* DroneBarcodeUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FFA8B7DE2064091800676B06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
+		FFA8B7E22064092800676B06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
 		FFCDE09D2062A2CC00F885B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FFCDE0802062A2CC00F885B3 /* Project object */;
@@ -33,13 +53,38 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FFA8B7E42064092900676B06 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FFA8B7E12064092800676B06 /* VideoPreviewer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1EDBD3EDCCB9E183A8526B4B /* Pods-DroneBarcodeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63D7A895E808F1E8D7D6E58E /* Pods-DroneBarcodeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests.release.xcconfig"; sourceTree = "<group>"; };
+		7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcode.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode.release.xcconfig"; sourceTree = "<group>"; };
+		88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96345A5D1016C1C5EE1CA9F2 /* Pods-DroneBarcodeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C80697D5C040D7634011A7DC /* Pods-DroneBarcodeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0E777A4ACE88F52F24C1267 /* Pods-DroneBarcode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode.debug.xcconfig"; sourceTree = "<group>"; };
+		FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneConnectionManager.swift; sourceTree = "<group>"; };
+		FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
+		FFA8B7C12064056100676B06 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		FFCDE0882062A2CC00F885B3 /* DroneBarcode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DroneBarcode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCDE08B2062A2CC00F885B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FFCDE08D2062A2CC00F885B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FFCDE0902062A2CC00F885B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFCDE0922062A2CC00F885B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FFCDE0952062A2CC00F885B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFCDE0972062A2CC00F885B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFCDE09C2062A2CC00F885B3 /* DroneBarcodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DroneBarcodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCDE0A02062A2CC00F885B3 /* DroneBarcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneBarcodeTests.swift; sourceTree = "<group>"; };
@@ -54,6 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA8B7E02064092800676B06 /* VideoPreviewer.framework in Frameworks */,
+				EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F39F3EC88339F367F308A03 /* Pods_DroneBarcodeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +116,62 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004DC137DB2204AB78228D68 /* Pods_DroneBarcodeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31917A40288C1EAE6E5AAEBD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E0E777A4ACE88F52F24C1267 /* Pods-DroneBarcode.debug.xcconfig */,
+				7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */,
+				1EDBD3EDCCB9E183A8526B4B /* Pods-DroneBarcodeTests.debug.xcconfig */,
+				63D7A895E808F1E8D7D6E58E /* Pods-DroneBarcodeTests.release.xcconfig */,
+				C80697D5C040D7634011A7DC /* Pods-DroneBarcodeUITests.debug.xcconfig */,
+				96345A5D1016C1C5EE1CA9F2 /* Pods-DroneBarcodeUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C35D21EFFC07DCCDD6C73847 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */,
+				88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */,
+				C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */,
+				5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FFA8B7BB2063F23500676B06 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FFA8B7BE2063FC6800676B06 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8B7C12064056100676B06 /* ScanViewController.swift */,
+				FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FFA8B7DB2064091800676B06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFA8B7DF2064091800676B06 /* VideoPreviewer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FFCDE07F2062A2CC00F885B3 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +179,8 @@
 				FFCDE09F2062A2CC00F885B3 /* DroneBarcodeTests */,
 				FFCDE0AA2062A2CD00F885B3 /* DroneBarcodeUITests */,
 				FFCDE0892062A2CC00F885B3 /* Products */,
+				31917A40288C1EAE6E5AAEBD /* Pods */,
+				C35D21EFFC07DCCDD6C73847 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,11 +197,11 @@
 		FFCDE08A2062A2CC00F885B3 /* DroneBarcode */ = {
 			isa = PBXGroup;
 			children = (
+				FFA8B7BB2063F23500676B06 /* Services */,
+				FFA8B7BE2063FC6800676B06 /* ViewControllers */,
 				FFCDE08B2062A2CC00F885B3 /* AppDelegate.swift */,
-				FFCDE08D2062A2CC00F885B3 /* ViewController.swift */,
 				FFCDE08F2062A2CC00F885B3 /* Main.storyboard */,
 				FFCDE0922062A2CC00F885B3 /* Assets.xcassets */,
-				FFCDE0942062A2CC00F885B3 /* LaunchScreen.storyboard */,
 				FFCDE0972062A2CC00F885B3 /* Info.plist */,
 			);
 			path = DroneBarcode;
@@ -132,13 +232,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCDE0B02062A2CD00F885B3 /* Build configuration list for PBXNativeTarget "DroneBarcode" */;
 			buildPhases = (
+				331679C9ED9D6292FFD7A30E /* [CP] Check Pods Manifest.lock */,
 				FFCDE0842062A2CC00F885B3 /* Sources */,
 				FFCDE0852062A2CC00F885B3 /* Frameworks */,
 				FFCDE0862062A2CC00F885B3 /* Resources */,
+				E404B298DD1FA49B74C21940 /* [CP] Embed Pods Frameworks */,
+				3AA08685E1FD43564B5146CF /* [CP] Copy Pods Resources */,
+				FFA8B7E42064092900676B06 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FFA8B7E32064092800676B06 /* PBXTargetDependency */,
 			);
 			name = DroneBarcode;
 			productName = DroneBarcode;
@@ -149,9 +254,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCDE0B32062A2CD00F885B3 /* Build configuration list for PBXNativeTarget "DroneBarcodeTests" */;
 			buildPhases = (
+				CA5005F3552DD5FC2AAAC508 /* [CP] Check Pods Manifest.lock */,
 				FFCDE0982062A2CC00F885B3 /* Sources */,
 				FFCDE0992062A2CC00F885B3 /* Frameworks */,
 				FFCDE09A2062A2CC00F885B3 /* Resources */,
+				F5C7FBC52838A9BAA605D4B0 /* [CP] Embed Pods Frameworks */,
+				29D2D2A01BFCE85E99735A14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +275,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FFCDE0B62062A2CD00F885B3 /* Build configuration list for PBXNativeTarget "DroneBarcodeUITests" */;
 			buildPhases = (
+				9B9EE52BA27C89BE38ED6EDB /* [CP] Check Pods Manifest.lock */,
 				FFCDE0A32062A2CD00F885B3 /* Sources */,
 				FFCDE0A42062A2CD00F885B3 /* Frameworks */,
 				FFCDE0A52062A2CD00F885B3 /* Resources */,
+				BFDCBA6E419185AB832F890C /* [CP] Embed Pods Frameworks */,
+				DE459CEE5D1079D3656EE7A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,6 +329,12 @@
 			mainGroup = FFCDE07F2062A2CC00F885B3;
 			productRefGroup = FFCDE0892062A2CC00F885B3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FFA8B7DB2064091800676B06 /* Products */;
+					ProjectRef = FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FFCDE0872062A2CC00F885B3 /* DroneBarcode */,
@@ -227,12 +344,21 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		FFA8B7DF2064091800676B06 /* VideoPreviewer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = VideoPreviewer.framework;
+			remoteRef = FFA8B7DE2064091800676B06 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		FFCDE0862062A2CC00F885B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFCDE0962062A2CC00F885B3 /* LaunchScreen.storyboard in Resources */,
 				FFCDE0932062A2CC00F885B3 /* Assets.xcassets in Resources */,
 				FFCDE0912062A2CC00F885B3 /* Main.storyboard in Resources */,
 			);
@@ -254,13 +380,165 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29D2D2A01BFCE85E99735A14 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		331679C9ED9D6292FFD7A30E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DroneBarcode-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AA08685E1FD43564B5146CF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B9EE52BA27C89BE38ED6EDB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DroneBarcodeUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFDCBA6E419185AB832F890C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA5005F3552DD5FC2AAAC508 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DroneBarcodeTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE459CEE5D1079D3656EE7A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E404B298DD1FA49B74C21940 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-frameworks.sh",
+				"${PODS_ROOT}/DJI-SDK-iOS/iOS_Mobile_SDK/DJISDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DJISDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5C7FBC52838A9BAA605D4B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FFCDE0842062A2CC00F885B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFCDE08E2062A2CC00F885B3 /* ViewController.swift in Sources */,
+				FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */,
+				FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */,
 				FFCDE08C2062A2CC00F885B3 /* AppDelegate.swift in Sources */,
+				FFA8B7C22064056100676B06 /* ScanViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +561,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FFA8B7E32064092800676B06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VideoPreviewer;
+			targetProxy = FFA8B7E22064092800676B06 /* PBXContainerItemProxy */;
+		};
 		FFCDE09E2062A2CC00F885B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FFCDE0872062A2CC00F885B3 /* DroneBarcode */;
@@ -302,14 +585,6 @@
 				FFCDE0902062A2CC00F885B3 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FFCDE0942062A2CC00F885B3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FFCDE0952062A2CC00F885B3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -424,13 +699,15 @@
 		};
 		FFCDE0B12062A2CD00F885B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0E777A4ACE88F52F24C1267 /* Pods-DroneBarcode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UHDP7LK8C7;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DroneBarcode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.riis.DroneBarcode;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.riis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -439,13 +716,15 @@
 		};
 		FFCDE0B22062A2CD00F885B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UHDP7LK8C7;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DroneBarcode/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.riis.DroneBarcode;
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.riis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,6 +733,7 @@
 		};
 		FFCDE0B42062A2CD00F885B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EDBD3EDCCB9E183A8526B4B /* Pods-DroneBarcodeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -471,6 +751,7 @@
 		};
 		FFCDE0B52062A2CD00F885B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63D7A895E808F1E8D7D6E58E /* Pods-DroneBarcodeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -488,6 +769,7 @@
 		};
 		FFCDE0B72062A2CD00F885B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C80697D5C040D7634011A7DC /* Pods-DroneBarcodeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -504,6 +786,7 @@
 		};
 		FFCDE0B82062A2CD00F885B3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96345A5D1016C1C5EE1CA9F2 /* Pods-DroneBarcodeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
