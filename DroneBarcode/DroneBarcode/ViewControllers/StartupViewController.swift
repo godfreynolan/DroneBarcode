@@ -60,7 +60,7 @@ class StartupViewController: UIViewController {
         self.title = "Drone Barcode"
         self.statusLabel.text = "Status: Trying to connect..."
         self.modelLabel.text = "Model: Unavailable"
-        self.openButton.isEnabled = false
+//        self.openButton.isEnabled = false
     }
     
     private func productConnected() {
