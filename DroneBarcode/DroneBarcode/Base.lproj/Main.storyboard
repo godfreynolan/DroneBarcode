@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NWe-gp-Vic">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NWe-gp-Vic">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="-56" y="-883"/>
         </scene>
-        <!--Scan View Controller-->
+        <!--Scan Sample View Controller-->
         <scene sceneID="PBu-Xc-enw">
             <objects>
-                <viewController id="YoL-zv-PPK" customClass="ScanViewController" customModule="DroneBarcode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YoL-zv-PPK" customClass="ScanSampleViewController" customModule="DroneBarcode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eJr-rz-s8I">
                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,29 +106,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1B-3x-SeN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618.75" y="669.53125"/>
+            <point key="canvasLocation" x="1273" y="670"/>
         </scene>
         <!--Flight Plan View Controller-->
         <scene sceneID="UXM-1p-wKi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c4j-Fg-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="dXe-12-92J" customClass="FlightPlanViewController" customModule="DroneBarcode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tYP-KD-HTT">
                         <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xe2-4C-Tbw">
-                                <rect key="frame" x="20" y="82" width="664" height="559"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKe-dZ-o7i">
-                                <rect key="frame" x="20" y="698" width="145" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Record Flight Plan"/>
-                                <connections>
-                                    <action selector="recordFlightPath:" destination="dXe-12-92J" eventType="touchUpInside" id="Iym-5R-CaL"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Latitude: 0.0000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPq-UD-MMc">
                                 <rect key="frame" x="20" y="20" width="145" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -165,18 +152,50 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dC-Mu-VgF">
+                                <rect key="frame" x="20" y="707" width="115" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="stop:" destination="dXe-12-92J" eventType="touchUpInside" id="Sli-I3-VbU"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Logs:" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-g2-j1E">
+                                <rect key="frame" x="20" y="82" width="664" height="559"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxv-dm-Ei4">
+                                <rect key="frame" x="143" y="718" width="102" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Turn"/>
+                                <connections>
+                                    <action selector="turn:" destination="dXe-12-92J" eventType="touchUpInside" id="323-UO-Pu6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfY-0a-Aiz">
+                                <rect key="frame" x="395" y="718" width="154" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Increase Pitch"/>
+                                <connections>
+                                    <action selector="increasePitch:" destination="dXe-12-92J" eventType="touchUpInside" id="u7E-Nw-Op2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="OHZ-Z2-b32"/>
                     </view>
                     <connections>
                         <outlet property="altitudeLabel" destination="NME-w3-XeD" id="QC8-Xm-NNU"/>
-                        <outlet property="flightMapView" destination="Xe2-4C-Tbw" id="K97-vK-0Rp"/>
                         <outlet property="latitudeLabel" destination="xPq-UD-MMc" id="Br7-Ts-EZu"/>
+                        <outlet property="logTextView" destination="K1t-g2-j1E" id="PoH-Mo-t7O"/>
                         <outlet property="longitudeLabel" destination="9no-vJ-cwS" id="BZL-N4-Pam"/>
                         <outlet property="statusLabel" destination="0Z6-3J-AjQ" id="nUf-Db-pJt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c4j-Fg-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-56.249999999999993" y="669.53125"/>
         </scene>
@@ -207,6 +226,7 @@
                     <connections>
                         <segue destination="YoL-zv-PPK" kind="showDetail" identifier="ScannerSegue" id="Gof-MT-Xr0"/>
                         <segue destination="dXe-12-92J" kind="showDetail" identifier="FlightPlanSegue" id="4cf-sJ-djR"/>
+                        <segue destination="PrC-7e-Ila" kind="showDetail" identifier="FlightDownloadSegue" id="VZW-Il-1Xb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rps-Zv-pca" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -228,6 +248,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8L-ff-gNU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="619" y="-78"/>
+        </scene>
+        <!--Flight Download View Controller-->
+        <scene sceneID="i7a-Ok-HIM">
+            <objects>
+                <viewController id="PrC-7e-Ila" customClass="FlightDownloadViewController" customModule="DroneBarcode" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1j6-ee-0V1">
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vpJ-HX-opL">
+                                <rect key="frame" x="20" y="103" width="664" height="580"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Jl-Z7-piT">
+                                        <rect key="frame" x="0.0" y="0.0" width="664" height="580"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" id="hSA-K4-YI2">
+                                                <rect key="frame" x="0.0" y="28" width="664" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hSA-K4-YI2" id="evY-R0-Ncw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="664" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <sections/>
+                                    </tableView>
+                                </subviews>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOv-Oq-vl3">
+                                <rect key="frame" x="240" y="691" width="223" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start Download"/>
+                                <connections>
+                                    <action selector="downloadPictures:" destination="PrC-7e-Ila" eventType="touchUpInside" id="T7Q-hF-u1A"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Checking for Images to download" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHj-xf-4sL">
+                                <rect key="frame" x="20" y="20" width="664" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Downloading Image 0 of 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pds-hB-16I">
+                                <rect key="frame" x="20" y="67" width="664" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GdK-D3-69q"/>
+                    </view>
+                    <connections>
+                        <outlet property="downloadProgressLabel" destination="Pds-hB-16I" id="si7-xT-i9C"/>
+                        <outlet property="tableView" destination="4Jl-Z7-piT" id="30E-RN-w6w"/>
+                        <outlet property="totalDownloadImageLabel" destination="pHj-xf-4sL" id="gEF-bc-GTq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6be-Bo-CGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="618.75" y="669.53125"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="drt-Ou-OkJ">

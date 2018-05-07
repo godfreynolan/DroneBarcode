@@ -19,7 +19,9 @@ class RootViewController: UITableViewController {
             cell.textLabel?.text = "Flight Plan"
             cell.detailTextLabel?.text = ""
         case 1:
-            cell.textLabel?.text = "Scanner"
+            cell.textLabel?.text = "Download & Scan Flight"
+        case 2:
+            cell.textLabel?.text = "Scanner Sample"
             cell.detailTextLabel?.text = ""
         default:
             cell.textLabel?.text = "test"
@@ -30,7 +32,7 @@ class RootViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -45,6 +47,8 @@ class RootViewController: UITableViewController {
         case 0:
             self.performSegue(withIdentifier: "FlightPlanSegue", sender: nil)
         case 1:
+            self.performSegue(withIdentifier: "FlightDownloadSegue", sender: nil)
+        case 2:
             self.performSegue(withIdentifier: "ScannerSegue", sender: nil)
         default:
             break
