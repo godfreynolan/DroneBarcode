@@ -76,6 +76,7 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
         self.flightController = (DJISDKManager.product() as? DJIAircraft)?.flightController
         
         // Change default measurement systems to make the drone easier to control
+        self.flightController?.isVirtualStickAdvancedModeEnabled = true
         self.flightController?.rollPitchControlMode = DJIVirtualStickRollPitchControlMode.velocity
         self.flightController?.yawControlMode = DJIVirtualStickYawControlMode.angle
         self.flightController?.rollPitchCoordinateSystem = DJIVirtualStickFlightCoordinateSystem.body

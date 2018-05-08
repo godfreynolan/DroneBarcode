@@ -13,10 +13,10 @@ import VideoPreviewer
 class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeScanCallback, DownloadCallback {
     private var barcodeScanner: BarcodeScanner!
     private var camera: DJICamera!
-    private var isCameraSetup = false
     private var imageDownloader: ImageDownloader!
     
     @IBOutlet weak var videoPreviewerView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,44 +27,9 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         self.setUpVideoPreview()
         
         self.camera = fetchCamera()!
-        self.camera.getSharpnessWithCompletion { (sharpness, error) in
-            if (error != nil) {
-                let alert = UIAlertController(title: "Format Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else if sharpness == 3 {
-                self.isCameraSetup = true
-            }
-        }
-    }
-    
-    @IBAction func setUpCamera(_ sender: Any?) {
-        if self.isCameraSetup {
-            let alert = UIAlertController(title: "Ready to Scan", message: "The drone's camera is ready to scan barcodes.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        self.camera.setSharpness(3) { (error) in
-            if (error != nil) {
-                let alert = UIAlertController(title: "Sharpness Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                self.isCameraSetup = true
-            }
-        }
     }
     
     @IBAction func startTakingPhoto(_ sender: Any?) {
-        if !self.isCameraSetup {
-            let alert = UIAlertController(title: "Error", message: "Please setup the drone's camera before taking a picture.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        
         camera.setMode(.shootPhoto, withCompletion: { (error) in
             DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1), execute: {() -> Void in
                 if (error != nil) {
@@ -88,6 +53,8 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 let alert = UIAlertController(title: "Success", message: "Photo captured. Ready to download.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                
+//                self.startDownload()
             }
         }
     }
@@ -119,14 +86,10 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func onScanSuccess(barcodeData: String) {
-        if barcodeData.isEmpty {
-            let alert = UIAlertController(title: "Result", message: "No barcode found", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Result", message: barcodeData, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        var displayData = barcodeData
+        
+        if displayData.isEmpty {
+            displayData = "No barcode found"
         }
         
         self.camera.setMode(.shootPhoto, withCompletion: { (error) in
@@ -136,9 +99,17 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 self.present(alert, animated: true, completion: nil)
             }
         })
+        
+        self.statusLabel.text = "Finished Barcode Scan"
+        
+        let alert = UIAlertController(title: "Barcodes", message: displayData, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func startDownload() {
+        self.statusLabel.text = "Scanning Barcode"
+        
         self.camera.setMode(.mediaDownload, withCompletion: { (error) in
             if error != nil {
                 let alert = UIAlertController(title: "Start Download Error", message: error?.localizedDescription, preferredStyle: .alert)
@@ -157,15 +128,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let lastImage = self.camera.mediaManager?.sdCardFileListSnapshot()?.last
-                if lastImage == nil {
-                    let alert = UIAlertController(title: "Error", message: "No photos available to download. Please take a picture.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    return
-                }
-                
-                self.imageDownloader.downloadImage(file: lastImage!)
+                self.imageDownloader.downloadImage(file: (self.camera.mediaManager?.sdCardFileListSnapshot()?.last)!)
             }
         })
     }

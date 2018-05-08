@@ -98,8 +98,8 @@ class StartupViewController: UIViewController {
             }
         })
         
-        let snapshotHandler = MediaSnapshotHandler(camera: self.fetchCamera()!, viewController: self)
-        snapshotHandler.fetchInitialData()
+//        let snapshotHandler = MediaSnapshotHandler(camera: self.fetchCamera()!, viewController: self)
+//        snapshotHandler.fetchInitialData()
     }
     
     private func productDisconnected() {
@@ -112,13 +112,13 @@ class StartupViewController: UIViewController {
     
     // Camera Settings
     private func setUpCamera() {
-//        self.fetchCamera()?.setSharpness(3, withCompletion: { (error) in
-//            if (error != nil) {
-//                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-//                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//                self.present(alert, animated: true, completion: nil)
-//            }
-//        })
+        self.fetchCamera()?.setContrast(3, withCompletion: { (error) in
+            if (error != nil) {
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
     }
     
     private func fetchCamera() -> DJICamera? {

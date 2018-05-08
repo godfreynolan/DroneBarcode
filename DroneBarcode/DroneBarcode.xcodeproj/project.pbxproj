@@ -33,6 +33,7 @@
 		FFCDE0932062A2CC00F885B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCDE0922062A2CC00F885B3 /* Assets.xcassets */; };
 		FFCDE0A12062A2CC00F885B3 /* DroneBarcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE0A02062A2CC00F885B3 /* DroneBarcodeTests.swift */; };
 		FFCDE0AC2062A2CD00F885B3 /* DroneBarcodeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCDE0AB2062A2CD00F885B3 /* DroneBarcodeUITests.swift */; };
+		FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		FFCDE0A72062A2CD00F885B3 /* DroneBarcodeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DroneBarcodeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFCDE0AB2062A2CD00F885B3 /* DroneBarcodeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneBarcodeUITests.swift; sourceTree = "<group>"; };
 		FFCDE0AD2062A2CD00F885B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendBarcodeTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */,
 				FFA375462069349C0031ACED /* ImageDownloader.swift */,
 				FF54F2EE2065755D00F8DBDF /* Utils.swift */,
+				FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -292,7 +295,6 @@
 				FFCDE0852062A2CC00F885B3 /* Frameworks */,
 				FFCDE0862062A2CC00F885B3 /* Resources */,
 				E404B298DD1FA49B74C21940 /* [CP] Embed Pods Frameworks */,
-				3AA08685E1FD43564B5146CF /* [CP] Copy Pods Resources */,
 				FFA8B7E42064092900676B06 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -313,8 +315,6 @@
 				FFCDE0982062A2CC00F885B3 /* Sources */,
 				FFCDE0992062A2CC00F885B3 /* Frameworks */,
 				FFCDE09A2062A2CC00F885B3 /* Resources */,
-				F5C7FBC52838A9BAA605D4B0 /* [CP] Embed Pods Frameworks */,
-				29D2D2A01BFCE85E99735A14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -334,8 +334,6 @@
 				FFCDE0A32062A2CD00F885B3 /* Sources */,
 				FFCDE0A42062A2CD00F885B3 /* Frameworks */,
 				FFCDE0A52062A2CD00F885B3 /* Resources */,
-				BFDCBA6E419185AB832F890C /* [CP] Embed Pods Frameworks */,
-				DE459CEE5D1079D3656EE7A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -436,21 +434,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		29D2D2A01BFCE85E99735A14 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		331679C9ED9D6292FFD7A30E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -467,21 +450,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3AA08685E1FD43564B5146CF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9B9EE52BA27C89BE38ED6EDB /* [CP] Check Pods Manifest.lock */ = {
@@ -502,21 +470,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFDCBA6E419185AB832F890C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CA5005F3552DD5FC2AAAC508 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,21 +488,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DE459CEE5D1079D3656EE7A2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E404B298DD1FA49B74C21940 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -566,21 +504,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F5C7FBC52838A9BAA605D4B0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -607,6 +530,7 @@
 				FFCDE08C2062A2CC00F885B3 /* AppDelegate.swift in Sources */,
 				FFA8B7C22064056100676B06 /* ScanSampleViewController.swift in Sources */,
 				FFA3755020694A0B0031ACED /* MediaHandler.swift in Sources */,
+				FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

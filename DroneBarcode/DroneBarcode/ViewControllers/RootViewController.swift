@@ -15,13 +15,13 @@ class RootViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         switch indexPath.row {
-        case 0:
+        case 1:
             cell.textLabel?.text = "Flight Plan"
             cell.detailTextLabel?.text = ""
-        case 1:
-            cell.textLabel?.text = "Download & Scan Flight"
         case 2:
-            cell.textLabel?.text = "Scanner Sample"
+            cell.textLabel?.text = "Download & Scan Flight"
+        case 0:
+            cell.textLabel?.text = "Manual Flight"
             cell.detailTextLabel?.text = ""
         default:
             cell.textLabel?.text = "test"
@@ -44,11 +44,11 @@ class RootViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0:
-            self.performSegue(withIdentifier: "FlightPlanSegue", sender: nil)
         case 1:
-            self.performSegue(withIdentifier: "FlightDownloadSegue", sender: nil)
+            self.performSegue(withIdentifier: "FlightPlanSegue", sender: nil)
         case 2:
+            self.performSegue(withIdentifier: "FlightDownloadSegue", sender: nil)
+        case 0:
             self.performSegue(withIdentifier: "ScannerSegue", sender: nil)
         default:
             break

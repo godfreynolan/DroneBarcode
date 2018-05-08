@@ -40,16 +40,17 @@ class BarcodeScanner {
                 return
             }
             
+            var message = ""
             // Loop through the found results
             for result in results {
                 // Cast the result to a barcode-observation
                 if let barcode = result as? VNBarcodeObservation {
-                    var message = "Symbology: \(barcode.symbology.rawValue)"
+                    message = "Symbology: \(barcode.symbology.rawValue)"
                     message += "\nPayload Value: \(barcode.payloadStringValue!)"
-                    
-                    self.callback.onScanSuccess(barcodeData: message)
                 }
             }
+            
+            self.callback.onScanSuccess(barcodeData: message)
         })
         
         // Create an image handler and use the CGImage your UIImage instance.
