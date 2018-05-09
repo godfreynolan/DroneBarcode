@@ -10,7 +10,7 @@ import UIKit
 import DJISDK
 
 class StartupViewController: UIViewController {
-    weak var appDelegate: AppDelegate! = UIApplication.shared.delegate as? AppDelegate
+    private var appDelegate: AppDelegate! = UIApplication.shared.delegate as? AppDelegate
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var modelLabel: UILabel!
@@ -42,6 +42,32 @@ class StartupViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        DJISDKManager.keyManager()?.stopAllListening(ofListeners: self)
+    }
+    
+    func setPreFlightImageCount(imageCount: Int) {
+        self.appDelegate.preFlightImageCount = imageCount
+    }
+    
+    // Connection UI
+    func showDroneConnected() {
+        self.setUpCamera()
+        
+        self.statusLabel.text = "Status: Connected"
+        
+        self.modelLabel.text = "Model: \((DJISDKManager.product()?.model)!)"
+        self.openButton.isEnabled = true;
+        self.openButton.alpha = 1.0;
+    }
+    
+    private func resetUI() {
+        self.title = "Drone Barcode"
+        self.statusLabel.text = "Status: Trying to connect..."
+        self.modelLabel.text = "Model: Unavailable"
+        self.openButton.isEnabled = false
+    }
+    
     private func handleConnectionResult(isConnected: Bool) {
         DispatchQueue.main.async {
             if isConnected {
@@ -52,32 +78,28 @@ class StartupViewController: UIViewController {
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        DJISDKManager.keyManager()?.stopAllListening(ofListeners: self)
-    }
-    
-    private func resetUI() {
-        self.title = "Drone Barcode"
-        self.statusLabel.text = "Status: Trying to connect..."
-        self.modelLabel.text = "Model: Unavailable"
-//        self.openButton.isEnabled = false
-    }
-    
     private func productConnected() {
-        guard let newProduct = DJISDKManager.product() else {
-            let alert = UIAlertController(title: "Error", message: "Product is connected but DJISDKManager.product is nil -> something is wrong", preferredStyle: .alert)
+        guard DJISDKManager.product() != nil else {
+            let alert = UIAlertController(title: "Error", message: "Product is connected but cannot be retrieved", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-            print("Product is connected but DJISDKManager.product is nil -> something is wrong")
             return;
         }
         
-        self.statusLabel.text = "Status: Connected"
+        self.statusLabel.text = "Status: Connecting..."
         
-        //Updates the product's model
-        self.modelLabel.text = "Model: \((newProduct.model)!)"
-        self.openButton.isEnabled = true;
-        self.openButton.alpha = 1.0;
+        let controller = (DJISDKManager.product() as? DJIAircraft)?.flightController
+        
+        controller?.setVisionAssistedPositioningEnabled(true, withCompletion: { (error) in
+            if error != nil {
+                // Handle error
+            } else {
+                self.showDroneConnected()
+            }
+        })
+        
+//        let snapshotHandler = MediaSnapshotHandler(camera: self.fetchCamera()!, viewController: self)
+//        snapshotHandler.fetchInitialData()
     }
     
     private func productDisconnected() {
@@ -86,5 +108,28 @@ class StartupViewController: UIViewController {
         
         self.openButton.isEnabled = false;
         self.openButton.alpha = 0.8;
+    }
+    
+    // Camera Settings
+    private func setUpCamera() {
+        self.fetchCamera()?.setContrast(3, withCompletion: { (error) in
+            if (error != nil) {
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    private func fetchCamera() -> DJICamera? {
+        if (DJISDKManager.product() == nil) {
+            return nil
+        }
+        
+        if (DJISDKManager.product() is DJIAircraft) {
+            return (DJISDKManager.product() as? DJIAircraft)?.camera
+        }
+        
+        return nil
     }
 }
