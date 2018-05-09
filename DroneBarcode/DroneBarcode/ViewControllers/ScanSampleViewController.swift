@@ -15,6 +15,8 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     private var camera: DJICamera!
     private var imageDownloader: ImageDownloader!
     
+    private var scanningAlert: UIAlertController!
+    
     @IBOutlet weak var videoPreviewerView: UIView!
     @IBOutlet weak var statusLabel: UILabel!
     
@@ -50,11 +52,16 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Success", message: "Photo captured. Ready to download.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+//                let alert = UIAlertController(title: "Success", message: "Photo captured. Please wait for the barcode.", preferredStyle: .alert)
+//                self.present(alert, animated: true, completion: nil)
                 
-//                self.startDownload()
+                self.scanningAlert = UIAlertController(title: "Scanning Barcode", message: "Retrieving barcode from the captured image.", preferredStyle: .alert)
+                self.present(self.scanningAlert, animated: true, completion: nil)
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+//                    alert.dismiss(animated: true, completion: nil)
+                    self.startDownload()
+                })
             }
         }
     }
@@ -74,6 +81,8 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func onError(error: Error?) {
+        self.scanningAlert.dismiss(animated: true, completion: nil)
+        
         if error == nil {
             let alert = UIAlertController(title: "Error", message: "Could not perform barcode-request!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -102,9 +111,13 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         
         self.statusLabel.text = "Finished Barcode Scan"
         
-        let alert = UIAlertController(title: "Barcodes", message: displayData, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.scanningAlert.dismiss(animated: true, completion: nil)
+        
+//        let alert = UIAlertController(title: "Barcodes", message: displayData, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+        
+        SendBarcodeTask().sendBarcode(displayData)
     }
     
     private func startDownload() {

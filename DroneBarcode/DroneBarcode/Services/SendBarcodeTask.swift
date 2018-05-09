@@ -10,19 +10,18 @@ import UIKit
 
 class SendBarcodeTask {
     func sendBarcode(_ barcode: String) {
-        let params = ["barcode":barcode] as Dictionary<String, String>
+        let data = ["code": "", "data": barcode]
+        let dataArray = [data]
         
-        var request = URLRequest(url: URL(string: "test")!)
+        let jsonObject = ["codes": dataArray]
+        
+        var request = URLRequest(url: URL(string: "http://10.5.2.16:8000/riis")!)
         request.httpMethod = "POST"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.httpBody = try? JSONSerialization.data(withJSONObject: jsonObject, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-//            } catch {
-//            }
         })
         
         task.resume()
