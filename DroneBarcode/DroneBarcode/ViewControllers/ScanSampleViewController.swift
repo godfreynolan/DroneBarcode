@@ -10,88 +10,50 @@ import DJISDK
 import UIKit
 import VideoPreviewer
 
-class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeScanCallback, DownloadCallback {
+class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeScanCallback {
     private var barcodeScanner: BarcodeScanner!
-    private var camera: DJICamera!
-    private var imageDownloader: ImageDownloader!
     
     private var scanningAlert: UIAlertController!
     
+    private var scanningTimer: Timer!
+    
     @IBOutlet weak var videoPreviewerView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.barcodeScanner = BarcodeScanner(callback: self)
-        self.imageDownloader = ImageDownloader(callback: self)
         
         self.setUpVideoPreview()
-        
-        self.camera = fetchCamera()!
     }
     
-    @IBAction func startTakingPhoto(_ sender: Any?) {
-        camera.setMode(.shootPhoto, withCompletion: { (error) in
-            DispatchQueue.main.asyncAfter(deadline: (DispatchTime.now() + 1), execute: {() -> Void in
-                if (error != nil) {
-                    let alert = UIAlertController(title: "Shoot Photo Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                } else {
-                    self.takePhoto()
-                }
-            })
-        })
-    }
-    
-    private func takePhoto() {
-        self.camera.startShootPhoto { (error) in
-            if error != nil {
-                let alert = UIAlertController(title: "Start Shoot Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else {
-//                let alert = UIAlertController(title: "Success", message: "Photo captured. Please wait for the barcode.", preferredStyle: .alert)
-//                self.present(alert, animated: true, completion: nil)
-                
-                self.scanningAlert = UIAlertController(title: "Scanning Barcode", message: "Retrieving barcode from the captured image.", preferredStyle: .alert)
-                self.present(self.scanningAlert, animated: true, completion: nil)
-                
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
-//                    alert.dismiss(animated: true, completion: nil)
-                    self.startDownload()
-                })
-            }
+    override func viewDidDisappear(_ animated: Bool) {
+        if self.scanningTimer.isValid {
+            self.scanningTimer.invalidate()
         }
     }
     
-    @IBAction func download(_ sender: Any?) {
-        self.startDownload()
-    }
-    
-    func onDownloadError(error: Error?) {
-        let alert = UIAlertController(title: "Download error", message: error?.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func onDownloadSuccess(image: UIImage) {
-        self.barcodeScanner.scanForBarcode(image: image)
+    @objc func takePhoto() {
+        let renderer = UIGraphicsImageRenderer(size: self.videoPreviewerView.bounds.size)
+        let capturedImage = renderer.image { ctx in
+            self.videoPreviewerView.drawHierarchy(in: self.videoPreviewerView.bounds, afterScreenUpdates: true)
+        }
+        
+        self.barcodeScanner.scanForBarcode(image: capturedImage)
     }
     
     func onError(error: Error?) {
-        self.scanningAlert.dismiss(animated: true, completion: nil)
+//        self.scanningAlert.dismiss(animated: true, completion: nil)
         
-        if error == nil {
-            let alert = UIAlertController(title: "Error", message: "Could not perform barcode-request!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+//        if error == nil {
+//            let alert = UIAlertController(title: "Error", message: "Could not perform barcode-request!", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        } else {
+//            let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
     }
     
     func onScanSuccess(barcodeData: String) {
@@ -99,51 +61,16 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         
         if displayData.isEmpty {
             displayData = "No barcode found"
+            return
         }
         
-        self.camera.setMode(.shootPhoto, withCompletion: { (error) in
-            if (error != nil) {
-                let alert = UIAlertController(title: "Shoot Photo Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        })
-        
-        self.statusLabel.text = "Finished Barcode Scan"
-        
-        self.scanningAlert.dismiss(animated: true, completion: nil)
+//        self.scanningAlert.dismiss(animated: true, completion: nil)
         
 //        let alert = UIAlertController(title: "Barcodes", message: displayData, preferredStyle: .alert)
 //        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
 //        self.present(alert, animated: true, completion: nil)
         
         SendBarcodeTask().sendBarcode(displayData)
-    }
-    
-    private func startDownload() {
-        self.statusLabel.text = "Scanning Barcode"
-        
-        self.camera.setMode(.mediaDownload, withCompletion: { (error) in
-            if error != nil {
-                let alert = UIAlertController(title: "Start Download Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                self.fetchImage()
-            }
-        })
-    }
-    
-    private func fetchImage() {
-        self.camera.mediaManager?.refreshFileList(of: .sdCard, withCompletion: { (error) in
-            if error != nil {
-                let alert = UIAlertController(title: "Refresh File List Error", message: error?.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            } else {
-                self.imageDownloader.downloadImage(file: (self.camera.mediaManager?.sdCardFileListSnapshot()?.last)!)
-            }
-        })
     }
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {
@@ -165,6 +92,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         }
         
         VideoPreviewer.instance().start()
+        self.scanningTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(takePhoto)), userInfo: nil, repeats: true)
     }
     
     private func resetVideoPreview() {
@@ -177,17 +105,9 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         } else {
             DJISDKManager.videoFeeder()?.primaryVideoFeed.remove(self)
         }
-    }
-    
-    private func fetchCamera() -> DJICamera? {
-        if (DJISDKManager.product() == nil) {
-            return nil
-        }
         
-        if (DJISDKManager.product() is DJIAircraft) {
-            return (DJISDKManager.product() as? DJIAircraft)?.camera
+        if self.scanningTimer.isValid {
+            self.scanningTimer.invalidate()
         }
-        
-        return nil
     }
 }

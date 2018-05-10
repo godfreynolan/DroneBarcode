@@ -87,7 +87,7 @@ class FlightDownloadViewController: UIViewController, UITableViewDataSource, Bar
     }
     
     func onDownloadSuccess(image: UIImage) {
-        self.barcodeScanner.scanForBarcode(image: image)
+//        self.barcodeScanner.scanForBarcode(image: image)
     }
     
     //BarcodeScanCallback

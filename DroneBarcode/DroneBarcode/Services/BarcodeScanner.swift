@@ -17,7 +17,6 @@ class BarcodeScanner {
     }
     
     func scanForBarcode(image: UIImage) {
-        // Create a barcode detection-request
         let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
             if error != nil {
                 DispatchQueue.main.async {
