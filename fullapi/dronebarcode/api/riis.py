@@ -57,5 +57,7 @@ def get_block():
         abort(400)
     context = {}
     context["status"] = 'ok'
+
+    # TODO: return the next block in the chain
     
     return jsonify(**context), 200
