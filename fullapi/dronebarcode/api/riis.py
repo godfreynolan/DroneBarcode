@@ -1,4 +1,7 @@
-#!flask/bin/python
+# Block chain storage for barcode data sent by drone
+#
+# Luke Justice (justicelu97@gmail.com) 2018
+
 import dronebarcode
 import hashlib
 from flask import Flask
@@ -8,6 +11,7 @@ from flask import abort
 
 
 difficulty = 5
+default_method = 'sha512'
 
 
 def create_hash(block, algorithm='sha512'):
@@ -134,7 +138,13 @@ def get_block():
     context = {}
     context["status"] = 'ok'
 
-    context["block"], context['length'] = select_last_block()
+    block, length = select_last_block()
+
+    print(length)
+
+    context['last_hash'] = block['bchash']
+    context['hash_method'] = default_method
+    context['difficulty'] = difficulty
     
     return jsonify(**context), 200
 
@@ -161,6 +171,28 @@ def get_chain():
 
     context['chain'] = chain
     context['status'] = 'ok'
+    return jsonify(**context), 200
+
+
+@dronebarcode.app.route('/append', methods=['POST'])
+def append():
+
+    if not request.json:
+        abort(400)
+    context = {}
+
+    block = request.json["block"]
+
+    # TODO: check that they are inserting into recent
+
+    connection = dronebarcode.model.get_db()
+    connection.execute(
+        "INSERT INTO blockchain "
+        "VALUES (?, ?, ?, ?, ?)",
+        (block['hash'], block['data'], block['nonce'], block['created'], block['prevhash'])
+    )
+
+    context["status"] = 'ok'
     return jsonify(**context), 200
 
 
