@@ -43,34 +43,14 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func onError(error: Error?) {
-//        self.scanningAlert.dismiss(animated: true, completion: nil)
-        
-//        if error == nil {
-//            let alert = UIAlertController(title: "Error", message: "Could not perform barcode-request!", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        } else {
-//            let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
     }
     
     func onScanSuccess(barcodeData: String) {
-        var displayData = barcodeData
-        
-        if displayData.isEmpty {
-            displayData = "No barcode found"
+        if barcodeData.isEmpty {
             return
         }
         
-//        self.scanningAlert.dismiss(animated: true, completion: nil)
-        
-//        let alert = UIAlertController(title: "Barcodes", message: displayData, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-        
-        SendBarcodeTask().sendBarcode(displayData)
+        SendBarcodeTask().sendBarcode(barcodeData)
     }
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {
