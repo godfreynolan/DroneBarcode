@@ -162,10 +162,6 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     }
     
     //MARK: - Helpers
-    func setPreFlightImageCount(imageCount: Int) {
-        self.appDelegate.preFlightImageCount = imageCount
-    }
-    
     private func fetchCamera() -> DJICamera? {
         if (DJISDKManager.product() == nil) {
             return nil

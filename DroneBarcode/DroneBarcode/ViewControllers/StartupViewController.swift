@@ -46,10 +46,6 @@ class StartupViewController: UIViewController {
         DJISDKManager.keyManager()?.stopAllListening(ofListeners: self)
     }
     
-    func setPreFlightImageCount(imageCount: Int) {
-        self.appDelegate.preFlightImageCount = imageCount
-    }
-    
     // Connection UI
     func showDroneConnected() {
         self.setUpCamera()
@@ -97,9 +93,6 @@ class StartupViewController: UIViewController {
                 self.showDroneConnected()
             }
         })
-        
-//        let snapshotHandler = MediaSnapshotHandler(camera: self.fetchCamera()!, viewController: self)
-//        snapshotHandler.fetchInitialData()
     }
     
     private func productDisconnected() {

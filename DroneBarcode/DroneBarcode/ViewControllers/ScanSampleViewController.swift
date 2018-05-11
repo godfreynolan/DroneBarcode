@@ -50,7 +50,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
             return
         }
         
-        SendBarcodeTask().sendBarcode(barcodeData)
+        SendBarcodeTask().getBlockDetails(barcodeData)
     }
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {

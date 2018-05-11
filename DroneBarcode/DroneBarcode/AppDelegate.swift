@@ -10,8 +10,6 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var flightImageCount = 9
-    var preFlightImageCount = 20
     var window: UIWindow?
 
     private let droneConnectionManager = DroneConnectionManager()

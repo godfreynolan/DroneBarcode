@@ -13,12 +13,6 @@ class Utils {
         return 3.28084 * meters
     }
     
-    static func convertSpacingFeetToDegrees(_ spacingFeet:Double) -> Double {
-        // SpacingFeet / 3280.4 converts feet to kilometers
-        // Kilometers / (10000/90) converts kilometers to lat/long distance
-        return (spacingFeet / 3280.4) / (10000/90)
-    }
-    
     static func getTurnAroundFlightCommand(_ yaw: Double) -> DJIVirtualStickFlightControlData {
         return DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(yaw), verticalThrottle: 0)
     }
