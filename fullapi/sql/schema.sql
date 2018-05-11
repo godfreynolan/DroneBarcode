@@ -12,3 +12,11 @@ AFTER INSERT ON codes
 BEGIN
 	UPDATE codes SET created = datetime('now') WHERE cid = new.cid;
 END;
+
+CREATE TABLE blockchain(
+	bchash VARCHAR(64) NOT NULL PRIMARY KEY,
+	bcdata VARCHAR(256) NOT NULL,
+	bcnonce INTEGER NOT NULL,
+	bccreated INTEGER NOT NULL,
+	bcprevhash VARCHAR(64) NOT NULL
+);
