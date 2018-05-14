@@ -56,8 +56,8 @@ class Posts extends React.Component {
     const posts = this.state.data.map(post => (
       <div className="post">
         <div className="barcode">
-          {post.code}
-          {post.data}
+          DATA:{post.txdata}<br/>
+          BLOCK:{post.bchash}<br/>
         </div>
       </div>
     ));
