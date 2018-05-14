@@ -185,7 +185,8 @@ def get_chain():
     # Retrieving the stored chain data of the longest chain
     block, context['length'] = select_last_block()
     while block['bchash'] != '0':
-        chain.insert(0, block)
+        #chain.insert(0, block)
+        chain.append(block)
         cur = connection.execute(
             "SELECT * "
             "FROM blockchain "

@@ -5,14 +5,15 @@
 import dronebarcode
 import ecdsa
 import hashlib
-import random
 import requests
 import time
 from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import abort
-from threading import Thread
+
+# used for testing
+import random
 
 
 tx_per_block = 4
@@ -185,9 +186,9 @@ def transaction():
     # Insert into the database
     connection = dronebarcode.model.get_db()
     connection.execute(
-        "INSERT INTO transactions (txsignature, txfrom, txto, txdata, txcreated) "
-        "VALUES (?, ?, ?, ?, ?)",
-        (tx['signature'], tx['from'], tx['to'], tx['data'], str(tx['created']))
+        "INSERT INTO transactions (txsignature, txfrom, txto, txdata, txcreated, txspent) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        (tx['signature'], tx['from'], tx['to'], tx['data'], str(tx['created']), 0)
     )
 
     # Update the blockchain

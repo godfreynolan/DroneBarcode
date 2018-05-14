@@ -28,5 +28,6 @@ CREATE TABLE transactions(
 	txto VARCHAR(128) NOT NULL,
 	txdata VARCHAR(256) NOT NULL,
 	txcreated INTEGER NOT NULL,
+	txspent INTEGER NOT NULL,
 	FOREIGN KEY (bchash) REFERENCES blockchain(bchash)
 );
