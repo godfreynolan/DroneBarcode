@@ -10,19 +10,12 @@
 		004DC137DB2204AB78228D68 /* Pods_DroneBarcodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */; };
 		4F39F3EC88339F367F308A03 /* Pods_DroneBarcodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */; };
 		EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */; };
-		FF54F2EB2065721B00F8DBDF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EA2065721B00F8DBDF /* RootViewController.swift */; };
 		FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EC206573DE00F8DBDF /* FlightPlanViewController.swift */; };
 		FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EE2065755D00F8DBDF /* Utils.swift */; };
 		FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */; };
 		FF61782F209B41520098F1C6 /* FlightControlCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF61782E209B41520098F1C6 /* FlightControlCallback.swift */; };
-		FFA37545206933640031ACED /* FlightDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA37544206933640031ACED /* FlightDownloadViewController.swift */; };
-		FFA375472069349C0031ACED /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA375462069349C0031ACED /* ImageDownloader.swift */; };
-		FFA3754A206936050031ACED /* DownloadCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA37549206936050031ACED /* DownloadCallback.swift */; };
 		FFA3754C206939C20031ACED /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3754B206939C20031ACED /* BarcodeScanner.swift */; };
 		FFA3754E20693A2D0031ACED /* BarcodeScanCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3754D20693A2D0031ACED /* BarcodeScanCallback.swift */; };
-		FFA3755020694A0B0031ACED /* MediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3754F20694A0B0031ACED /* MediaHandler.swift */; };
-		FFA3755220694A210031ACED /* CameraCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3755120694A210031ACED /* CameraCallback.swift */; };
-		FFA3755520694AAF0031ACED /* MediaSnapshotHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3755420694AAF0031ACED /* MediaSnapshotHandler.swift */; };
 		FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */; };
 		FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */; };
 		FFA8B7C22064056100676B06 /* ScanSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7C12064056100676B06 /* ScanSampleViewController.swift */; };
@@ -91,19 +84,13 @@
 		C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80697D5C040D7634011A7DC /* Pods-DroneBarcodeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0E777A4ACE88F52F24C1267 /* Pods-DroneBarcode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode.debug.xcconfig"; sourceTree = "<group>"; };
-		FF54F2EA2065721B00F8DBDF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		FF37DA7520A5F108001D610F /* DroneBarcode-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DroneBarcode-Bridging-Header.h"; sourceTree = "<group>"; };
 		FF54F2EC206573DE00F8DBDF /* FlightPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightPlanViewController.swift; sourceTree = "<group>"; };
 		FF54F2EE2065755D00F8DBDF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightPlanner.swift; sourceTree = "<group>"; };
 		FF61782E209B41520098F1C6 /* FlightControlCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightControlCallback.swift; sourceTree = "<group>"; };
-		FFA37544206933640031ACED /* FlightDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDownloadViewController.swift; sourceTree = "<group>"; };
-		FFA375462069349C0031ACED /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
-		FFA37549206936050031ACED /* DownloadCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCallback.swift; sourceTree = "<group>"; };
 		FFA3754B206939C20031ACED /* BarcodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
 		FFA3754D20693A2D0031ACED /* BarcodeScanCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanCallback.swift; sourceTree = "<group>"; };
-		FFA3754F20694A0B0031ACED /* MediaHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaHandler.swift; sourceTree = "<group>"; };
-		FFA3755120694A210031ACED /* CameraCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCallback.swift; sourceTree = "<group>"; };
-		FFA3755420694AAF0031ACED /* MediaSnapshotHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSnapshotHandler.swift; sourceTree = "<group>"; };
 		FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneConnectionManager.swift; sourceTree = "<group>"; };
 		FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
 		FFA8B7C12064056100676B06 /* ScanSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanSampleViewController.swift; sourceTree = "<group>"; };
@@ -179,33 +166,21 @@
 			isa = PBXGroup;
 			children = (
 				FFA3754D20693A2D0031ACED /* BarcodeScanCallback.swift */,
-				FFA3755120694A210031ACED /* CameraCallback.swift */,
-				FFA37549206936050031ACED /* DownloadCallback.swift */,
 				FF61782E209B41520098F1C6 /* FlightControlCallback.swift */,
 			);
 			path = Callbacks;
-			sourceTree = "<group>";
-		};
-		FFA3755320694A4C0031ACED /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				FFA3754F20694A0B0031ACED /* MediaHandler.swift */,
-				FFA3755420694AAF0031ACED /* MediaSnapshotHandler.swift */,
-			);
-			path = Camera;
 			sourceTree = "<group>";
 		};
 		FFA8B7BB2063F23500676B06 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				FFA37548206935EA0031ACED /* Callbacks */,
-				FFA3755320694A4C0031ACED /* Camera */,
 				FFA3754B206939C20031ACED /* BarcodeScanner.swift */,
 				FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */,
 				FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */,
-				FFA375462069349C0031ACED /* ImageDownloader.swift */,
 				FF54F2EE2065755D00F8DBDF /* Utils.swift */,
 				FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */,
+				FF37DA7520A5F108001D610F /* DroneBarcode-Bridging-Header.h */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -213,11 +188,9 @@
 		FFA8B7BE2063FC6800676B06 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FFA37544206933640031ACED /* FlightDownloadViewController.swift */,
 				FF54F2EC206573DE00F8DBDF /* FlightPlanViewController.swift */,
 				FFA8B7C12064056100676B06 /* ScanSampleViewController.swift */,
 				FFA8B7BF2063FC7B00676B06 /* StartupViewController.swift */,
-				FF54F2EA2065721B00F8DBDF /* RootViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -357,6 +330,7 @@
 				TargetAttributes = {
 					FFCDE0872062A2CC00F885B3 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 					FFCDE09B2062A2CC00F885B3 = {
@@ -513,23 +487,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFA37545206933640031ACED /* FlightDownloadViewController.swift in Sources */,
-				FF54F2EB2065721B00F8DBDF /* RootViewController.swift in Sources */,
 				FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */,
-				FFA3755520694AAF0031ACED /* MediaSnapshotHandler.swift in Sources */,
 				FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */,
 				FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */,
 				FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */,
-				FFA3755220694A210031ACED /* CameraCallback.swift in Sources */,
-				FFA375472069349C0031ACED /* ImageDownloader.swift in Sources */,
 				FFA3754E20693A2D0031ACED /* BarcodeScanCallback.swift in Sources */,
 				FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */,
-				FFA3754A206936050031ACED /* DownloadCallback.swift in Sources */,
 				FF61782F209B41520098F1C6 /* FlightControlCallback.swift in Sources */,
 				FFA3754C206939C20031ACED /* BarcodeScanner.swift in Sources */,
 				FFCDE08C2062A2CC00F885B3 /* AppDelegate.swift in Sources */,
 				FFA8B7C22064056100676B06 /* ScanSampleViewController.swift in Sources */,
-				FFA3755020694A0B0031ACED /* MediaHandler.swift in Sources */,
 				FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -694,6 +661,7 @@
 			baseConfigurationReference = E0E777A4ACE88F52F24C1267 /* Pods-DroneBarcode.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UHDP7LK8C7;
@@ -703,6 +671,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.riis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DroneBarcode/Services/DroneBarcode-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -713,6 +683,7 @@
 			baseConfigurationReference = 7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UHDP7LK8C7;
@@ -722,6 +693,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.riis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DroneBarcode/Services/DroneBarcode-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
