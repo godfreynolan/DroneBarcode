@@ -124,6 +124,10 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
                 message += "Coordinate System = Ground"
             }
             
+            if state.isUltrasonicBeingUsed {
+                self.logTextView.text = self.logTextView.text + "\nIsUltrasonicBeingUsed: \(state.isUltrasonicBeingUsed)"
+            }
+            
             self.logTextView.text = self.logTextView.text + "\nController State: " + message
             self.logTextView.text = self.logTextView.text + "\nController State Info: \(state.attitude.yaw)"
         }

@@ -134,7 +134,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Logs:" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-g2-j1E">
-                                <rect key="frame" x="20" y="82" width="664" height="559"/>
+                                <rect key="frame" x="20" y="82" width="984" height="559"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -170,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4j-Fg-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="90"/>
+            <point key="canvasLocation" x="468.74999999999994" y="89.84375"/>
         </scene>
     </scenes>
 </document>

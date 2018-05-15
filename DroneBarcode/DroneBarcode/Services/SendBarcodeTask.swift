@@ -33,7 +33,6 @@ class SendBarcodeTask {
     }
     
     func sendBarcode(difficulty: Int, barcode: String, lastHash: String) {
-        
         let timeStamp = Int((Date().timeIntervalSince1970 * 1000.0).rounded())
         
         let hash = self.generateHash(difficulty: difficulty, timeStamp: timeStamp, previousHash: lastHash, data: barcode)
