@@ -9,12 +9,16 @@ from flask import request
 from flask import jsonify
 from flask import abort
 
+#used for testing
+import time
 
-difficulty = 5
+difficulty = 4
 default_method = 'sha512'
 
 
-def create_hash(block, algorithm='sha512'):
+def create_hash(block, algorithm=default_method):
+    """Creates a hash using data in the block."""
+
     unhashed = block["bcprevhash"] + str(block["bccreated"]) + str(block["bcnonce"]) + block["bcdata"]
     hash_obj = hashlib.new(algorithm)
     hash_obj.update(unhashed.encode('utf-8'))
@@ -23,17 +27,23 @@ def create_hash(block, algorithm='sha512'):
 
 
 def is_valid_hash(block):
+    """Validates the hash stored in the block."""
+
     if block["bchash"][:difficulty] != '0' * difficulty:
         return False
-    return create_hash(block, 'sha512') == block["bchash"]
+    return create_hash(block) == block["bchash"]
 
 
 def is_valid_chain(block):
+    """Checks if the block is in a valid portion of the chain."""
+
     # TODO: implement
     return True
 
 
 def get_chain_length(block):
+    """Returns the length of the chain to this block."""
+
     count = 1
     connection = dronebarcode.model.get_db()
     while block['bcprevhash'] != '0':
@@ -57,6 +67,8 @@ def get_chain_length(block):
 
 
 def select_last_block():
+    """Finds the last block in the longest chain."""
+
     # Select the end blocks in the chain
     connection = dronebarcode.model.get_db()
     cur = connection.execute(
@@ -88,8 +100,17 @@ def select_last_block():
     return bestblock, bestlength
 
 
+def clean_chain():
+    """Removes all rogue chains."""
+
+    # TODO: implement
+    return 4
+
+
 @dronebarcode.app.route('/riis', methods=['POST'])
 def index():
+    """DEPRECATED."""
+
     if not request.json:
         abort(400)
     context = {}
@@ -112,6 +133,8 @@ def index():
 
 @dronebarcode.app.route('/riis', methods=['GET'])
 def get_code():
+    """DEPRECATED."""
+
     context = {}
     results = []
     connection = dronebarcode.model.get_db()
@@ -135,6 +158,8 @@ def get_code():
 
 @dronebarcode.app.route('/block', methods=['GET'])
 def get_block():
+    """Returns information for continuing the chain."""
+
     context = {}
     context["status"] = 'ok'
 
@@ -151,13 +176,17 @@ def get_block():
 
 @dronebarcode.app.route('/chain', methods=['GET'])
 def get_chain():
+    """Gets all the chain data."""
+
     context = {}
     chain = []
     connection = dronebarcode.model.get_db()
     
+    # Retrieving the stored chain data of the longest chain
     block, context['length'] = select_last_block()
     while block['bchash'] != '0':
-        chain.insert(0, block)
+        #chain.insert(0, block)
+        chain.append(block)
         cur = connection.execute(
             "SELECT * "
             "FROM blockchain "
@@ -166,25 +195,26 @@ def get_chain():
         )
         block = cur.fetchone()
 
-    if len(chain) == 0:
-        chain.append(block)
-
     context['chain'] = chain
+    context['hash_method'] = default_method
+    context['difficulty'] = difficulty
     context['status'] = 'ok'
     return jsonify(**context), 200
 
 
 @dronebarcode.app.route('/append', methods=['POST'])
 def append():
+    """Appends a block to the chain."""
 
     if not request.json:
         abort(400)
     context = {}
-
     block = request.json["block"]
 
-    # TODO: check that they are inserting into recent
+    # TODO: check that they are inserting after final block
+    # abort(409)
 
+    # Append the block
     connection = dronebarcode.model.get_db()
     connection.execute(
         "INSERT INTO blockchain "
@@ -198,6 +228,8 @@ def append():
 
 @dronebarcode.app.route('/testmine', methods=['GET'])
 def mine():
+    """Mines and appends one block for testing."""
+
     context = {}
     context['status'] = 'ok'
 
@@ -205,13 +237,13 @@ def mine():
 
     test = {}
     test["bcnonce"] = 0
-    test["bccreated"] = 102030
+    test["bccreated"] = int(time.time())
     test["bcdata"] = 'this is my data'
     test['bcprevhash'] = block['bchash']
-    test['bchash'] = create_hash(test, 'sha512')
+    test['bchash'] = create_hash(test)
     while test['bchash'][:difficulty] != '0' * difficulty:
         test['bcnonce'] += 1
-        test['bchash'] = create_hash(test, 'sha512')
+        test['bchash'] = create_hash(test)
 
     connection = dronebarcode.model.get_db()
     connection.execute(

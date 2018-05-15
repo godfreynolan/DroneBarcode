@@ -24,7 +24,7 @@ class Posts extends React.Component {
           this.setState(history.state);
         } else {
           this.setState({
-            data: data.data,
+            data: data.chain,
           });
           history.pushState(this.state, '');
           // Check for new posts after a short delay
@@ -43,7 +43,7 @@ class Posts extends React.Component {
       })
       .then((data) => {
         this.setState({
-          data: data.data,
+          data: data.chain,
         });
         // Delay in between checks
         setTimeout(this.fetchNext, 3000);
@@ -56,8 +56,9 @@ class Posts extends React.Component {
     const posts = this.state.data.map(post => (
       <div className="post">
         <div className="barcode">
-          {post.code}
-          {post.data}
+          DATA:{post.bcdata}<br/>
+          BLOCK:<font color={post.bchash.substring(4,10)}>{post.bchash}</font><br/>
+          PREVIOUS:<font color={post.bcprevhash.substring(4,10)}>{post.bcprevhash}</font><br/>
         </div>
       </div>
     ));
