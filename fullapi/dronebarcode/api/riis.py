@@ -12,7 +12,7 @@ from flask import abort
 #used for testing
 import time
 
-difficulty = 3
+difficulty = 5
 default_method = 'sha512'
 
 
@@ -239,6 +239,7 @@ def mine():
 
     context = {}
     context['status'] = 'ok'
+    connection = dronebarcode.model.get_db()
 
     block, _ = select_last_block()
 
@@ -248,11 +249,22 @@ def mine():
     test["bcdata"] = str(request.json['data'])
     test['bcprevhash'] = block['bchash']
     test['bchash'] = create_hash(test)
+
     while test['bchash'][:difficulty] != '0' * difficulty:
         test['bcnonce'] += 1
         test['bchash'] = create_hash(test)
 
-    connection = dronebarcode.model.get_db()
+        if test['bcnonce'] % 10000 == 0 and test['bcprevhash'] != '0':
+            cur = connection.execute(
+                "SELECT COUNT(*) AS mytotal "
+                "FROM blockchain "
+                "WHERE bcprevhash = ?",
+                (test['bcprevhash'],)
+            )
+            if int(cur.fetchone()['mytotal']) > 0:
+                test['bcnonce'] = 0
+                test['bcprevhash'] = select_last_block()[0]['bchash']
+    
     connection.execute(
         "INSERT INTO blockchain "
         "VALUES (?, ?, ?, ?, ?)",
