@@ -14,6 +14,7 @@
 		FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EE2065755D00F8DBDF /* Utils.swift */; };
 		FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */; };
 		FF61782F209B41520098F1C6 /* FlightControlCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF61782E209B41520098F1C6 /* FlightControlCallback.swift */; };
+		FF8FBB7220AF0AD300D788C3 /* MQTTHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8FBB7120AF0AD300D788C3 /* MQTTHelper.swift */; };
 		FFA3754C206939C20031ACED /* BarcodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3754B206939C20031ACED /* BarcodeScanner.swift */; };
 		FFA3754E20693A2D0031ACED /* BarcodeScanCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA3754D20693A2D0031ACED /* BarcodeScanCallback.swift */; };
 		FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */; };
@@ -89,6 +90,7 @@
 		FF54F2EE2065755D00F8DBDF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightPlanner.swift; sourceTree = "<group>"; };
 		FF61782E209B41520098F1C6 /* FlightControlCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightControlCallback.swift; sourceTree = "<group>"; };
+		FF8FBB7120AF0AD300D788C3 /* MQTTHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTHelper.swift; sourceTree = "<group>"; };
 		FFA3754B206939C20031ACED /* BarcodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanner.swift; sourceTree = "<group>"; };
 		FFA3754D20693A2D0031ACED /* BarcodeScanCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScanCallback.swift; sourceTree = "<group>"; };
 		FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroneConnectionManager.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				FF54F2EE2065755D00F8DBDF /* Utils.swift */,
 				FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */,
 				FF37DA7520A5F108001D610F /* DroneBarcode-Bridging-Header.h */,
+				FF8FBB7120AF0AD300D788C3 /* MQTTHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -469,11 +472,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
 				"${PODS_ROOT}/DJI-SDK-iOS/iOS_Mobile_SDK/DJISDK.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DJISDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -488,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */,
+				FF8FBB7220AF0AD300D788C3 /* MQTTHelper.swift in Sources */,
 				FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */,
 				FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */,
 				FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */,

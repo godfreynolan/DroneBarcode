@@ -6,6 +6,7 @@ target 'DroneBarcode' do
   use_frameworks!
 
   pod 'DJI-SDK-iOS', '~> 4.5'
+  pod 'CocoaMQTT'
 
   target 'DroneBarcodeTests' do
     inherit! :search_paths

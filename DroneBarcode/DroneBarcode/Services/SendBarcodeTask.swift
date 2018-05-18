@@ -15,20 +15,20 @@ class SendBarcodeTask {
         var request = URLRequest(url: URL(string: "http://10.5.2.16:8000/block")!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             if data != nil {
                 let responseObject = try? JSONSerialization.jsonObject(with: data!, options: [])
                 let jsonObject = responseObject as? [String: Any]
-                
+
                 let difficulty = jsonObject!["difficulty"] as! Int
                 let lastHash = jsonObject!["last_hash"] as! String
-                
+
                 self.sendBarcode(difficulty: difficulty, barcode: barcode, lastHash: lastHash)
             }
         })
-        
+
         task.resume()
     }
     
