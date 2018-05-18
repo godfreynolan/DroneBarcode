@@ -259,4 +259,6 @@ def mine():
         (test['bchash'], test['bcdata'], test['bcnonce'], test['bccreated'], test['bcprevhash'])
     )
 
+    context['block'] = test
+
     return jsonify(**context), 200

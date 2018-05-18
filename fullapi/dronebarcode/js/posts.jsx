@@ -16,75 +16,41 @@ class Posts extends Component {
     // Initialize mutable state
     super(props);
     this.state = { data: [] };
-    this.fetchNext = this.fetchNext.bind(this);
     this.customDispatch = this.customDispatch.bind(this);
     this.MessageContainer = subscribe({topic: 'barcode', dispatch: this.customDispatch})(_mqttHandler);
   }
 
   customDispatch(topic, message, packet) {
-    console.log(`dispatch ${message}`);
-    console.log(`${JSON.stringify(this.props)}`);
-    this.setState(prevState => ({
-      data: prevState.data.concat(message.toString('utf8')),
-    }));
-  }
-
-  componentDidMount() {
-    // On mount, load all posts
-    /*fetch(this.props.url, { credentials: 'same-origin' })
+    const barcode = { data: message.toString('utf8') };
+    fetch('/testmine', {
+      credentials: 'same-origin',
+      body: JSON.stringify(barcode),
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'POST'
+    })
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
         return response.json();
       })
       .then((data) => {
-        if (performance.navigation.type === 2) {
-          this.setState(history.state);
-        } else {
-          this.setState({
-            data: data.chain,
-          });
-          history.pushState(this.state, '');
-          // Check for new posts after a short delay
-          //setTimeout(this.fetchNext, 1000);
-        }
-      })
-      .catch(error => console.log(error)); // eslint-disable-line no-console*/
-  }
-
-  fetchNext() {
-    // Every few seconds checks for updates
-    fetch(this.props.url, { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) throw Error(response.statusText);
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({
-          data: data.chain,
-        });
-        // Delay in between checks
-        setTimeout(this.fetchNext, 1000);
+        let temp = [ data.block, ];
+        this.setState( prevState => ({
+          data: temp.concat(prevState.data),
+        }));
       })
       .catch(error => console.log(error)); // eslint-disable-line no-console
   }
 
   render() {
     // Creates each of the posts
-    /*const posts = this.state.data.map(post => (
+    const posts = this.state.data.map(post => (
       <div className="post">
         <div className="barcode">
           <span>DATA:{post.bcdata}</span><br/>
           <span>BLOCK:<font color={post.bchash.substring(4,10)}>{post.bchash}</font></span><br/>
           <span>PREVIOUS:<font color={post.bcprevhash.substring(4,10)}>{post.bcprevhash}</font></span><br/>
-        </div>
-      </div>
-    ));*/
-    console.log(`${JSON.stringify(this.state.data)}`);
-
-    const posts = this.state.data.map(post => (
-      <div className="post">
-        <div className="barcode">
-          <span>DATA:{post}</span><br/>
         </div>
       </div>
     ));
