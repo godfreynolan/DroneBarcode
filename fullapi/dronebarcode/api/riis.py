@@ -12,7 +12,7 @@ from flask import abort
 #used for testing
 import time
 
-difficulty = 4
+difficulty = 3
 default_method = 'sha512'
 
 
@@ -44,11 +44,15 @@ def is_valid_chain(block):
 def get_chain_length(block):
     """Returns the length of the chain to this block."""
 
+    if block['bchash'] == '0':
+        return 0
+    
     count = 1
     connection = dronebarcode.model.get_db()
     while block['bcprevhash'] != '0':
-        if not is_valid_hash(block):
-            return 0
+        #if not is_valid_hash(block):
+        #    print('Invalid Block found')
+        #    return 0
 
         # get the previous block
         cur = connection.execute(
@@ -76,7 +80,7 @@ def select_last_block():
         "FROM blockchain bc1 "
         "WHERE bc1.bchash NOT IN ("
         "   SELECT bc2.bcprevhash FROM blockchain bc2"
-        ")"
+        ") ORDER BY bccreated"
     )
     blocks = cur.fetchall()
 
@@ -104,7 +108,7 @@ def clean_chain():
     """Removes all rogue chains."""
 
     # TODO: implement
-    return 4
+    return True
 
 
 @dronebarcode.app.route('/riis', methods=['POST'])
@@ -205,14 +209,17 @@ def get_chain():
 @dronebarcode.app.route('/append', methods=['POST'])
 def append():
     """Appends a block to the chain."""
-
     if not request.json:
         abort(400)
     context = {}
     block = request.json["block"]
 
-    # TODO: check that they are inserting after final block
-    # abort(409)
+    print(request.json)
+
+    # Ensures inserts only happen after the last block
+    last_block, _ = select_last_block()
+    if block['prevhash'] != last_block['bchash']:
+        abort(409)
 
     # Append the block
     connection = dronebarcode.model.get_db()
@@ -226,7 +233,7 @@ def append():
     return jsonify(**context), 200
 
 
-@dronebarcode.app.route('/testmine', methods=['GET'])
+@dronebarcode.app.route('/testmine', methods=['POST'])
 def mine():
     """Mines and appends one block for testing."""
 
@@ -238,7 +245,7 @@ def mine():
     test = {}
     test["bcnonce"] = 0
     test["bccreated"] = int(time.time())
-    test["bcdata"] = 'this is my data'
+    test["bcdata"] = str(request.json['data'])
     test['bcprevhash'] = block['bchash']
     test['bchash'] = create_hash(test)
     while test['bchash'][:difficulty] != '0' * difficulty:

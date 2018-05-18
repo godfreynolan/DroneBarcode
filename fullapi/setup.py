@@ -22,6 +22,7 @@ setup(
         'Flask-Testing==0.6.2',
         'selenium==3.6.0',
         'requests==2.18.4',
-        'arrow==0.10.0'
+        'arrow==0.10.0',
+        'paho-mqtt'
     ],
 )

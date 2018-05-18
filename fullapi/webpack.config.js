@@ -14,7 +14,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           // Convert ES6 syntax to ES5 for browser compatibility
-          presets: ['es2015', 'react'],
+          presets: ['es2015', 'react', 'stage-0'],
         },
       },
     ],

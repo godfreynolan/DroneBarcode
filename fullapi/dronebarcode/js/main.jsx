@@ -5,6 +5,6 @@ import Posts from './posts';
 
 ReactDOM.render(
   // Renders the 'reactPostInfo' element using the Posts class on url '/riis'
-  <Posts url="/chain" />,
-  document.getElementById('reactPostInfo'),
+  <Posts url='/chain' />,
+  document.getElementById('reactPostInfo')
 );
