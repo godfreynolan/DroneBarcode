@@ -12,6 +12,7 @@
     "babel-loader": "==7.1.2",
     "babel-preset-es2015": "==6.24.1",
     "babel-preset-react": "==6.24.1",
+    "babel-preset-stage-0": "==6.24.1",
     "eslint": "==4.8.0",
     "eslint-config-airbnb": "==15.1.0",
     "eslint-plugin-import": "==2.7.0",
@@ -23,10 +24,11 @@
     "isomorphic-fetch": "==2.2.1",
     "jsonlint": "==1.6.2",
     "moment": "==2.18.1",
+    "mqtt": "^2.18.0",
+    "mqtt-react": "0.0.2",
     "prop-types": "==15.6.0",
     "python-virtualenv": "0.0.4",
     "react": "==16.0.0",
-    "react-dom": "==16.0.0",
-    "react-infinite-scroll-component": "^2.4.0"
+    "react-dom": "==16.0.0"
   }
 }
