@@ -5,7 +5,7 @@ target 'DroneBarcode' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'DJI-SDK-iOS', '~> 4.5'
+  pod 'DJI-SDK-iOS', '~> 4.7'
   pod 'CocoaMQTT'
 
   target 'DroneBarcodeTests' do

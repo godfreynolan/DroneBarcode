@@ -16,23 +16,18 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     private var scanningAlert: UIAlertController!
     
     private var scanningTimer: Timer!
-    
-    private var mqtt: MQTTHelper!
-    
+
     @IBOutlet weak var videoPreviewerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.barcodeScanner = BarcodeScanner(callback: self)
-        self.mqtt = MQTTHelper()
-        
         self.setUpVideoPreview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.mqtt.disconnect()
-        
+
         if self.scanningTimer.isValid {
             self.scanningTimer.invalidate()
         }
@@ -54,9 +49,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         if barcodeData.isEmpty {
             return
         }
-        
-        self.mqtt.sendMessage(barcodeData)
-        
+        print("Successful scan: " + barcodeData)
 //        SendBarcodeTask().getBlockDetails(barcodeData)
     }
     
