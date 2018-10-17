@@ -27,6 +27,13 @@ class FlightPlanner {
     init(flightController: DJIFlightController, callback: FlightControlCallback) {
         self.flightController = flightController
         self.callback = callback
+        flightController.setVirtualStickModeEnabled(true) { (err) in
+            if err == nil {
+                print("Virtual stick mode enabled.")
+            } else {
+                print("Error enabling virutal stick mode: ", err.debugDescription)
+            }
+        }
     }
     
     func setUpParameters(initialYaw: Double) {

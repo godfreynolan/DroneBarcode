@@ -50,6 +50,9 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     @IBOutlet weak var altitudeLabel: UILabel!
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var pitchLabel: UILabel!
+    @IBOutlet weak var yawLabel: UILabel!
+    @IBOutlet weak var rollLabel: UILabel!
     
     private var loadingAlert: UIAlertController!
     
@@ -57,10 +60,10 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     private var flightController: DJIFlightController?
     
     override func viewWillAppear(_ animated: Bool) {
+        // Location changes (Lat/Lng + Altitude)
         DJISDKManager.keyManager()?.startListeningForChanges(on: DJIFlightControllerKey(param: DJIFlightControllerParamAircraftLocation)!, withListener: self) { [unowned self] (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
             if newValue != nil {
                 let newLocationValue = newValue!.value as! CLLocation
-                
                 let altitude = Utils.metersToFeet(newLocationValue.altitude)
                 
                 self.latitudeLabel.text = String(format:"Lat: %.4f", newLocationValue.coordinate.latitude)
@@ -68,6 +71,16 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
                 self.altitudeLabel.text = String(format:"Alt: %.1f ft", altitude)
             }
         }
+        
+        // Attitude changes (RPY)
+        DJISDKManager.keyManager()?.startListeningForChanges(on: DJIFlightControllerKey(param: DJIFlightControllerParamAttitude)!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
+                if newValue != nil {
+                let attitude = newValue!.value as! DJISDKVector3D
+                self.pitchLabel.text = String(format:"Pitch: %.2f", attitude.y)
+                self.yawLabel.text = String(format:"Yaw: %.2f", attitude.z)
+                self.rollLabel.text = String(format:"Roll: %.2f", attitude.x)
+            }
+        })
     }
     
     override func viewDidLoad() {
