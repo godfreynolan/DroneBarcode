@@ -27,13 +27,6 @@ class FlightPlanner {
     init(flightController: DJIFlightController, callback: FlightControlCallback) {
         self.flightController = flightController
         self.callback = callback
-        flightController.setVirtualStickModeEnabled(true) { (err) in
-            if err == nil {
-                print("Virtual stick mode enabled.")
-            } else {
-                print("Error enabling virutal stick mode: ", err.debugDescription)
-            }
-        }
     }
     
     func setUpParameters(initialYaw: Double) {
@@ -89,13 +82,103 @@ class FlightPlanner {
 //        self.pitchTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: (#selector(pitchDroneCommand)), userInfo: nil, repeats: true)
     }
     
+    func forwardShort(value: Float? = 0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.roll = Float(value!)
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Forward short error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent forward command (roll %.4f)", value!))
+                }
+            })
+        }
+    }
+    
+    func backwardShort(value: Float? = -0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.roll = Float(value!)
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Backward short error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent backward command (roll %.4f)", value!))
+                }
+            })
+        }
+    }
+    
+    func rightShort(value: Float? = 0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.pitch = Float(value!)
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Right short error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent right command (pitch %.4f)", value!))
+                }
+            })
+        }
+    }
+    
+    func leftShort(value: Float? = -0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.pitch = Float(value!)
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Left short error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent left command (pitch %.4f)", value!))
+                }
+            })
+        }
+    }
+    
+    func up(value: Float? = 0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch:0, roll:0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.verticalThrottle = value!
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Up command error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent up command (vertical throttle %.4f)", value!))
+                }
+            })
+        }
+    }
+    
+    func down(value: Float? = -0.5, callback send: @escaping (String) -> Void) {
+        DispatchQueue.global().async {
+            var data = DJIVirtualStickFlightControlData(pitch:0, roll:0, yaw: Float(self.currentYaw), verticalThrottle: 0)
+            data.verticalThrottle = value!
+            self.flightController.send(data, withCompletion: {(error) in
+                if error != nil {
+                    self.callback.onError(error: error)
+                    send("Down error: " + error!.localizedDescription)
+                } else {
+                    send(String(format: "Sent down command (vertical throttle %.4f)", value!))
+                }
+            })
+        }
+    }
+    
     @objc func pitchDroneCommand() {
         self.pitchTime += 0.2
         
         // Pitch controls left/right. Positive pitch values go right. Range is -15 to 15
         // Roll controlls forward/backward. Positive values go forward. Range is -15 to 15
         let data = Utils.getPitchFlightCommand(0.5, self.currentYaw)
-        
+
         self.flightController.send(data, withCompletion: { (error) in
             if error != nil {
                 self.callback.onError(error: error)
