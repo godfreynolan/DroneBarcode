@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		004DC137DB2204AB78228D68 /* Pods_DroneBarcodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */; };
 		4F39F3EC88339F367F308A03 /* Pods_DroneBarcodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */; };
+		8422691B2180D432002955A3 /* FlightReplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422691A2180D432002955A3 /* FlightReplayer.swift */; };
+		8486E2F4217E06C70066491D /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E2F3217E06C70066491D /* Benchmark.swift */; };
+		8486E2F6217F87D60066491D /* FlightRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E2F5217F87D60066491D /* FlightRecorder.swift */; };
 		84E58EED217A3117004F076E /* FlightTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEC217A3117004F076E /* FlightTrack.swift */; };
+		84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEF217A4AAE004F076E /* TrackManager.swift */; };
 		EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */; };
 		FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EC206573DE00F8DBDF /* FlightPlanViewController.swift */; };
 		FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EE2065755D00F8DBDF /* Utils.swift */; };
@@ -80,7 +84,11 @@
 		5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D7A895E808F1E8D7D6E58E /* Pods-DroneBarcodeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcode.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode.release.xcconfig"; sourceTree = "<group>"; };
+		8422691A2180D432002955A3 /* FlightReplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightReplayer.swift; sourceTree = "<group>"; };
+		8486E2F3217E06C70066491D /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
+		8486E2F5217F87D60066491D /* FlightRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRecorder.swift; sourceTree = "<group>"; };
 		84E58EEC217A3117004F076E /* FlightTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTrack.swift; sourceTree = "<group>"; };
+		84E58EEF217A4AAE004F076E /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
 		88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96345A5D1016C1C5EE1CA9F2 /* Pods-DroneBarcodeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +169,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		84E58EEE217A4A77004F076E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				84E58EEF217A4AAE004F076E /* TrackManager.swift */,
+				8486E2F3217E06C70066491D /* Benchmark.swift */,
+				8486E2F5217F87D60066491D /* FlightRecorder.swift */,
+				8422691A2180D432002955A3 /* FlightReplayer.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		C35D21EFFC07DCCDD6C73847 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,8 +207,8 @@
 				FFA3754B206939C20031ACED /* BarcodeScanner.swift */,
 				FFA8B7BC2063F27C00676B06 /* DroneConnectionManager.swift */,
 				FF54F2F02065758A00F8DBDF /* FlightPlanner.swift */,
-				FF54F2EE2065755D00F8DBDF /* Utils.swift */,
 				FFFFC5C620A21A7900A4794C /* SendBarcodeTask.swift */,
+				FF54F2EE2065755D00F8DBDF /* Utils.swift */,
 				FF37DA7520A5F108001D610F /* DroneBarcode-Bridging-Header.h */,
 			);
 			path = Services;
@@ -238,6 +257,7 @@
 		FFCDE08A2062A2CC00F885B3 /* DroneBarcode */ = {
 			isa = PBXGroup;
 			children = (
+				84E58EEE217A4A77004F076E /* Util */,
 				84E58EEB217A310B004F076E /* Model */,
 				FFA8B7BB2063F23500676B06 /* Services */,
 				FFA8B7BE2063FC6800676B06 /* ViewControllers */,
@@ -505,15 +525,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */,
+				8422691B2180D432002955A3 /* FlightReplayer.swift in Sources */,
+				8486E2F4217E06C70066491D /* Benchmark.swift in Sources */,
 				FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */,
 				FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */,
 				FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */,
+				84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */,
 				FFA3754E20693A2D0031ACED /* BarcodeScanCallback.swift in Sources */,
 				FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */,
 				FF61782F209B41520098F1C6 /* FlightControlCallback.swift in Sources */,
 				FFA3754C206939C20031ACED /* BarcodeScanner.swift in Sources */,
 				FFCDE08C2062A2CC00F885B3 /* AppDelegate.swift in Sources */,
 				FFA8B7C22064056100676B06 /* ScanSampleViewController.swift in Sources */,
+				8486E2F6217F87D60066491D /* FlightRecorder.swift in Sources */,
 				FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */,
 				84E58EED217A3117004F076E /* FlightTrack.swift in Sources */,
 			);

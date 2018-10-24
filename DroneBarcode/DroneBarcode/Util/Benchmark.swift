@@ -29,15 +29,31 @@ public class Benchmark {
     
     /// Saves the list of times you have accumulated from numerous benchmarks to a file
     static func saveTimesToDataFile(_ times: [UInt64], file fileName: String) {
-        let fm = FileManager.default
-        let outfile = fm.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
-        if let handle = try? FileHandle(forWritingTo: outfile) {
-            handle.seekToEndOfFile()
-            // Write a comma separated list of values.
-            for time in times {
-                handle.write(String(format: "%lld, ", time).data(using: .utf8)!)
-            }
-            handle.closeFile()
+        var times_str = ""
+        for time in times {
+            times_str += String(format: "%lld,", time)
         }
+        if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .allDomainsMask, true).first {
+            let path = dir + "/" + fileName
+            print("Saving to " + path)
+            do {
+                try times_str.write(toFile: path, atomically: false, encoding: .utf8)
+                print("Wrote to file.")
+            } catch {
+                print("Could not save!")
+            }
+        } else {
+            print("Could not get directory!")
+        }
+//        let fm = FileManager.default
+//        let outfile = fm.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(fileName)
+//        if let handle = try? FileHandle(forWritingTo: outfile) {
+//            handle.seekToEndOfFile()
+//            // Write a comma separated list of values.
+//            for time in times {
+//                handle.write(String(format: "%lld, ", time).data(using: .utf8)!)
+//            }
+//            handle.closeFile()
+//        }
     }
 }

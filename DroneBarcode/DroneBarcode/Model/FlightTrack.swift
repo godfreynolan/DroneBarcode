@@ -32,7 +32,7 @@ public class FlightTrack {
     }
     
     public func canExecuteNext() -> Bool {
-        return !self.isExecuting
+        return (!self.isExecuting) && self.queue.count > 0
     }
     
     /// Execute the next command in the queue, with an optional callback. Does not perform safety checks.

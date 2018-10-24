@@ -142,7 +142,7 @@
                                     <action selector="startFlight:" destination="dXe-12-92J" eventType="touchUpInside" id="ugn-6W-3eP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Status: Ready to Record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z6-3J-AjQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Status: Ready to Record Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Z6-3J-AjQ">
                                 <rect key="frame" x="20" y="649" width="664" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -304,8 +304,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPd-j0-UpZ">
-                                <rect key="frame" x="866" y="611" width="30" height="30"/>
-                                <state key="normal" title="up"/>
+                                <rect key="frame" x="860" y="611" width="42" height="30"/>
+                                <state key="normal" title="replay"/>
                                 <connections>
                                     <action selector="upClicked:" destination="dXe-12-92J" eventType="touchUpInside" id="d9q-87-82x"/>
                                 </connections>
@@ -316,7 +316,7 @@
                                     <constraint firstAttribute="height" constant="30" id="8Qv-aL-LFO"/>
                                     <constraint firstAttribute="width" constant="38" id="C9E-IY-Wup"/>
                                 </constraints>
-                                <state key="normal" title="down"/>
+                                <state key="normal" title="save"/>
                                 <connections>
                                     <action selector="downClicked:" destination="dXe-12-92J" eventType="touchUpInside" id="OL6-jv-TiM"/>
                                 </connections>

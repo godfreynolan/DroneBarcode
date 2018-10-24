@@ -21,6 +21,8 @@ class FlightPlanner {
     private var pitchTime = 0.0
     private var pitchTimer: Timer? = nil
     
+    private var callbackTimes: [UInt64] = []
+    
     private var callback: FlightControlCallback!
     private var flightController: DJIFlightController!
     
@@ -82,16 +84,28 @@ class FlightPlanner {
 //        self.pitchTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: (#selector(pitchDroneCommand)), userInfo: nil, repeats: true)
     }
     
-    func forwardShort(value: Float? = 0.5, callback send: @escaping (String) -> Void) {
+    func forwardShort(value: Float? = 0.25, callback send: @escaping (String) -> Void) {
+        self.turnTime = 0
+        self.turnTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: (#selector(doForward)), userInfo: nil, repeats: true)
+    }
+    
+    @objc func doForward() {
         DispatchQueue.global().async {
+            self.turnTime = self.turnTime + 1
+            if self.turnTime >= 10 {
+                self.turnTimer?.invalidate()
+            }
             var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
-            data.roll = Float(value!)
+            data.roll = Float(0.25)
+            let benchmark = Benchmark()
+            benchmark.startBenchmark()
             self.flightController.send(data, withCompletion: {(error) in
+                benchmark.endBenchmark()
+                self.logTime(benchmark.getTimeNano())
                 if error != nil {
-                    self.callback.onError(error: error)
-                    send("Forward short error: " + error!.localizedDescription)
+                    //self.send("Forward short error: " + error!.localizedDescription)
                 } else {
-                    send(String(format: "Sent forward command (roll %.4f)", value!))
+                    //self.send("Sent forward command (roll 0.2500)")
                 }
             })
         }
@@ -101,9 +115,12 @@ class FlightPlanner {
         DispatchQueue.global().async {
             var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
             data.roll = Float(value!)
+            let benchmark = Benchmark()
+            benchmark.startBenchmark()
             self.flightController.send(data, withCompletion: {(error) in
+                benchmark.endBenchmark()
+                self.logTime(benchmark.getTimeNano())
                 if error != nil {
-                    self.callback.onError(error: error)
                     send("Backward short error: " + error!.localizedDescription)
                 } else {
                     send(String(format: "Sent backward command (roll %.4f)", value!))
@@ -116,9 +133,12 @@ class FlightPlanner {
         DispatchQueue.global().async {
             var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
             data.pitch = Float(value!)
+            let benchmark = Benchmark()
+            benchmark.startBenchmark()
             self.flightController.send(data, withCompletion: {(error) in
+                benchmark.endBenchmark()
+                self.logTime(benchmark.getTimeNano())
                 if error != nil {
-                    self.callback.onError(error: error)
                     send("Right short error: " + error!.localizedDescription)
                 } else {
                     send(String(format: "Sent right command (pitch %.4f)", value!))
@@ -131,9 +151,12 @@ class FlightPlanner {
         DispatchQueue.global().async {
             var data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: 0)
             data.pitch = Float(value!)
+            let benchmark = Benchmark()
+            benchmark.startBenchmark()
             self.flightController.send(data, withCompletion: {(error) in
+                benchmark.endBenchmark()
+                self.logTime(benchmark.getTimeNano())
                 if error != nil {
-                    self.callback.onError(error: error)
                     send("Left short error: " + error!.localizedDescription)
                 } else {
                     send(String(format: "Sent left command (pitch %.4f)", value!))
@@ -146,11 +169,14 @@ class FlightPlanner {
         DispatchQueue.global().async {
             var data = DJIVirtualStickFlightControlData(pitch:0, roll:0, yaw: Float(self.currentYaw), verticalThrottle: 0)
             data.verticalThrottle = value!
+            let benchmark = Benchmark()
+            benchmark.startBenchmark()
             self.flightController.send(data, withCompletion: {(error) in
                 if error != nil {
-                    self.callback.onError(error: error)
                     send("Up command error: " + error!.localizedDescription)
                 } else {
+                    benchmark.endBenchmark()
+                    self.logTime(benchmark.getTimeNano())
                     send(String(format: "Sent up command (vertical throttle %.4f)", value!))
                 }
             })
@@ -163,7 +189,6 @@ class FlightPlanner {
             data.verticalThrottle = value!
             self.flightController.send(data, withCompletion: {(error) in
                 if error != nil {
-                    self.callback.onError(error: error)
                     send("Down error: " + error!.localizedDescription)
                 } else {
                     send(String(format: "Sent down command (vertical throttle %.4f)", value!))
@@ -200,5 +225,13 @@ class FlightPlanner {
                 self.callback.onError(error: error)
             }
         })
+    }
+    
+    func logTime(_ time: UInt64) {
+        self.callbackTimes.append(time)
+    }
+    
+    func saveTimes() {
+        Benchmark.saveTimesToDataFile(self.callbackTimes, file: "nanosecond-times.txt")
     }
 }

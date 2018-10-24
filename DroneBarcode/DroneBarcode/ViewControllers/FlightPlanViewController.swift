@@ -10,7 +10,7 @@ import DJISDK
 import CoreLocation
 import UIKit
 
-class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, FlightControlCallback {
+class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, FlightControlCallback, DJIRemoteControllerDelegate {
     let steps = [1, 0]
     var index = 0
     private var left: Float = 0.0
@@ -19,7 +19,8 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     private var forward: Float = 0.0
     private var up: Float = 0.0
     private var down: Float = 0.0
-    
+    private var recorder: FlightRecorder = FlightRecorder()
+
     @IBOutlet weak var labelForward: UILabel!
     @IBOutlet weak var labelBack: UILabel!
     @IBOutlet weak var labelLeft: UILabel!
@@ -86,9 +87,9 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
                 let newLocationValue = newValue!.value as! CLLocation
                 let altitude = Utils.metersToFeet(newLocationValue.altitude)
                 
-                self.latitudeLabel.text = String(format:"Lat: %.4f", newLocationValue.coordinate.latitude)
-                self.longitudeLabel.text = String(format:"Long: %.4f", newLocationValue.coordinate.longitude)
-                self.altitudeLabel.text = String(format:"Alt: %.1f ft", altitude)
+                self.latitudeLabel.text = String(format: "Lat: %.4f", newLocationValue.coordinate.latitude)
+                self.longitudeLabel.text = String(format: "Long: %.4f", newLocationValue.coordinate.longitude)
+                self.altitudeLabel.text = String(format: "Alt: %.1f ft", altitude)
             }
         }
         
@@ -96,11 +97,14 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
         DJISDKManager.keyManager()?.startListeningForChanges(on: DJIFlightControllerKey(param: DJIFlightControllerParamAttitude)!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
                 if newValue != nil {
                 let attitude = newValue!.value as! DJISDKVector3D
-                self.pitchLabel.text = String(format:"Pitch: %.2f", attitude.y)
-                self.yawLabel.text = String(format:"Yaw: %.2f", attitude.z)
-                self.rollLabel.text = String(format:"Roll: %.2f", attitude.x)
+                self.pitchLabel.text = String(format: "Pitch: %.2f", attitude.y)
+                self.yawLabel.text = String(format: "Yaw: %.2f", attitude.z)
+                self.rollLabel.text = String(format: "Roll: %.2f", attitude.x)
             }
         })
+        
+        // Get stick updates.
+        (DJISDKManager.product() as! DJIAircraft).remoteController?.delegate = self
     }
     
     override func viewDidLoad() {
@@ -206,6 +210,14 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     }
     
     @IBAction func startFlight(_ sender: Any?) {
+        recorder.startMeasurements()
+        DJISDKManager.keyManager()?.startListeningForChanges(on: DJIFlightControllerKey(param: DJIFlightControllerParamVelocity)!, withListener: self, andUpdate: { (oldValue: DJIKeyedValue?, newValue: DJIKeyedValue?) in
+            if newValue != nil {
+                let attitude = newValue!.value as! DJISDKVector3D
+                self.recorder.addAttitudeMeasurement(pitch: Float(attitude.y), yaw: Float(attitude.z), roll: Float(attitude.x))
+            }
+        })
+        
         self.flightController?.setVirtualStickModeEnabled(true, withCompletion: { (error) in
             if error != nil {
                 self.logTextView.text = self.logTextView.text + "\nVSME: " + (error?.localizedDescription)!
@@ -215,10 +227,6 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
                         self.logTextView.text = self.logTextView.text + "\nST: " + (error?.localizedDescription)!
                     } else {
                         self.firstLoad = false
-                        
-//                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10, execute: {
-//                            self.onCommandSuccess()
-//                        })
                     }
                 })
             }
@@ -265,6 +273,10 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     }
     
     @IBAction func backBtnClick(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.flightPlanner.saveTimes()
+            self.logTextView.text = self.logTextView.text + "\nSaved times to file."
+        }
         self.flightPlanner.backwardShort(value: self.back, callback: {(msg) in
             DispatchQueue.main.async {
                 self.logTextView.text = self.logTextView.text + "\n" + msg
@@ -273,19 +285,24 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     }
     
     @IBAction func upClicked(_ sender: Any) {
-        self.flightPlanner.up(value: self.up, callback: { (msg) in
-            DispatchQueue.main.async {
-                self.logTextView.text = self.logTextView.text + "\n" + msg
-            }
+        self.logTextView.text += "\nAdding commands to replayer"
+        let replayer = FlightReplayer(commands: recorder.getMeasurements())
+        self.logTextView.text += "\nExecuting " + String(recorder.getMeasurements().count) + " commands."
+        replayer.executeCommandQueue(controller: self.flightController!, callback: {() in
+            self.logTextView.text += "\nFlight replay complete."
         })
     }
     
     @IBAction func downClicked(_ sender: Any) {
-        self.flightPlanner.down(value: self.down, callback: { (msg) in
-            DispatchQueue.main.async {
-                self.logTextView.text = self.logTextView.text + "\n" + msg
-            }
-        })
+//        self.flightPlanner.down(value: self.down, callback: { (msg) in
+//            DispatchQueue.main.async {
+//                self.logTextView.text = self.logTextView.text + "\n" + msg
+//            }
+//        })
+        self.logTextView.text += "\nFinalizing measurements..."
+        recorder.finalizeMeasurements()
+        recorder.saveFile()
+        self.logTextView.text += "\nSaved measurements to file."
     }
     
     
@@ -318,5 +335,15 @@ class FlightPlanViewController: UIViewController, DJIFlightControllerDelegate, F
     @IBAction func sliderDown(_ sender: Any) {
         self.down = downSlider.value
         self.labelDown.text = String(format: "D: %2.2f", self.down)
+    }
+    
+    // STICK UPDATES
+    func remoteController(_ rc: DJIRemoteController, didUpdate state: DJIRCHardwareState) {
+        let left_h = Float(state.leftStick.horizontalPosition)
+        let left_v = Float(state.leftStick.verticalPosition)
+        let right_h = Float(state.rightStick.horizontalPosition)
+        let right_v = Float(state.rightStick.verticalPosition)
+        
+        //recorder.addJoystickMeasurement(left_h, left_v, right_h, right_v)
     }
 }
