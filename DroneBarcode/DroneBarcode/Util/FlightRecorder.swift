@@ -29,6 +29,7 @@ class FlightRecorder {
     public enum MeasurementType {
         case joystick
         case attitude
+        case camera
         //case velocity
         //case location
     }
@@ -43,6 +44,7 @@ class FlightRecorder {
         var type: MeasurementType
         var time: UInt64
         var attitude: Attitude? = nil
+        var altitude: Float? = nil
         var left_h: Float? = nil
         var left_v: Float? = nil
         var right_h: Float? = nil
@@ -52,25 +54,27 @@ class FlightRecorder {
             self.type = measurementType
             self.time = measurementTime
             self.attitude = nil
+            self.altitude = nil
             self.left_h = nil
             self.left_v = nil
             self.right_h = nil
             self.right_v = nil
         }
 
-        /// Converts the time units from the mach_absolute_time to elapsed milliseconds relative to given value.
+        /// Converts the time units from the mach_absolute_time to elapsed nanoseconds relative to given value.
         mutating func convertToRelativeTime(_ relativeTo: UInt64) -> Measurement {
             let elapsed = self.time - relativeTo
             var timebaseInfo = mach_timebase_info_data_t()
             mach_timebase_info(&timebaseInfo)
             let elapsedNano = elapsed * UInt64(timebaseInfo.numer) / UInt64(timebaseInfo.denom)
-            self.time = elapsedNano // 1_000_000
+            self.time = elapsedNano
             return self
         }
     }
     
     func startMeasurements() {
         self.initialTime = mach_absolute_time()
+        usleep(200000)
         self.isRecording = true
     }
     
@@ -96,8 +100,26 @@ class FlightRecorder {
         measurements.append(m)
     }
     
+    func addCameraMeasurement(pitch: Float, yaw: Float, roll: Float) {
+        if !isRecording { return }
+        let att = Attitude(pitch: pitch, yaw: yaw, roll: roll)
+        var m = Measurement(type: .camera, time: mach_absolute_time())
+        m.attitude = att
+        measurements.append(m)
+    }
+    
+    func addAttitudeAltitudeMeasurement(pitch: Float, yaw: Float, roll: Float, altitude: Float) {
+        if !isRecording { return }
+        let att = Attitude(pitch: pitch, yaw: yaw, roll: roll)
+        var m = Measurement(type: .attitude, time: mach_absolute_time())
+        m.attitude = att
+        m.altitude = altitude
+        measurements.append(m)
+    }
+    
     /// Stop measuring and finalize the measurements by calculating time relatively.
     func finalizeMeasurements() {
+        self.isRecording = false
         for i in 0...measurements.count - 1{
             measurements[i] = measurements[i].convertToRelativeTime(self.initialTime)
         }
@@ -113,6 +135,8 @@ class FlightRecorder {
             case .attitude:
                 outStr += String(m.time) + ",att,,,,," + String(m.attitude!.pitch) + "," + String(m.attitude!.roll) + "," + String(m.attitude!.yaw)
                 break
+            case .camera:
+                outStr += String(m.time) + ",cam,,,,," + String(m.attitude!.pitch) + "," + String(m.attitude!.roll) + "," + String(m.attitude!.yaw)
             }
             outStr += "\n"
         }

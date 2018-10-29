@@ -20,13 +20,9 @@ class DroneConnectionManager: NSObject, DJISDKManagerDelegate {
         DJISDKManager.registerApp(with: self)
     }
     
-    func productConnected(_ product: DJIBaseProduct?) {
-        
-    }
+    func productConnected(_ product: DJIBaseProduct?) {}
     
-    func productDisconnected() {
-        
-    }
+    func productDisconnected() {}
     
     func appRegisteredWithError(_ error: Error?) {
         print("SDK Registered with error \(error?.localizedDescription ?? "None")")

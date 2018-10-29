@@ -4,25 +4,29 @@ PODS:
     - CocoaAsyncSocket (~> 7.6.1)
     - SwiftyTimer (~> 2.0.0)
   - DJI-SDK-iOS (4.7.1)
+  - DJIWidget (1.1)
   - SwiftyTimer (2.0.0)
 
 DEPENDENCIES:
   - CocoaMQTT
   - DJI-SDK-iOS (~> 4.7)
+  - DJIWidget (~> 1.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CocoaAsyncSocket
     - CocoaMQTT
     - DJI-SDK-iOS
+    - DJIWidget
     - SwiftyTimer
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   CocoaMQTT: d33ab3cd4e329f9f1cfbb62e25306a318a606616
   DJI-SDK-iOS: 61190de33ed627dee3171f40146386c31b1d6c09
+  DJIWidget: 84a10f046a34ba3115641bcabf5b11a14edb4774
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: d663a325f1957e0e61d4ae89a16e734a76f314d2
+PODFILE CHECKSUM: d670e80d4b0e92ad3dec3277c1762e4724bdbf16
 
 COCOAPODS: 1.5.3

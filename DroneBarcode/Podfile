@@ -6,6 +6,7 @@ target 'DroneBarcode' do
   use_frameworks!
 
   pod 'DJI-SDK-iOS', '~> 4.7'
+  pod 'DJIWidget', '~> 1.1'
   pod 'CocoaMQTT'
 
   target 'DroneBarcodeTests' do
