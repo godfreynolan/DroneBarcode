@@ -219,6 +219,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     }
     
     @IBAction func forwardBtnClick(_ sender: Any) {
+        self.cameraView.isHidden = false
         self.flightController?.setVirtualStickModeEnabled(true, withCompletion: { (error) in
             if error != nil {
                 self.logTextView.text = self.logTextView.text + "\nVSME: " + (error?.localizedDescription)!
@@ -242,7 +243,6 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     }
     
     @IBAction func upClicked(_ sender: Any) {
-        self.cameraView.isHidden = false
         self.logTextView.text += "\nAdding commands to replayer"
         let replayer = FlightReplayer(commands: recorder.getMeasurements())
         self.logTextView.text += "\nExecuting " + String(recorder.getMeasurements().count) + " commands."
