@@ -102,7 +102,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         self.flightPlanner = FlightPlanner(flightController: self.flightController!, callback: self)
         
         // Make sure the camera is pointing straight ahead
-        DJISDKManager.product()?.gimbal?.rotate(with: DJIGimbalRotation(pitchValue: 0, rollValue: 0, yawValue: 0, time: 1, mode: DJIGimbalRotationMode.absoluteAngle), completion: { (error) in
+        DJISDKManager.product()?.gimbal?.rotate(with: DJIGimbalRotation(pitchValue: 0, rollValue: 0, yawValue: 0, time: 1, mode: DJIGimbalRotationMode.relativeAngle), completion: { (error) in
             if error != nil {
                 self.logTextView.text = self.logTextView.text + "\nGimbal: " + (error?.localizedDescription)!
             }
@@ -275,7 +275,9 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     func gimbal(_ gimbal: DJIGimbal, didUpdate state: DJIGimbalState) {
         let pitch = state.attitudeInDegrees.pitch
         let roll = state.attitudeInDegrees.roll
-        self.recorder.addCameraMeasurement(pitch: pitch, yaw: 0, roll: roll)
+        let yaw = state.attitudeInDegrees.yaw - self.lastYaw
+        print("Yaw = \(state.attitudeInDegrees.yaw) - \(self.lastYaw) = \(yaw)")
+        self.recorder.addCameraMeasurement(pitch: pitch, yaw: yaw, roll: roll)
     }
 
     //MARK: STICK UPDATES

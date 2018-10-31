@@ -82,36 +82,6 @@ class FlightPlanner {
         })
     }
 
-    @objc func pitchDroneCommand() {
-        self.pitchTime += 0.2
-        
-        // Pitch controls left/right. Positive pitch values go right. Range is -15 to 15
-        // Roll controlls forward/backward. Positive values go forward. Range is -15 to 15
-        let data = Utils.getPitchFlightCommand(0.5, self.currentYaw)
-
-        self.flightController.send(data, withCompletion: { (error) in
-            if error != nil {
-                self.callback.onError(error: error)
-            }
-        })
-        
-        if self.pitchTime >= 1 {
-            self.pitchTimer?.invalidate()
-            self.pitchTime = 0.0
-            self.callback.onCommandSuccess()
-        }
-    }
-    
-    func changeAltitude() {
-        let data = DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: Float(self.currentYaw), verticalThrottle: Float(0.5))
-        
-        self.flightController?.send(data, withCompletion: { (error) in
-            if error != nil {
-                self.callback.onError(error: error)
-            }
-        })
-    }
-    
     func logTime(_ time: UInt64) {
         self.callbackTimes.append(time)
     }
