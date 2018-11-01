@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import Firebase
+import ScanditBarcodeScanner
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    private let APP_KEY = "AclceybBOrb/Dx8+gDEcWhARENDRBdFqcFAW9zNenGu6ZP542mg5gtcx8DLXQnwkfkWVBjN5tWfkWuPquWYae6JOddHkYcMwMRdZ4sltlotSTClDoC2JwUANEP4nNSd6FNMlTODtElIYdkbiSP5GG0pPO3839JEJejQImmsiggeaqmqWBBu9u/19oUK+WC4BGnuy70aWfplWs2E0ATusfgA8fKe3WzEHPi7UXvyhnGFH4VjemXjj0w+yq8/PezIco0PiKtTIpZIpL2d0Cc5RRdwDymizpcefNY3NFJxsnTyB3RTz2Q6OEzKRgJUmFzFAlVwtaY20Q7ZRcXfvk2jBOufNd3q5h2w0pktI7MtoHF8V6ywgrTcmeNC7J/E3667QGYlSa5H/NDGPMDwwFZCom0Ms6Mz/AX6vTIaNiLeEY+9FsTQ397YvACros4L04EHTbCw95E7UEQ8vo33AFrdSrIlTg8FLwvF3TF8OCVyU3UOswwvsJ4IftJvHIkS6xtsk3GJ09DsIxAGdEirrbAc6FBT7G2n/JoC7I7tmxxI+UkE62pcQ+0mSgejWayOlpUVAn1yZEPgoSsvaGpiBjlzMnDb+59TzTWPKdLqyivws/8Bmve/1BMR7cxOPUOKhCX/gwUOB362Pwlxml8K0+fxZMf2YmthhPVXOJMjO3noaJT+rICw9JPkJBw6McaExZ+2h3am0dzWH3Bc+qedT4FDtqJHZbwkRzBPz6czjJFEDoSEpYxwnbZpGdX3NsFp59OfEhJ+vMdOp9C+uLDjvshxKWCv57ee7+g+RsDWDw+Uulw=="
 
     private let droneConnectionManager = DroneConnectionManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.droneConnectionManager.registerWithSDK()
         UIApplication.shared.isIdleTimerDisabled = true
+        SBSLicense.setAppKey(APP_KEY)
+        FirebaseApp.configure()
         
         return true
     }

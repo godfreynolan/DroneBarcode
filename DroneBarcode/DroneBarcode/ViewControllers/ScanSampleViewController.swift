@@ -13,11 +13,13 @@ import VideoPreviewer
 class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeScanCallback {
     private var barcodeScanner: BarcodeScanner!
     
+    @IBOutlet weak var labelWinner: UILabel!
     private var scanningAlert: UIAlertController!
     
     private var scanningTimer: Timer!
-
+    
     @IBOutlet weak var videoPreviewerView: UIView!
+    @IBOutlet weak var rectDrawView: RectDrawView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +51,13 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         if barcodeData.isEmpty {
             return
         }
-        print("Successful scan: " + barcodeData)
+        self.labelWinner!.text = barcodeData
+        //print("Successful scan: " + barcodeData)
 //        SendBarcodeTask().getBlockDetails(barcodeData)
+    }
+    
+    func scanSuccess(rect: CGRect, color: UIColor) {
+        rectDrawView.addRectangle(rect: rect, color: color)
     }
     
     func videoFeed(_ videoFeed: DJIVideoFeed, didUpdateVideoData videoData: Data) {

@@ -246,9 +246,13 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         self.logTextView.text += "\nAdding commands to replayer"
         let replayer = FlightReplayer(commands: recorder.getMeasurements())
         self.logTextView.text += "\nExecuting " + String(recorder.getMeasurements().count) + " commands."
+        self.recorder.resetMeasurements()
+        self.recorder.startMeasurements()
         replayer.executeCommandQueue(controller: self.flightController!, cameraGimbal: self.gimbal!, callback: {() in
             DispatchQueue.main.async {
-                self.logTextView.text += "\nFlight replay complete."
+                self.recorder.finalizeMeasurements()
+                self.logTextView.text += "\nFlight replay complete. Saving to flightplan-autonomous.csv"
+                self.recorder.saveFile(with: "flightplan-autonomous.csv")
             }
         })
     }
@@ -256,7 +260,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     @IBAction func downClicked(_ sender: Any) {
         self.logTextView.text += "\nFinalizing measurements..."
         recorder.finalizeMeasurements()
-        recorder.saveFile()
+        recorder.saveFile(with: "flightplan-human.csv")
         self.logTextView.text += "\nSaved measurements to file."
     }
     
@@ -276,7 +280,6 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         let pitch = state.attitudeInDegrees.pitch
         let roll = state.attitudeInDegrees.roll
         let yaw = state.attitudeInDegrees.yaw - self.lastYaw
-        print("Yaw = \(state.attitudeInDegrees.yaw) - \(self.lastYaw) = \(yaw)")
         self.recorder.addCameraMeasurement(pitch: pitch, yaw: yaw, roll: roll)
     }
 

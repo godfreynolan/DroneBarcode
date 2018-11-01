@@ -8,67 +8,105 @@
 
 import UIKit
 import Vision
+import Firebase
+import ScanditBarcodeScanner
 
-class BarcodeScanner {
+class BarcodeScanner: SBSScanDelegate {
     private var callback: BarcodeScanCallback!
-    
+    private var scanAttempts = 0
+    private var googleCount = 0
+    private var appleCount = 0
+    private lazy var vision = Vision.vision()
+
+    private var format = VisionBarcodeFormat.all
+    private var googleDetector: VisionBarcodeDetector? = nil
+
     init(callback: BarcodeScanCallback) {
         self.callback = callback
+        let options = VisionBarcodeDetectorOptions(formats: format)
+        self.googleDetector = self.vision.barcodeDetector(options: options)
+    }
+
+    func scanForBarcode(image: UIImage) {
+        scanAttempts += 1
+        scanGoogle(image)
+        scanApple(image)
+        
+        self.callback.onScanSuccess(barcodeData: "Google: \(self.googleCount)     Apple: \(self.appleCount)")
     }
     
-    func scanForBarcode(image: UIImage) {
+    func getGoogleCount() -> Int { return self.googleCount }
+    func getAppleCount() -> Int { return self.appleCount }
+    
+    func scanApple(_ image: UIImage) {
         let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.callback.onError(error: error)
-                }
-                return
-            }
-            
             guard let results = request.results else {
-                DispatchQueue.main.async {
-                    self.callback.onScanSuccess(barcodeData: "")
-                }
                 return
             }
             
             if results.isEmpty {
-                DispatchQueue.main.async {
-                    self.callback.onScanSuccess(barcodeData: "")
-                }
                 return
             }
             
-            var message = ""
-            // Loop through the found results
             for result in results {
-                // Cast the result to a barcode-observation
-                if let barcode = result as? VNBarcodeObservation {
-                    message = "Symbology: \(barcode.symbology.rawValue)"
-                    message += "\nPayload Value: \(barcode.payloadStringValue!)"
-                }
+                let result = result as! VNBarcodeObservation
+                let x1 = result.topLeft.x * image.size.width
+                let x2 = result.topRight.x * image.size.width
+                let y1 = result.topLeft.y * image.size.height
+                let y2 = result.bottomLeft.y * image.size.height
+                let rect = CGRect(x: x1, y: image.size.height - y2, width: x2 - x1, height: y2 - y1)
+                self.callback.scanSuccess(rect: rect, color: .blue)
             }
             
-            self.callback.onScanSuccess(barcodeData: message)
+            self.appleCount += results.count
         })
         
         // Create an image handler and use the CGImage your UIImage instance.
         guard let cgImage = image.cgImage else {
-            DispatchQueue.main.async {
-                self.callback.onError(error: nil)
-            }
             return
-            
         }
         
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         
         // Perform the barcode-request. This will call the completion-handler of the barcode-request.
         guard let _ = try? handler.perform([barcodeRequest]) else {
-            DispatchQueue.main.async {
-                self.callback.onError(error: nil)
-            }
             return
         }
+    }
+    
+    func scanGoogle(_ image: UIImage) {
+        let image = VisionImage(image: image)
+        self.googleDetector!.detect(in: image) { features, error in
+            guard error == nil, let features = features, !features.isEmpty else {
+                return
+            }
+            
+            for feature in features {
+                self.callback.scanSuccess(rect: feature.frame, color: .red)
+            }
+            
+            self.googleCount += features.count
+        }
+    }
+    
+    func scanScandit(_ image: UIImage) {
+        let scanSettings = SBSScanSettings.default()
+        scanSettings.cameraFacingPreference = .front
+        scanSettings.setSymbology(.aztec, enabled: true)
+        scanSettings.setSymbology(.qr, enabled: true)
+        scanSettings.setSymbology(.microQR, enabled: true)
+        scanSettings.setSymbology(.ean8, enabled: true)
+        scanSettings.setSymbology(.ean13, enabled: true)
+        scanSettings.setSymbology(.code11, enabled: true)
+        scanSettings.setSymbology(.code128, enabled: true)
+        scanSettings.setSymbology(.fiveDigitAddOn, enabled: true)
+        let picker = SBSBarcodePicker(settings: scanSettings)
+        picker.scanDelegate = self
+        picker.startScanning()
+    }
+    
+    func barcodePicker(_ picker: SBSBarcodePicker, didScan session: SBSScanSession) {
+        guard let code = session.newlyRecognizedCodes.first else { return }
+        self.callback.onScanSuccess(barcodeData: code.data!)
     }
 }

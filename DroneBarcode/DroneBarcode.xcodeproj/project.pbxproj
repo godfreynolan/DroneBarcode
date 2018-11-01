@@ -9,11 +9,31 @@
 /* Begin PBXBuildFile section */
 		004DC137DB2204AB78228D68 /* Pods_DroneBarcodeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */; };
 		4F39F3EC88339F367F308A03 /* Pods_DroneBarcodeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */; };
+		840069A7218B3C6700222C3D /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 840069A6218B3C6700222C3D /* libiconv.tbd */; };
+		840069A9218B3C6E00222C3D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 840069A8218B3C6E00222C3D /* libc++.tbd */; };
+		840069AB218B3C7400222C3D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 840069AA218B3C7300222C3D /* libz.tbd */; };
 		8422691B2180D432002955A3 /* FlightReplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422691A2180D432002955A3 /* FlightReplayer.swift */; };
+		847491422189F24C009AD022 /* DJISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847491412189F24C009AD022 /* DJISDK.framework */; };
 		8486E2F4217E06C70066491D /* Benchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E2F3217E06C70066491D /* Benchmark.swift */; };
 		8486E2F6217F87D60066491D /* FlightRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E2F5217F87D60066491D /* FlightRecorder.swift */; };
+		849B08C5218A352700365DC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849B08C4218A352600365DC6 /* GoogleService-Info.plist */; };
+		84BA9517218B47C100F28DCD /* RectDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA9516218B47C100F28DCD /* RectDrawView.swift */; };
+		84E280BE218B335F00A33B9A /* ScanditBarcodeScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */; };
 		84E58EED217A3117004F076E /* FlightTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEC217A3117004F076E /* FlightTrack.swift */; };
 		84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEF217A4AAE004F076E /* TrackManager.swift */; };
+		84F49C11218B39B60021CF94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C10218B39B60021CF94 /* AudioToolbox.framework */; };
+		84F49C13218B39BD0021CF94 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C12218B39BD0021CF94 /* CoreText.framework */; };
+		84F49C15218B39C40021CF94 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C14218B39C40021CF94 /* OpenGLES.framework */; };
+		84F49C17218B39CB0021CF94 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C16218B39CA0021CF94 /* MessageUI.framework */; };
+		84F49C19218B39D20021CF94 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C18218B39D10021CF94 /* CoreVideo.framework */; };
+		84F49C1B218B39D50021CF94 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C1A218B39D50021CF94 /* UIKit.framework */; };
+		84F49C1D218B39DC0021CF94 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C1C218B39DC0021CF94 /* CoreGraphics.framework */; };
+		84F49C1F218B39E40021CF94 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C1E218B39E40021CF94 /* AVFoundation.framework */; };
+		84F49C21218B39E90021CF94 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C20218B39E90021CF94 /* CoreMedia.framework */; };
+		84F49C23218B39F10021CF94 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C22218B39F10021CF94 /* QuartzCore.framework */; };
+		84F49C25218B39F70021CF94 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C24218B39F70021CF94 /* SystemConfiguration.framework */; };
+		84F49C27218B39FD0021CF94 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C26218B39FD0021CF94 /* MediaPlayer.framework */; };
+		84F49C29218B3A4E0021CF94 /* ScanditBarcodeScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84F49C28218B3A4E0021CF94 /* ScanditBarcodeScanner.bundle */; };
 		EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */; };
 		FF54F2ED206573DE00F8DBDF /* FlightPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EC206573DE00F8DBDF /* FlightPlanViewController.swift */; };
 		FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF54F2EE2065755D00F8DBDF /* Utils.swift */; };
@@ -84,11 +104,31 @@
 		5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D7A895E808F1E8D7D6E58E /* Pods-DroneBarcodeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeTests/Pods-DroneBarcodeTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C97732F2EFC688048B4D525 /* Pods-DroneBarcode.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcode.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcode/Pods-DroneBarcode.release.xcconfig"; sourceTree = "<group>"; };
+		840069A6218B3C6700222C3D /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		840069A8218B3C6E00222C3D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		840069AA218B3C7300222C3D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8422691A2180D432002955A3 /* FlightReplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightReplayer.swift; sourceTree = "<group>"; };
+		847491412189F24C009AD022 /* DJISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DJISDK.framework; sourceTree = "<group>"; };
 		8486E2F3217E06C70066491D /* Benchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Benchmark.swift; sourceTree = "<group>"; };
 		8486E2F5217F87D60066491D /* FlightRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRecorder.swift; sourceTree = "<group>"; };
+		849B08C4218A352600365DC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84BA9516218B47C100F28DCD /* RectDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDrawView.swift; sourceTree = "<group>"; };
+		84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ScanditBarcodeScanner.framework; sourceTree = "<group>"; };
 		84E58EEC217A3117004F076E /* FlightTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTrack.swift; sourceTree = "<group>"; };
 		84E58EEF217A4AAE004F076E /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
+		84F49C10218B39B60021CF94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		84F49C12218B39BD0021CF94 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		84F49C14218B39C40021CF94 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		84F49C16218B39CA0021CF94 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		84F49C18218B39D10021CF94 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		84F49C1A218B39D50021CF94 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		84F49C1C218B39DC0021CF94 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		84F49C1E218B39E40021CF94 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		84F49C20218B39E90021CF94 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		84F49C22218B39F10021CF94 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		84F49C24218B39F70021CF94 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		84F49C26218B39FD0021CF94 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		84F49C28218B3A4E0021CF94 /* ScanditBarcodeScanner.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ScanditBarcodeScanner.bundle; path = ScanditBarcodeScanner.framework/Resources/ScanditBarcodeScanner.bundle; sourceTree = "<group>"; };
 		88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96345A5D1016C1C5EE1CA9F2 /* Pods-DroneBarcodeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DroneBarcodeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DroneBarcodeUITests/Pods-DroneBarcodeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DroneBarcodeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +164,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840069AB218B3C7400222C3D /* libz.tbd in Frameworks */,
+				840069A9218B3C6E00222C3D /* libc++.tbd in Frameworks */,
+				840069A7218B3C6700222C3D /* libiconv.tbd in Frameworks */,
+				84F49C27218B39FD0021CF94 /* MediaPlayer.framework in Frameworks */,
+				84F49C25218B39F70021CF94 /* SystemConfiguration.framework in Frameworks */,
+				84F49C23218B39F10021CF94 /* QuartzCore.framework in Frameworks */,
+				84F49C21218B39E90021CF94 /* CoreMedia.framework in Frameworks */,
+				84F49C1F218B39E40021CF94 /* AVFoundation.framework in Frameworks */,
+				84F49C1D218B39DC0021CF94 /* CoreGraphics.framework in Frameworks */,
+				84F49C1B218B39D50021CF94 /* UIKit.framework in Frameworks */,
+				84F49C19218B39D20021CF94 /* CoreVideo.framework in Frameworks */,
+				84F49C17218B39CB0021CF94 /* MessageUI.framework in Frameworks */,
+				84F49C15218B39C40021CF94 /* OpenGLES.framework in Frameworks */,
+				84F49C13218B39BD0021CF94 /* CoreText.framework in Frameworks */,
+				84F49C11218B39B60021CF94 /* AudioToolbox.framework in Frameworks */,
+				847491422189F24C009AD022 /* DJISDK.framework in Frameworks */,
 				FFA8B7E02064092800676B06 /* VideoPreviewer.framework in Frameworks */,
 				EED424ECE5E02553DF4FD39A /* Pods_DroneBarcode.framework in Frameworks */,
+				84E280BE218B335F00A33B9A /* ScanditBarcodeScanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +218,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84BA9515218B47AD00F28DCD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84BA9516218B47C100F28DCD /* RectDrawView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		84E58EEB217A310B004F076E /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,9 +248,27 @@
 		C35D21EFFC07DCCDD6C73847 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				840069AA218B3C7300222C3D /* libz.tbd */,
+				840069A8218B3C6E00222C3D /* libc++.tbd */,
+				840069A6218B3C6700222C3D /* libiconv.tbd */,
+				84F49C26218B39FD0021CF94 /* MediaPlayer.framework */,
+				84F49C24218B39F70021CF94 /* SystemConfiguration.framework */,
+				84F49C22218B39F10021CF94 /* QuartzCore.framework */,
+				84F49C20218B39E90021CF94 /* CoreMedia.framework */,
+				84F49C1E218B39E40021CF94 /* AVFoundation.framework */,
+				84F49C1C218B39DC0021CF94 /* CoreGraphics.framework */,
+				84F49C1A218B39D50021CF94 /* UIKit.framework */,
+				84F49C18218B39D10021CF94 /* CoreVideo.framework */,
+				84F49C16218B39CA0021CF94 /* MessageUI.framework */,
+				84F49C14218B39C40021CF94 /* OpenGLES.framework */,
+				84F49C12218B39BD0021CF94 /* CoreText.framework */,
+				84F49C10218B39B60021CF94 /* AudioToolbox.framework */,
 				FFA8B7DA2064091800676B06 /* VideoPreviewer.xcodeproj */,
 				88A760908F0547DEDDF64623 /* Pods_DroneBarcode.framework */,
 				C21EAE3F000FE2E4D3F68573 /* Pods_DroneBarcodeTests.framework */,
+				84F49C28218B3A4E0021CF94 /* ScanditBarcodeScanner.bundle */,
+				84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */,
+				847491412189F24C009AD022 /* DJISDK.framework */,
 				5E69B1D46659CF7A0CB3BEBC /* Pods_DroneBarcodeUITests.framework */,
 			);
 			name = Frameworks;
@@ -257,12 +340,14 @@
 		FFCDE08A2062A2CC00F885B3 /* DroneBarcode */ = {
 			isa = PBXGroup;
 			children = (
+				84BA9515218B47AD00F28DCD /* View */,
 				84E58EEE217A4A77004F076E /* Util */,
 				84E58EEB217A310B004F076E /* Model */,
 				FFA8B7BB2063F23500676B06 /* Services */,
 				FFA8B7BE2063FC6800676B06 /* ViewControllers */,
 				FFCDE08B2062A2CC00F885B3 /* AppDelegate.swift */,
 				FFCDE08F2062A2CC00F885B3 /* Main.storyboard */,
+				849B08C4218A352600365DC6 /* GoogleService-Info.plist */,
 				FFCDE0922062A2CC00F885B3 /* Assets.xcassets */,
 				FFCDE0972062A2CC00F885B3 /* Info.plist */,
 			);
@@ -417,8 +502,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F49C29218B3A4E0021CF94 /* ScanditBarcodeScanner.bundle in Resources */,
 				FFCDE0932062A2CC00F885B3 /* Assets.xcassets in Resources */,
 				FFCDE0912062A2CC00F885B3 /* Main.storyboard in Resources */,
+				849B08C5218A352700365DC6 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,7 +592,13 @@
 				"${PODS_ROOT}/DJI-SDK-iOS/iOS_Mobile_SDK/DJISDK.framework",
 				"${PODS_ROOT}/DJIWidget/FFmpeg/FFmpeg.framework",
 				"${BUILT_PRODUCTS_DIR}/DJIWidget/DJIWidget.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -514,7 +607,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DJISDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FFmpeg.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DJIWidget.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -544,6 +643,7 @@
 				8486E2F6217F87D60066491D /* FlightRecorder.swift in Sources */,
 				FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */,
 				84E58EED217A3117004F076E /* FlightTrack.swift in Sources */,
+				84BA9517218B47C100F28DCD /* RectDrawView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,6 +812,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYG5XF554D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DroneBarcode/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -735,6 +839,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DYG5XF554D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DroneBarcode/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

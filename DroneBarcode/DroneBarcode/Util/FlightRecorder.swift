@@ -125,7 +125,12 @@ class FlightRecorder {
         }
     }
     
-    func saveFile() {
+    func resetMeasurements() {
+        self.isRecording = false
+        self.measurements = []
+    }
+    
+    func saveFile(with name: String = "flightplan.csv") {
         var outStr = "time,type,left_h,left_v,right_h,right_v,pitch,roll,yaw\n"
         for m in measurements {
             switch m.type {
@@ -142,7 +147,7 @@ class FlightRecorder {
         }
         
         if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .allDomainsMask, true).first {
-            let path = dir + "/flightplan.csv"
+            let path = dir + "/" + name
             print("Saving to " + path)
             do {
                 try outStr.write(toFile: path, atomically: false, encoding: .utf8)
