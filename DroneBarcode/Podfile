@@ -9,10 +9,6 @@ target 'DroneBarcode' do
   pod 'DJIWidget', '~> 1.1'
   pod 'CocoaMQTT'
 
-  pod 'Firebase/Core'
-  pod 'Firebase/MLVision'
-  pod 'Firebase/MLVisionBarcodeModel'
-
   target 'DroneBarcodeTests' do
     inherit! :search_paths
     # Pods for testing

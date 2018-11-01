@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import ScanditBarcodeScanner
 
 @UIApplicationMain
@@ -21,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.droneConnectionManager.registerWithSDK()
         UIApplication.shared.isIdleTimerDisabled = true
         SBSLicense.setAppKey(APP_KEY)
-        FirebaseApp.configure()
-        
+
         return true
     }
 

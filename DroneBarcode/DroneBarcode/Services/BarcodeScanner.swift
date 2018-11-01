@@ -8,19 +8,14 @@
 
 import UIKit
 import Vision
-import Firebase
 import ScanditBarcodeScanner
 
 class BarcodeScanner: SBSScanDelegate {
     private var callback: BarcodeScanCallback!
     private var scanAttempts = 0
-    private var googleCount = 0
     private var appleCount = 0
     private lazy var vision = Vision.vision()
-
-    private var format = VisionBarcodeFormat.all
-    private var googleDetector: VisionBarcodeDetector? = nil
-
+    
     init(callback: BarcodeScanCallback) {
         self.callback = callback
         let options = VisionBarcodeDetectorOptions(formats: format)
@@ -29,14 +24,8 @@ class BarcodeScanner: SBSScanDelegate {
 
     func scanForBarcode(image: UIImage) {
         scanAttempts += 1
-        scanGoogle(image)
         scanApple(image)
-        
-        self.callback.onScanSuccess(barcodeData: "Google: \(self.googleCount)     Apple: \(self.appleCount)")
     }
-    
-    func getGoogleCount() -> Int { return self.googleCount }
-    func getAppleCount() -> Int { return self.appleCount }
     
     func scanApple(_ image: UIImage) {
         let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
@@ -71,21 +60,6 @@ class BarcodeScanner: SBSScanDelegate {
         // Perform the barcode-request. This will call the completion-handler of the barcode-request.
         guard let _ = try? handler.perform([barcodeRequest]) else {
             return
-        }
-    }
-    
-    func scanGoogle(_ image: UIImage) {
-        let image = VisionImage(image: image)
-        self.googleDetector!.detect(in: image) { features, error in
-            guard error == nil, let features = features, !features.isEmpty else {
-                return
-            }
-            
-            for feature in features {
-                self.callback.scanSuccess(rect: feature.frame, color: .red)
-            }
-            
-            self.googleCount += features.count
         }
     }
     
