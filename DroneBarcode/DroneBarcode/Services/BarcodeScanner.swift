@@ -14,12 +14,9 @@ class BarcodeScanner: SBSScanDelegate {
     private var callback: BarcodeScanCallback!
     private var scanAttempts = 0
     private var appleCount = 0
-    private lazy var vision = Vision.vision()
-    
+
     init(callback: BarcodeScanCallback) {
         self.callback = callback
-        let options = VisionBarcodeDetectorOptions(formats: format)
-        self.googleDetector = self.vision.barcodeDetector(options: options)
     }
 
     func scanForBarcode(image: UIImage) {

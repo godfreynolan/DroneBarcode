@@ -25,6 +25,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         super.viewDidLoad()
         
         self.barcodeScanner = BarcodeScanner(callback: self)
+        rectDrawView.addTarget()
         self.setUpVideoPreview()
     }
     
@@ -37,6 +38,12 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     
     @objc func takePhoto() {
         let renderer = UIGraphicsImageRenderer(size: self.videoPreviewerView.bounds.size)
+//        self.videoPreviewerView.snapshotView(afterScreenUpdates: true)
+//        UIGraphicsBeginImageContextWithOptions(self.videoPreviewerView!.frame.size, false, 0.0)
+//        self.videoPreviewerView.layer.render(in: UIGraphicsGetCurrentContext()!)
+//        let renderedImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+        
         let capturedImage = renderer.image { ctx in
             self.videoPreviewerView.drawHierarchy(in: self.videoPreviewerView.bounds, afterScreenUpdates: true)
         }

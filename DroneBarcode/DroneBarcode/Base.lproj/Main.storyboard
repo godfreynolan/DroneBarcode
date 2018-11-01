@@ -66,19 +66,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N17-kR-97o">
                                 <rect key="frame" x="20" y="20" width="906" height="670"/>
-                                <subviews>
-                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-I5-EeL" customClass="RectDrawView" customModule="DroneBarcode" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="890" height="654"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="GVu-I5-EeL" firstAttribute="bottom" secondItem="N17-kR-97o" secondAttribute="bottomMargin" id="CsP-gG-Zjg"/>
-                                    <constraint firstItem="GVu-I5-EeL" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="topMargin" id="NzV-7j-h6K"/>
-                                    <constraint firstItem="GVu-I5-EeL" firstAttribute="leading" secondItem="N17-kR-97o" secondAttribute="leadingMargin" id="jay-kL-cP4"/>
-                                    <constraint firstItem="GVu-I5-EeL" firstAttribute="trailing" secondItem="N17-kR-97o" secondAttribute="trailingMargin" id="q4u-by-CZZ"/>
-                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google: 10      Apple: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2L-Pm-DdG">
                                 <rect key="frame" x="289" y="727" width="429" height="21"/>
@@ -86,6 +74,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-I5-EeL" customClass="RectDrawView" customModule="DroneBarcode" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="906" height="670"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
