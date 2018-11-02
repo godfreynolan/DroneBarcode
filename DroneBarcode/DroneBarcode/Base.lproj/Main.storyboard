@@ -65,30 +65,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N17-kR-97o">
-                                <rect key="frame" x="20" y="20" width="906" height="670"/>
+                                <rect key="frame" x="20" y="20" width="906" height="671"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google: 10      Apple: 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2L-Pm-DdG">
-                                <rect key="frame" x="289" y="727" width="429" height="21"/>
+                                <rect key="frame" x="289" y="728" width="429" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-I5-EeL" customClass="RectDrawView" customModule="DroneBarcode" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="906" height="670"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVu-I5-EeL" customClass="RectDrawView" customModule="DroneBarcode" customModuleProvider="target">
+                                <rect key="frame" x="20" y="20" width="906" height="671"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUX-s2-ag4">
+                                <rect key="frame" x="526" y="722" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="Vjj-4q-17C"/>
+                                    <constraint firstAttribute="height" constant="30" id="u8d-7S-zig"/>
+                                </constraints>
+                                <state key="normal" title="OH SHIT"/>
+                                <connections>
+                                    <action selector="virtualSticksOff:" destination="YoL-zv-PPK" eventType="touchUpInside" id="FQv-yU-KV3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYK-0j-ZwQ">
+                                <rect key="frame" x="659" y="723" width="115" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="YeX-wv-c2c"/>
+                                </constraints>
+                                <state key="normal" title="takeoff"/>
+                                <connections>
+                                    <action selector="takeOff:" destination="YoL-zv-PPK" eventType="touchUpInside" id="ReJ-Ob-v16"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3m-l5-XOf">
+                                <rect key="frame" x="782" y="723" width="112" height="30"/>
+                                <state key="normal" title="start positioning"/>
+                                <connections>
+                                    <action selector="startPositioning:" destination="YoL-zv-PPK" eventType="touchUpInside" id="Szg-9W-4To"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="m3m-l5-XOf" firstAttribute="leading" secondItem="WYK-0j-ZwQ" secondAttribute="trailing" constant="8" symbolic="YES" id="1pL-h9-TZ5"/>
+                            <constraint firstItem="lUX-s2-ag4" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="32" id="40d-x2-Ebh"/>
+                            <constraint firstItem="WYK-0j-ZwQ" firstAttribute="leading" secondItem="lUX-s2-ag4" secondAttribute="trailing" constant="8" symbolic="YES" id="7YE-OB-Aec"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="289" id="9LZ-x1-fOr"/>
-                            <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="ulr-qt-NTQ" secondAttribute="top" id="LkB-IG-Ujz"/>
+                            <constraint firstItem="lUX-s2-ag4" firstAttribute="centerY" secondItem="X2L-Pm-DdG" secondAttribute="centerY" id="CeA-L7-rNc"/>
+                            <constraint firstItem="X2L-Pm-DdG" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="37" id="Efj-Ol-6du"/>
+                            <constraint firstItem="WYK-0j-ZwQ" firstAttribute="baseline" secondItem="X2L-Pm-DdG" secondAttribute="baseline" id="FuW-Eh-uI1"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="GVu-I5-EeL" secondAttribute="leading" id="Fva-ac-TiX"/>
+                            <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="N17-kR-97o" secondAttribute="trailing" constant="98" id="KFg-c5-rMB"/>
                             <constraint firstAttribute="bottom" secondItem="X2L-Pm-DdG" secondAttribute="bottom" constant="20" symbolic="YES" id="MjW-My-JnG"/>
-                            <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="eJr-rz-s8I" secondAttribute="leadingMargin" id="Ouk-2V-kB9"/>
-                            <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="N17-kR-97o" secondAttribute="trailing" constant="98" id="aX1-hj-QuP"/>
+                            <constraint firstItem="lUX-s2-ag4" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="526" id="TXM-ED-Xkq"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="bottom" secondItem="GVu-I5-EeL" secondAttribute="bottom" id="bAL-r3-5he"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="GVu-I5-EeL" secondAttribute="top" id="ccA-X0-och"/>
                             <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="X2L-Pm-DdG" secondAttribute="trailing" constant="306" id="elG-sP-6aQ"/>
-                            <constraint firstItem="X2L-Pm-DdG" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="37" id="qMy-DU-JNI"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="trailing" secondItem="GVu-I5-EeL" secondAttribute="trailing" id="iMj-nk-v29"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="eJr-rz-s8I" secondAttribute="leadingMargin" id="lrG-Fv-f3K"/>
+                            <constraint firstItem="m3m-l5-XOf" firstAttribute="baseline" secondItem="WYK-0j-ZwQ" secondAttribute="baseline" id="v3z-1S-8LH"/>
+                            <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="ulr-qt-NTQ" secondAttribute="top" id="wjU-9Q-iev"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ulr-qt-NTQ"/>
                     </view>
