@@ -38,7 +38,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Open"/>
                                 <connections>
-                                    <segue destination="YoL-zv-PPK" kind="show" id="NI2-8E-TGh"/>
+                                    <segue destination="YoL-zv-PPK" kind="show" id="ocT-W1-Xfc"/>
                                 </connections>
                             </button>
                         </subviews>

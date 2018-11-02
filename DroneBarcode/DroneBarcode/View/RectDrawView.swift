@@ -15,10 +15,10 @@ class RectDrawView: UIView {
     
     private let LEFT_ARROW = UIImageView(image: UIImage(named: "arrow-left"))
     private let RIGHT_ARROW = UIImageView(image: UIImage(named: "arrow-right"))
-    private let UP_ARROW = UIImageView(image: UIImage(named: "arrow-up"))
-    private let DOWN_ARROW = UIImageView(image: UIImage(named: "arrow-down"))
-    private let FORWARD_ARROW = UIImageView(image: UIImage(named: "arrow-forward"))
-    private let BACK_ARROW = UIImageView(image: UIImage(named: "arrow-back"))
+    private let UP_ARROW = UIImageView(image: UIImage(named: "arrow-forward"))
+    private let DOWN_ARROW = UIImageView(image: UIImage(named: "arrow-back"))
+    private let FORWARD_ARROW = UIImageView(image: UIImage(named: "arrow-up"))
+    private let BACK_ARROW = UIImageView(image: UIImage(named: "arrow-down"))
     
     private static let OVERLAP_AREA_THRESHOLD: Float = 0.62
     
@@ -36,7 +36,7 @@ class RectDrawView: UIView {
             self.targetImage = UIImageView(image: self.RED_TARGET)
             targetImage!.contentMode = .scaleAspectFit
             targetImage!.alpha = 0.65
-            targetImage!.frame = CGRect(x: (self.frame.width / 2) - 100, y: (self.frame.height / 2) - 100, width: 200, height: 200)
+            targetImage!.frame = CGRect(x: (self.frame.width / 2) - 75, y: (self.frame.height / 2) - 75, width: 150, height: 150)
             self.addSubview(self.targetImage!)
             self.hasAddedTarget = true
             self.initializeArrows()

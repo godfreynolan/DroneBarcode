@@ -127,7 +127,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     
     func directionHelper(_ directions: [Direction]) {
         self.rectDrawView.setHelperArrows(directions)
-        if self.shouldWait || !self.allowPositioning { return }
+        if  !self.allowPositioning { return }
         self.shouldWait = true
         for d in directions {
             switch d {
@@ -138,16 +138,16 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 altitudeSlight(up: false)
                 break
             case .right:
-                pitchSlight(right: false)
+                rollSlight(right: false)
                 break
             case .left:
-                pitchSlight(right: false)
+                rollSlight(right: false)
                 break
             case .forward:
-                rollSlight(forward: true)
+                pitchSlight(forward: true)
                 break
             case .back:
-                rollSlight(forward: false)
+                pitchSlight(forward: false)
                 break
             }
             usleep(100000) // 10ms
@@ -155,24 +155,36 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         self.shouldWait = false
     }
     
-    func pitchSlight(right: Bool) {
-        let val = Float(right ? 0.05 : -0.05)
+    func pitchSlight(forward: Bool) {
+        let val = Float(!forward ? 0.05 : -0.05)
         fc?.send(DJIVirtualStickFlightControlData(pitch: val, roll: 0, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
-
+            if err == nil {
+                print("pitch \(val) err nil")
+            } else {
+                print("pitch \(val) err \(err.debugDescription)")
+            }
         })
     }
     
-    func rollSlight(forward: Bool) {
-        let val = Float(forward ? 0.05 : -0.05)
+    func rollSlight(right: Bool) {
+        let val = Float(right ? 0.05 : -0.05)
         fc?.send(DJIVirtualStickFlightControlData(pitch: 0, roll: val, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
-            
+            if err == nil {
+                print("roll \(val) err nil")
+            } else {
+                print("roll \(val) err \(err.debugDescription)")
+            }
         })
     }
     
     func altitudeSlight(up: Bool) {
         let val = Float(up ? 0.05 : -0.05)
         fc?.send(DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: 0, verticalThrottle: val), withCompletion: { (err) in
-
+            if err == nil {
+                print("altitude \(val) err nil")
+            } else {
+                print("altitude \(val) err \(err.debugDescription)")
+            }
         })
     }
     

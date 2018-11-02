@@ -27,7 +27,7 @@ public protocol PositionMonitorDelegate: class {
 
 public class PositionMonitor {
     
-    private static let QR_TARGET_THRESHOLD: Float = 0.65
+    private static let QR_TARGET_THRESHOLD: Float = 0.60
     
     weak var delegate: PositionMonitorDelegate?
     
@@ -68,16 +68,16 @@ public class PositionMonitor {
         
         // Forward and backwards
         if (minXDiff >= 25 && maxXDiff <= -25) || (minYDiff >= 25 && maxYDiff <= -25) {
-            directions.append(.forward)
+            directions.append(.up)
         } else if (getArea(self.targetRect) <= getArea(self.qrRect)) {
-            directions.append(.back)
+            directions.append(.down)
         }
         
         // Up and down
         if (self.qrRect.minY < self.targetRect.maxY) && (self.qrRect.maxY > self.targetRect.maxY) {
-            directions.append(.down)
+            directions.append(.back)
         } else if (self.qrRect.minY < self.targetRect.minY) && (self.qrRect.maxY > self.targetRect.minY) {
-            directions.append(.up)
+            directions.append(.forward)
         }
 
         // Left and right
