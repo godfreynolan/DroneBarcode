@@ -10,7 +10,7 @@ import DJISDK
 import UIKit
 import VideoPreviewer
 
-class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeScanCallback, PositionMonitorDelegate {
+class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  DJIVideoFeedListener, BarcodeScanCallback, PositionMonitorDelegate {
 
     private var barcodeScanner: BarcodeScanner!
     private var positionMonitor: PositionMonitor? = nil
@@ -28,6 +28,8 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var videoPreviewerView: UIView!
     @IBOutlet weak var rectDrawView: RectDrawView!
+    @IBOutlet weak var switchWallMode: UISwitch!
+    @IBOutlet weak var ivWind: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         self.fc?.yawControlMode = .angularVelocity
         self.fc?.rollPitchControlMode = .velocity
         self.fc?.verticalControlMode = .velocity
+        self.fc?.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -52,12 +55,6 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     
     @objc func takePhoto() {
         let renderer = UIGraphicsImageRenderer(size: self.videoPreviewerView.bounds.size)
-//        self.videoPreviewerView.snapshotView(afterScreenUpdates: true)
-//        UIGraphicsBeginImageContextWithOptions(self.videoPreviewerView!.frame.size, false, 0.0)
-//        self.videoPreviewerView.layer.render(in: UIGraphicsGetCurrentContext()!)
-//        let renderedImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-        
         let capturedImage = renderer.image { ctx in
             self.videoPreviewerView.drawHierarchy(in: self.videoPreviewerView.bounds, afterScreenUpdates: true)
         }
@@ -132,32 +129,25 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func directionHelper(_ directions: [Direction]) {
-        self.rectDrawView.setHelperArrows(directions)
+        var correct_directions: [Direction] = []
+        for direction in directions {
+            correct_directions.append(switchWallMode.isOn ? PositionUtil.translateFloorDirectionToWall(direction) : direction)
+        }
+        self.rectDrawView.setHelperArrows(correct_directions)
         if  !self.allowPositioning { return }
         self.shouldWait = true
-        for d in directions {
-            switch d {
-            case .up:
-                altitudeSlight(up: true)
-                break
-            case .down:
-                altitudeSlight(up: false)
-                break
-            case .right:
-                rollSlight(right: false)
-                break
-            case .left:
-                rollSlight(right: false)
-                break
-            case .forward:
-                pitchSlight(forward: true)
-                break
-            case .back:
-                pitchSlight(forward: false)
-                break
-            }
-            usleep(100000) // 10ms
+        if directions.count > 0 {
+            let command = PositionUtil.translateDirectionToCommand(correct_directions[0], isOnWall: false, verticalSpeed: 0.05, horizontalSpeed: slider.value)
+            fc?.send(command, withCompletion: { (err) in
+                if err != nil {
+                    print("Send error: \(err.debugDescription)")
+                } else {
+                    print("Send success")
+                }
+            })
+            usleep(100000) // 100ms
         }
+        
         self.shouldWait = false
     }
     
@@ -192,6 +182,20 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
                 print("altitude \(val) err \(err.debugDescription)")
             }
         })
+    }
+    
+    func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
+        switch state.windWarning {
+        case .level0:
+            self.ivWind.image = UIImage(named: "wind-light")
+            break
+        case .level1:
+            self.ivWind.image = UIImage(named: "wind-moderate")
+            break
+        case .level2, .unknown:
+            self.ivWind.image = UIImage(named: "wind-heavy")
+            break
+        }
     }
     
     @IBAction func virtualSticksOff(_ sender: Any) {

@@ -121,6 +121,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2sc-n3-1J9">
+                                <rect key="frame" x="20" y="721" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="wind-light" translatesAutoresizingMaskIntoConstraints="NO" id="ha1-Ed-yQa">
+                                <rect key="frame" x="816" y="21" width="96" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="AuZ-sZ-auf"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -145,22 +155,27 @@
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="WYK-0j-ZwQ" secondAttribute="centerY" id="baL-X6-aWz"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="GVu-I5-EeL" secondAttribute="top" id="ccA-X0-och"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="bottom" secondItem="m3m-l5-XOf" secondAttribute="bottom" id="eZK-Ev-28d"/>
+                            <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="ha1-Ed-yQa" secondAttribute="trailing" constant="112" id="ebI-FK-ioI"/>
                             <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="X2L-Pm-DdG" secondAttribute="trailing" constant="306" id="elG-sP-6aQ"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="X2L-Pm-DdG" secondAttribute="centerY" id="iHf-Ou-Uxo"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="trailing" secondItem="GVu-I5-EeL" secondAttribute="trailing" id="iMj-nk-v29"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="eJr-rz-s8I" secondAttribute="leadingMargin" id="lrG-Fv-f3K"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="m3m-l5-XOf" secondAttribute="centerY" id="n7O-Uz-nj5"/>
                             <constraint firstItem="vST-Kb-Xmi" firstAttribute="firstBaseline" secondItem="X2L-Pm-DdG" secondAttribute="firstBaseline" id="oBN-om-VyG"/>
+                            <constraint firstItem="ha1-Ed-yQa" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="top" id="q4g-3z-uqc"/>
                             <constraint firstItem="m3m-l5-XOf" firstAttribute="baseline" secondItem="WYK-0j-ZwQ" secondAttribute="baseline" id="v3z-1S-8LH"/>
+                            <constraint firstItem="ha1-Ed-yQa" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="816" id="vdZ-LA-RQA"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="ulr-qt-NTQ" secondAttribute="top" id="wjU-9Q-iev"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ulr-qt-NTQ"/>
                     </view>
                     <connections>
+                        <outlet property="ivWind" destination="ha1-Ed-yQa" id="ay4-oo-wva"/>
                         <outlet property="labelSliderVal" destination="vST-Kb-Xmi" id="w71-yE-3Sk"/>
                         <outlet property="labelWinner" destination="X2L-Pm-DdG" id="D9X-Hg-hcu"/>
                         <outlet property="rectDrawView" destination="GVu-I5-EeL" id="YsA-gr-zY6"/>
                         <outlet property="slider" destination="0tB-Xq-NZ9" id="6P6-zd-C07"/>
+                        <outlet property="switchWallMode" destination="2sc-n3-1J9" id="Dsg-p8-unt"/>
                         <outlet property="videoPreviewerView" destination="N17-kR-97o" id="keX-bj-EAf"/>
                     </connections>
                 </viewController>
@@ -402,4 +417,7 @@
             <point key="canvasLocation" x="468.74999999999994" y="89.84375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="wind-light" width="24" height="24"/>
+    </resources>
 </document>

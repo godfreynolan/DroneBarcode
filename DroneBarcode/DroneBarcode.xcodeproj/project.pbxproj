@@ -18,6 +18,7 @@
 		8486E2F6217F87D60066491D /* FlightRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E2F5217F87D60066491D /* FlightRecorder.swift */; };
 		84BA9517218B47C100F28DCD /* RectDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA9516218B47C100F28DCD /* RectDrawView.swift */; };
 		84BA951A218C741D00F28DCD /* PositionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA9519218C741D00F28DCD /* PositionMonitor.swift */; };
+		84C2836D219090ED0073F81D /* PositionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C2836C219090ED0073F81D /* PositionUtil.swift */; };
 		84E280BE218B335F00A33B9A /* ScanditBarcodeScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */; };
 		84E58EED217A3117004F076E /* FlightTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEC217A3117004F076E /* FlightTrack.swift */; };
 		84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEF217A4AAE004F076E /* TrackManager.swift */; };
@@ -113,6 +114,7 @@
 		8486E2F5217F87D60066491D /* FlightRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRecorder.swift; sourceTree = "<group>"; };
 		84BA9516218B47C100F28DCD /* RectDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectDrawView.swift; sourceTree = "<group>"; };
 		84BA9519218C741D00F28DCD /* PositionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionMonitor.swift; sourceTree = "<group>"; };
+		84C2836C219090ED0073F81D /* PositionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionUtil.swift; sourceTree = "<group>"; };
 		84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ScanditBarcodeScanner.framework; sourceTree = "<group>"; };
 		84E58EEC217A3117004F076E /* FlightTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTrack.swift; sourceTree = "<group>"; };
 		84E58EEF217A4AAE004F076E /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				8486E2F5217F87D60066491D /* FlightRecorder.swift */,
 				8422691A2180D432002955A3 /* FlightReplayer.swift */,
 				84BA9519218C741D00F28DCD /* PositionMonitor.swift */,
+				84C2836C219090ED0073F81D /* PositionUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				FFFFC5C720A21A7900A4794C /* SendBarcodeTask.swift in Sources */,
 				84E58EED217A3117004F076E /* FlightTrack.swift in Sources */,
 				84BA9517218B47C100F28DCD /* RectDrawView.swift in Sources */,
+				84C2836D219090ED0073F81D /* PositionUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
