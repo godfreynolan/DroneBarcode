@@ -17,6 +17,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     private let fc = (DJISDKManager.product() as! DJIAircraft).flightController
     
     @IBOutlet weak var labelWinner: UILabel!
+    @IBOutlet weak var labelSliderVal: UILabel!
     private var scanningAlert: UIAlertController!
     
     private var scanningTimer: Timer!
@@ -24,6 +25,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     private var shouldWait: Bool = false
     private var allowPositioning: Bool = false
     
+    @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var videoPreviewerView: UIView!
     @IBOutlet weak var rectDrawView: RectDrawView!
     
@@ -125,6 +127,10 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
         self.rectDrawView.setShouldBeGreenTarget(qrIsTargeted)
     }
     
+    @IBAction func sliderValueChanged(_ sender: Any) {
+        self.labelSliderVal.text = "\(slider.value)"
+    }
+    
     func directionHelper(_ directions: [Direction]) {
         self.rectDrawView.setHelperArrows(directions)
         if  !self.allowPositioning { return }
@@ -156,7 +162,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func pitchSlight(forward: Bool) {
-        let val = Float(!forward ? 0.05 : -0.05)
+        let val = Float(!forward ? slider.value : -1 * slider.value)
         fc?.send(DJIVirtualStickFlightControlData(pitch: val, roll: 0, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
             if err == nil {
                 print("pitch \(val) err nil")
@@ -167,7 +173,7 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     func rollSlight(right: Bool) {
-        let val = Float(right ? 0.05 : -0.05)
+        let val = Float(right ? slider.value : -1 * slider.value)
         fc?.send(DJIVirtualStickFlightControlData(pitch: 0, roll: val, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
             if err == nil {
                 print("roll \(val) err nil")
@@ -197,6 +203,12 @@ class ScanSampleViewController: UIViewController, DJIVideoFeedListener, BarcodeS
     }
     
     @IBAction func startPositioning(_ sender: Any) {
-        self.allowPositioning = true
+        self.allowPositioning = !self.allowPositioning
+        self.labelWinner.text = "Positioning enabled: \(self.allowPositioning)"
+        if !self.allowPositioning {
+            self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
+        } else {
+            self.fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
+        }
     }
 }

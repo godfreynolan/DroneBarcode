@@ -20,7 +20,7 @@ class RectDrawView: UIView {
     private let FORWARD_ARROW = UIImageView(image: UIImage(named: "arrow-up"))
     private let BACK_ARROW = UIImageView(image: UIImage(named: "arrow-down"))
     
-    private static let OVERLAP_AREA_THRESHOLD: Float = 0.62
+    private static let OVERLAP_AREA_THRESHOLD: Float = 0.5
     
     var rectangle: ColoredRect? = nil
     private var hasAddedTarget = false

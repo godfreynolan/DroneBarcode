@@ -27,7 +27,7 @@ public protocol PositionMonitorDelegate: class {
 
 public class PositionMonitor {
     
-    private static let QR_TARGET_THRESHOLD: Float = 0.60
+    private static let QR_TARGET_THRESHOLD: Float = 0.55
     
     weak var delegate: PositionMonitorDelegate?
     
@@ -59,35 +59,31 @@ public class PositionMonitor {
     }
     
     private func getDirectionHelper(intersect: Float, coverage: Float) -> [Direction] {
-        var directions: [Direction] = []
+        let targetArea = getArea(self.targetRect)
+        let qrArea = getArea(self.qrRect)
         
-        let minXDiff = self.qrRect.minX - self.targetRect.minX
-        let minYDiff = self.qrRect.minY - self.targetRect.minY
-        let maxXDiff = self.qrRect.maxX - self.targetRect.maxX
-        let maxYDiff = self.qrRect.maxY - self.targetRect.maxY
-        
-        // Forward and backwards
-        if (minXDiff >= 25 && maxXDiff <= -25) || (minYDiff >= 25 && maxYDiff <= -25) {
-            directions.append(.up)
-        } else if (getArea(self.targetRect) <= getArea(self.qrRect)) {
-            directions.append(.down)
-        }
-        
-        // Up and down
-        if (self.qrRect.minY < self.targetRect.maxY) && (self.qrRect.maxY > self.targetRect.maxY) {
-            directions.append(.back)
-        } else if (self.qrRect.minY < self.targetRect.minY) && (self.qrRect.maxY > self.targetRect.minY) {
-            directions.append(.forward)
+        // Up and down , return early so we have the right area first.
+        if (qrArea / targetArea >= 0.88) {
+            return [.up] //get further away
+        } else if (qrArea / targetArea <= PositionMonitor.QR_TARGET_THRESHOLD) {
+            return [.down] // Get closer
         }
 
-        // Left and right
-        if (self.qrRect.minX < self.targetRect.minX) && (self.qrRect.maxX > self.targetRect.minX) {
-            directions.append(.left)
-        } else if (self.qrRect.minX < self.targetRect.maxX) && (self.qrRect.maxX > self.targetRect.maxX) {
-            directions.append(.right)
+        // Forward and backwards
+        if (self.qrRect.minY > self.targetRect.minY) && (self.qrRect.maxY > self.targetRect.maxY) {
+            return [.back]
+        } else if (self.qrRect.minY < self.targetRect.minY) && (self.qrRect.maxY < self.targetRect.maxY) {
+            return [.forward]
         }
         
-        return directions
+        // Left and right
+        if (self.qrRect.minX > self.targetRect.minX) && (self.qrRect.maxX > self.targetRect.maxX){
+            return [.right]
+        } else if (self.qrRect.minX < self.targetRect.maxX) && (self.qrRect.maxX < self.targetRect.maxX) {
+            return [.left]
+        }
+        
+        return []
     }
     
     private func getArea(_ rect: CGRect) -> Float {

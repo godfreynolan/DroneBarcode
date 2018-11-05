@@ -106,33 +106,61 @@
                                     <action selector="startPositioning:" destination="YoL-zv-PPK" eventType="touchUpInside" id="Szg-9W-4To"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.074999999999999997" minValue="0.0" maxValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-Xq-NZ9">
+                                <rect key="frame" x="149" y="724" width="118" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="6wj-dg-Phn"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="YoL-zv-PPK" eventType="valueChanged" id="PeH-Vy-eOJ"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.075" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vST-Kb-Xmi">
+                                <rect key="frame" x="86" y="728" width="43" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="m3m-l5-XOf" firstAttribute="leading" secondItem="WYK-0j-ZwQ" secondAttribute="trailing" constant="8" symbolic="YES" id="1pL-h9-TZ5"/>
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="32" id="40d-x2-Ebh"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="bottom" secondItem="WYK-0j-ZwQ" secondAttribute="bottom" id="7EA-MV-H3A"/>
                             <constraint firstItem="WYK-0j-ZwQ" firstAttribute="leading" secondItem="lUX-s2-ag4" secondAttribute="trailing" constant="8" symbolic="YES" id="7YE-OB-Aec"/>
+                            <constraint firstItem="X2L-Pm-DdG" firstAttribute="leading" secondItem="0tB-Xq-NZ9" secondAttribute="trailing" constant="24" id="8nd-rW-Dyc"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="289" id="9LZ-x1-fOr"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="32" id="CWb-st-7Fg"/>
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="centerY" secondItem="X2L-Pm-DdG" secondAttribute="centerY" id="CeA-L7-rNc"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="37" id="Efj-Ol-6du"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="151" id="Fbs-6h-19A"/>
                             <constraint firstItem="WYK-0j-ZwQ" firstAttribute="baseline" secondItem="X2L-Pm-DdG" secondAttribute="baseline" id="FuW-Eh-uI1"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="GVu-I5-EeL" secondAttribute="leading" id="Fva-ac-TiX"/>
                             <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="N17-kR-97o" secondAttribute="trailing" constant="98" id="KFg-c5-rMB"/>
                             <constraint firstAttribute="bottom" secondItem="X2L-Pm-DdG" secondAttribute="bottom" constant="20" symbolic="YES" id="MjW-My-JnG"/>
+                            <constraint firstItem="vST-Kb-Xmi" firstAttribute="centerY" secondItem="0tB-Xq-NZ9" secondAttribute="centerY" id="Mjq-86-EEt"/>
+                            <constraint firstItem="vST-Kb-Xmi" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="86" id="TP2-YY-lX6"/>
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="526" id="TXM-ED-Xkq"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="bottom" secondItem="GVu-I5-EeL" secondAttribute="bottom" id="bAL-r3-5he"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="WYK-0j-ZwQ" secondAttribute="centerY" id="baL-X6-aWz"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="GVu-I5-EeL" secondAttribute="top" id="ccA-X0-och"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="bottom" secondItem="m3m-l5-XOf" secondAttribute="bottom" id="eZK-Ev-28d"/>
                             <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="X2L-Pm-DdG" secondAttribute="trailing" constant="306" id="elG-sP-6aQ"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="X2L-Pm-DdG" secondAttribute="centerY" id="iHf-Ou-Uxo"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="trailing" secondItem="GVu-I5-EeL" secondAttribute="trailing" id="iMj-nk-v29"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="leading" secondItem="eJr-rz-s8I" secondAttribute="leadingMargin" id="lrG-Fv-f3K"/>
+                            <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="m3m-l5-XOf" secondAttribute="centerY" id="n7O-Uz-nj5"/>
+                            <constraint firstItem="vST-Kb-Xmi" firstAttribute="firstBaseline" secondItem="X2L-Pm-DdG" secondAttribute="firstBaseline" id="oBN-om-VyG"/>
                             <constraint firstItem="m3m-l5-XOf" firstAttribute="baseline" secondItem="WYK-0j-ZwQ" secondAttribute="baseline" id="v3z-1S-8LH"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="ulr-qt-NTQ" secondAttribute="top" id="wjU-9Q-iev"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ulr-qt-NTQ"/>
                     </view>
                     <connections>
+                        <outlet property="labelSliderVal" destination="vST-Kb-Xmi" id="w71-yE-3Sk"/>
                         <outlet property="labelWinner" destination="X2L-Pm-DdG" id="D9X-Hg-hcu"/>
                         <outlet property="rectDrawView" destination="GVu-I5-EeL" id="YsA-gr-zY6"/>
+                        <outlet property="slider" destination="0tB-Xq-NZ9" id="6P6-zd-C07"/>
                         <outlet property="videoPreviewerView" destination="N17-kR-97o" id="keX-bj-EAf"/>
                     </connections>
                 </viewController>
