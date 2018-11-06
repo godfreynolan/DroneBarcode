@@ -54,6 +54,8 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         self.fc?.rollPitchControlMode = .velocity
         self.fc?.verticalControlMode = .velocity
         self.fc?.delegate = self
+        self.positionMonitor = PositionMonitor(qr: CGRect(x:0, y:0, width:0, height:0), target: rectDrawView.getTargetRect(), flightController: fc!)
+        self.positionMonitor!.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,11 +83,6 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
     }
     
     func scanSuccess(rect: CGRect, color: UIColor) {
-        if positionMonitor == nil {
-            self.positionMonitor = PositionMonitor(qr: rect, target: rectDrawView.getTargetRect(), flightController: fc!)
-            self.positionMonitor!.delegate = self
-        }
-        print("UPDATING QR POS")
         positionMonitor?.updateQRPosition(rect)
         rectDrawView.addRectangle(rect: rect, color: color)
     }
@@ -124,39 +121,6 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         }
         
         self.shouldWait = false
-    }
-    
-    func pitchSlight(forward: Bool) {
-        let val = Float(!forward ? slider.value : -1 * slider.value)
-        fc?.send(DJIVirtualStickFlightControlData(pitch: val, roll: 0, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
-            if err == nil {
-                print("pitch \(val) err nil")
-            } else {
-                print("pitch \(val) err \(err.debugDescription)")
-            }
-        })
-    }
-    
-    func rollSlight(right: Bool) {
-        let val = Float(right ? slider.value : -1 * slider.value)
-        fc?.send(DJIVirtualStickFlightControlData(pitch: 0, roll: val, yaw: 0, verticalThrottle: 0), withCompletion: { (err) in
-            if err == nil {
-                print("roll \(val) err nil")
-            } else {
-                print("roll \(val) err \(err.debugDescription)")
-            }
-        })
-    }
-    
-    func altitudeSlight(up: Bool) {
-        let val = Float(up ? 0.05 : -0.05)
-        fc?.send(DJIVirtualStickFlightControlData(pitch: 0, roll: 0, yaw: 0, verticalThrottle: val), withCompletion: { (err) in
-            if err == nil {
-                print("altitude \(val) err nil")
-            } else {
-                print("altitude \(val) err \(err.debugDescription)")
-            }
-        })
     }
     
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
