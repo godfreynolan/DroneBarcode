@@ -19,7 +19,7 @@ class FlightRecorder {
     
     init() {
         self.measurements = []
-        self.initialTime = 0
+        self.initialTime = mach_absolute_time()
     }
 
     enum JoystickSide {
@@ -30,8 +30,6 @@ class FlightRecorder {
         case joystick
         case attitude
         case camera
-        //case velocity
-        //case location
     }
     
     public struct Attitude {
@@ -71,6 +69,8 @@ class FlightRecorder {
             return self
         }
     }
+    
+    func isRecordingActive() -> Bool { return self.isRecording }
     
     func startMeasurements() {
         self.initialTime = mach_absolute_time()
@@ -120,6 +120,7 @@ class FlightRecorder {
     /// Stop measuring and finalize the measurements by calculating time relatively.
     func finalizeMeasurements() {
         self.isRecording = false
+        if measurements.count == 0 { return }
         for i in 0...measurements.count - 1{
             measurements[i] = measurements[i].convertToRelativeTime(self.initialTime)
         }

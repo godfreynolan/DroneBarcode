@@ -41,7 +41,6 @@ class RectDrawView: UIView {
             self.hasAddedTarget = true
             self.initializeArrows()
         }
-        
     }
     
     public func getTargetRect() -> CGRect {

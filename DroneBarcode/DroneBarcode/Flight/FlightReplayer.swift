@@ -52,7 +52,6 @@ class FlightReplayer {
         let roll = NSNumber(value: measurement.attitude!.roll)
         let yaw = NSNumber(value: measurement.attitude!.yaw)
         let rotation = DJIGimbalRotation(pitchValue: pitch, rollValue: roll, yawValue: yaw, time: TimeInterval(1.0), mode: .absoluteAngle)
-        print("PITCH ROLL YAW \(pitch) \(roll) \(yaw)")
         gimbal.rotate(with: rotation, completion: { (err) in
             if err != nil {
                 print("Error rotating gimbal: " + err.debugDescription)

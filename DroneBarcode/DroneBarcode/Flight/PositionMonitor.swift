@@ -34,8 +34,10 @@ public class PositionMonitor {
     private var flightController: DJIFlightController!
     
     private var qrIsTargeted: Bool = false
+    private var isRecentering: Bool = false
     private var qrRect: CGRect
     private let targetRect: CGRect
+    private var targetingCompleteCallback: (() -> Void)? = nil
 
     init(qr qr_rect: CGRect, target target_rect: CGRect, flightController fc: DJIFlightController) {
         self.qrRect = qr_rect
@@ -43,16 +45,39 @@ public class PositionMonitor {
         self.flightController = fc
     }
     
+    func startRecentering() {
+        self.isRecentering = true
+    }
+    
+    func startRecentering(withCompletion: @escaping () -> Void) {
+        self.isRecentering = true
+        self.targetingCompleteCallback = withCompletion
+    }
+    
+    func stopRecentering() {
+        self.isRecentering = false
+    }
+    
+    func isPositioned() -> Bool {
+        return self.qrIsTargeted
+    }
+    
     func updateQRPosition(_ qrRect: CGRect) {
         self.qrRect = qrRect
+        
+        if !self.isRecentering { return }
+        
         let intersect = calculateOverlap(first: self.targetRect, second: self.qrRect)
         let coverage = calculateOverlap(first: self.qrRect, second: self.targetRect)
         
         // Check if inside/outside boundaries are met, then send update.
         self.qrIsTargeted = intersect >= 1.0 && coverage >= PositionMonitor.QR_TARGET_THRESHOLD
+        print("Running if statement")
         if !self.qrIsTargeted {
             self.delegate?.directionHelper(getDirectionHelper(intersect: intersect, coverage: coverage))
         } else {
+            self.targetingCompleteCallback?()
+            self.targetingCompleteCallback = nil
             self.delegate?.directionHelper([])
         }
         self.delegate?.positionMonitorStatusUpdated(self.qrIsTargeted)

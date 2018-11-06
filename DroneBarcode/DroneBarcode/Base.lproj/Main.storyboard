@@ -84,9 +84,9 @@
                                     <constraint firstAttribute="width" constant="125" id="Vjj-4q-17C"/>
                                     <constraint firstAttribute="height" constant="30" id="u8d-7S-zig"/>
                                 </constraints>
-                                <state key="normal" title="OH SHIT"/>
+                                <state key="normal" title="Record Leg"/>
                                 <connections>
-                                    <action selector="virtualSticksOff:" destination="YoL-zv-PPK" eventType="touchUpInside" id="FQv-yU-KV3"/>
+                                    <action selector="recordLegPressed:" destination="YoL-zv-PPK" eventType="touchUpInside" id="bx9-aE-rNJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYK-0j-ZwQ">
@@ -106,8 +106,8 @@
                                     <action selector="startPositioning:" destination="YoL-zv-PPK" eventType="touchUpInside" id="Szg-9W-4To"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.074999999999999997" minValue="0.0" maxValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-Xq-NZ9">
-                                <rect key="frame" x="149" y="724" width="118" height="30"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.074999999999999997" minValue="0.0" maxValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-Xq-NZ9">
+                                <rect key="frame" x="149" y="723" width="118" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="6wj-dg-Phn"/>
                                 </constraints>
@@ -131,6 +131,13 @@
                                     <constraint firstAttribute="height" constant="96" id="AuZ-sZ-auf"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDm-LA-4n4">
+                                <rect key="frame" x="909" y="724" width="62" height="30"/>
+                                <state key="normal" title="Playback"/>
+                                <connections>
+                                    <action selector="playbackBtn:" destination="YoL-zv-PPK" eventType="touchUpInside" id="tNO-sh-s2R"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -138,8 +145,10 @@
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="32" id="40d-x2-Ebh"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="bottom" secondItem="WYK-0j-ZwQ" secondAttribute="bottom" id="7EA-MV-H3A"/>
                             <constraint firstItem="WYK-0j-ZwQ" firstAttribute="leading" secondItem="lUX-s2-ag4" secondAttribute="trailing" constant="8" symbolic="YES" id="7YE-OB-Aec"/>
+                            <constraint firstItem="vDm-LA-4n4" firstAttribute="firstBaseline" secondItem="vST-Kb-Xmi" secondAttribute="baseline" id="8Ri-M3-3Ke"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="leading" secondItem="0tB-Xq-NZ9" secondAttribute="trailing" constant="24" id="8nd-rW-Dyc"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="289" id="9LZ-x1-fOr"/>
+                            <constraint firstItem="vDm-LA-4n4" firstAttribute="top" secondItem="m3m-l5-XOf" secondAttribute="top" id="AtB-52-X1t"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="32" id="CWb-st-7Fg"/>
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="centerY" secondItem="X2L-Pm-DdG" secondAttribute="centerY" id="CeA-L7-rNc"/>
                             <constraint firstItem="X2L-Pm-DdG" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="bottom" constant="37" id="Efj-Ol-6du"/>
@@ -149,8 +158,10 @@
                             <constraint firstItem="ulr-qt-NTQ" firstAttribute="trailing" secondItem="N17-kR-97o" secondAttribute="trailing" constant="98" id="KFg-c5-rMB"/>
                             <constraint firstAttribute="bottom" secondItem="X2L-Pm-DdG" secondAttribute="bottom" constant="20" symbolic="YES" id="MjW-My-JnG"/>
                             <constraint firstItem="vST-Kb-Xmi" firstAttribute="centerY" secondItem="0tB-Xq-NZ9" secondAttribute="centerY" id="Mjq-86-EEt"/>
+                            <constraint firstItem="vDm-LA-4n4" firstAttribute="baseline" secondItem="vST-Kb-Xmi" secondAttribute="baseline" id="P18-Gl-mTx"/>
                             <constraint firstItem="vST-Kb-Xmi" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="86" id="TP2-YY-lX6"/>
                             <constraint firstItem="lUX-s2-ag4" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="526" id="TXM-ED-Xkq"/>
+                            <constraint firstItem="vDm-LA-4n4" firstAttribute="leading" secondItem="m3m-l5-XOf" secondAttribute="trailing" constant="15" id="Zvk-dK-znh"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="bottom" secondItem="GVu-I5-EeL" secondAttribute="bottom" id="bAL-r3-5he"/>
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="WYK-0j-ZwQ" secondAttribute="centerY" id="baL-X6-aWz"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="GVu-I5-EeL" secondAttribute="top" id="ccA-X0-och"/>
@@ -163,6 +174,7 @@
                             <constraint firstItem="0tB-Xq-NZ9" firstAttribute="centerY" secondItem="m3m-l5-XOf" secondAttribute="centerY" id="n7O-Uz-nj5"/>
                             <constraint firstItem="vST-Kb-Xmi" firstAttribute="firstBaseline" secondItem="X2L-Pm-DdG" secondAttribute="firstBaseline" id="oBN-om-VyG"/>
                             <constraint firstItem="ha1-Ed-yQa" firstAttribute="top" secondItem="N17-kR-97o" secondAttribute="top" id="q4g-3z-uqc"/>
+                            <constraint firstItem="vDm-LA-4n4" firstAttribute="centerY" secondItem="m3m-l5-XOf" secondAttribute="centerY" id="qYF-ZU-hKk"/>
                             <constraint firstItem="m3m-l5-XOf" firstAttribute="baseline" secondItem="WYK-0j-ZwQ" secondAttribute="baseline" id="v3z-1S-8LH"/>
                             <constraint firstItem="ha1-Ed-yQa" firstAttribute="leading" secondItem="ulr-qt-NTQ" secondAttribute="leading" constant="816" id="vdZ-LA-RQA"/>
                             <constraint firstItem="N17-kR-97o" firstAttribute="top" secondItem="ulr-qt-NTQ" secondAttribute="top" id="wjU-9Q-iev"/>
@@ -173,6 +185,7 @@
                         <outlet property="ivWind" destination="ha1-Ed-yQa" id="ay4-oo-wva"/>
                         <outlet property="labelSliderVal" destination="vST-Kb-Xmi" id="w71-yE-3Sk"/>
                         <outlet property="labelWinner" destination="X2L-Pm-DdG" id="D9X-Hg-hcu"/>
+                        <outlet property="recordLeg" destination="lUX-s2-ag4" id="y51-4Y-bRX"/>
                         <outlet property="rectDrawView" destination="GVu-I5-EeL" id="YsA-gr-zY6"/>
                         <outlet property="slider" destination="0tB-Xq-NZ9" id="6P6-zd-C07"/>
                         <outlet property="switchWallMode" destination="2sc-n3-1J9" id="Dsg-p8-unt"/>
