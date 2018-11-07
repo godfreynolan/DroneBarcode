@@ -14,6 +14,10 @@ class QRCodeGenViewController: UIViewController {
     @IBOutlet weak var editTextQRNum: UITextField!
     var dataArray: [String] = []
     var imageArray: [UIImage] = []
+    var cgImageArray: [CGImage] = []
+    var pdfStuff: NSData?
+    var nsDataArray: [NSData] = []
+    var pathGlobal: String = ""
     @IBOutlet weak var qrImageView: UIImageView!
     
     @IBAction func generateQR(_ sender: Any) {
@@ -23,91 +27,115 @@ class QRCodeGenViewController: UIViewController {
             dataArray.append("\(tempCounter)")
         }
         
-        for tempDataArray in dataArray{
-            imageArray.append(generateQRCode(from: tempDataArray)!)
+        for tempCGIImageArray in dataArray{
+            cgImageArray.append(generateQRCode(from: tempCGIImageArray)!)
         }
-        
-//        for tempDataArray in dataArray{
-//            let newSizedUIImage: UIImage = resizeImage(image: generateQRCode(from: tempDataArray)!, withSize: CGSize(width: 300, height: 300))
-//            imageArray.append(newSizedUIImage)
-//        }
         
     }//end generate
     
-    
-    @IBAction func printQR(_ sender: Any) {
+    @IBAction func makePDF(_ sender: Any) {
         
-        
-        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
-        self.present(vc, animated: true)
-        if let popOver = vc.popoverPresentationController {
-            popOver.sourceView = self.view
+        if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .allDomainsMask, true).first {
+            let path = dir + "/" + "something.pdf"
+            print("Saving to " + path)
+            pathGlobal = dir + "/" + "something.pdf"
+            //creating pdf from array of CGImages
+            let somePDF: NSData? = createPDF(cgImage: cgImageArray)
+
+            do {
+                try somePDF?.write(toFile: path, atomically: false)
+                print("Wrote to file.")
+            } catch {
+                print("Could not save!")
+            }
+        } else {
+            print("Could not get directory!")
         }
-//        for tempImageArray in imageArray{
-//            let vc = UIActivityViewController(activityItems: [tempImageArray], applicationActivities: [])
-//
-//        }
+
+    }
+    
+    @IBAction func printPDF(_ sender: Any) {
         
     }
     
-    func generateQRCode(from string: String) -> UIImage? {
+    @IBAction func printQR(_ sender: Any) {
+
+        // make a url from pdf file path
+        let pdfURL = NSURL.fileURL(withPath: pathGlobal)
+
+        let uiViewController = UIActivityViewController(activityItems: [pdfURL], applicationActivities: [])
+        uiViewController.popoverPresentationController?.sourceView = self.view
+
+        // all the UI to exclude from printing GUI
+        uiViewController.excludedActivityTypes = [UIActivityType.addToReadingList, UIActivityType.airDrop, UIActivityType.assignToContact, UIActivityType.copyToPasteboard, UIActivityType.mail, UIActivityType.markupAsPDF, UIActivityType.message, UIActivityType.openInIBooks, UIActivityType.postToFacebook, UIActivityType.postToFlickr, UIActivityType.postToTencentWeibo, UIActivityType.postToTwitter, UIActivityType.postToVimeo, UIActivityType.postToWeibo, UIActivityType.saveToCameraRoll]
+        
+        // getting the printing GUI to pop open
+        self.present(uiViewController, animated: true)
+        if let popOver = uiViewController.popoverPresentationController {
+            popOver.sourceView = self.view
+        }
+        
+    }
+    
+    func generateQRCode(from string: String) -> CGImage? {
         let data = string.data(using: String.Encoding.ascii)
         
         if let filter = CIFilter(name: "CIQRCodeGenerator") {
             filter.setValue(data, forKey: "inputMessage")
             
-            guard let qrCodeImage = filter.outputImage else{
-                return nil
-            }
-            let scaleX = qrImageView.frame.size.width / qrCodeImage.extent.size.width
-            let scaleY = qrImageView.frame.size.height / qrCodeImage.extent.size.height
-            let transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+            //makes the CIImage larger/smaller
+            let transform = CGAffineTransform(scaleX: 11, y: 11)
             
+            //ciImage
             if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output)
+
+                return convertCIImageToCGImage(inputImage: output)
+//                return UIImage(ciImage: output)
             }
         }
         
         return nil
     }//end generateQRCode
     
-//    func resizeImage(image: UIImage, withSize: CGSize) -> UIImage {
-//
-//        var actualHeight: CGFloat = image.size.height
-//        var actualWidth: CGFloat = image.size.width
-//        let maxHeight: CGFloat = withSize.width
-//        let maxWidth: CGFloat = withSize.height
-//        var imgRatio: CGFloat = actualWidth/actualHeight
-//        let maxRatio: CGFloat = maxWidth/maxHeight
-//        let compressionQuality = 0.5//50 percent compression
-//
-//        if (actualHeight > maxHeight || actualWidth > maxWidth) {
-//            if(imgRatio < maxRatio) {
-//                //adjust width according to maxHeight
-//                imgRatio = maxHeight / actualHeight
-//                actualWidth = imgRatio * actualWidth
-//                actualHeight = maxHeight
-//            } else if(imgRatio > maxRatio) {
-//                //adjust height according to maxWidth
-//                imgRatio = maxWidth / actualWidth
-//                actualHeight = imgRatio * actualHeight
-//                actualWidth = maxWidth
-//            } else {
-//                actualHeight = maxHeight
-//                actualWidth = maxWidth
-//            }
-//        }
-//
-//        let rect: CGRect = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight)
-//        UIGraphicsBeginImageContext(rect.size)
-//        image.draw(in: rect)
-//        let image: UIImage  = UIGraphicsGetImageFromCurrentImageContext()!
-//        let imageData = UIImageJPEGRepresentation(image, CGFloat(compressionQuality))
-//        UIGraphicsEndImageContext()
-//
-//        let resizedImage = UIImage(data: imageData!)
-//        return resizedImage!
-//
-//    }
+    func convertCIImageToCGImage(inputImage: CIImage) -> CGImage! {
+        let context = CIContext(options: nil)
+        if context != nil {
+            return context.createCGImage(inputImage, from: inputImage.extent)
+        }
+        return nil
+    }
+    
+    func createPDF(cgImage: [CGImage]) -> NSData? {
+        
+        let pdfData = NSMutableData()
+        
+        // count bytes into pdfData
+        let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
+        
+        // makes a CGRect from UIImage size
+        var imageDrawing = CGRect.init(x: 200, y: 300, width: cgImage[0].width, height: cgImage[0].height)
+        
+        // need firstPage mediaBox
+        let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &imageDrawing, nil)!
+
+    //   used to approximate blankPieceOfPaper dimensions when loaded in google chrome
+    //   let defaultPaper = UIPrintPaper.init()
+    //   defaultPaper.paperSize.width, height: defaultPaper.paperSize.height
+        
+        //container dimensions the CGImage is drawn onto
+        var blankPieceOfPaper = CGRect.init(x:0, y:0, width: 614, height: 794)
+       
+        //drawing multiple pdf pages
+        for tempCGImage in cgImageArray{
+            //begins a new page
+            pdfContext.beginPage(mediaBox: &blankPieceOfPaper)
+            //drawing UIImage in CGRect
+            pdfContext.draw(tempCGImage, in: imageDrawing)
+            //end the current page
+            pdfContext.endPage()
+        }
+
+        return pdfData
+    }
     
 }
