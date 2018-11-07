@@ -7,19 +7,17 @@
 //
 
 import UIKit
+import PDFKit
 
 class QRCodeGenViewController: UIViewController {
 
     
     @IBOutlet weak var editTextQRNum: UITextField!
-    var dataArray: [String] = []
-    var imageArray: [UIImage] = []
-    var cgImageArray: [CGImage] = []
-    var pdfStuff: NSData?
-    var nsDataArray: [NSData] = []
-    var pathGlobal: String = ""
-    @IBOutlet weak var qrImageView: UIImageView!
+    var dataArray: [String] = [] // data for each QR code
+    var cgImageArray: [CGImage] = [] // store each QR code as a CGImage
+    var pathGlobal: String = "" // path of the pdf file when it is made
     
+    // takes user input int and makes n number of QR images
     @IBAction func generateQR(_ sender: Any) {
         let numberOfQRCodes: Int = Int(editTextQRNum.text ?? "0") ?? 0
         
@@ -31,14 +29,19 @@ class QRCodeGenViewController: UIViewController {
             cgImageArray.append(generateQRCode(from: tempCGIImageArray)!)
         }
         
-    }//end generate
+    }
     
+    // initializes pathGlobal to use as a URL later to print from.
+    // calls createPDF to make a NSData from a array of CGImages
+    // creates a pdf file to be accessed from itunes
+  
     @IBAction func makePDF(_ sender: Any) {
         
         if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .allDomainsMask, true).first {
             let path = dir + "/" + "something.pdf"
             print("Saving to " + path)
             pathGlobal = dir + "/" + "something.pdf"
+            
             //creating pdf from array of CGImages
             let somePDF: NSData? = createPDF(cgImage: cgImageArray)
 
@@ -54,13 +57,11 @@ class QRCodeGenViewController: UIViewController {
 
     }
     
-    @IBAction func printPDF(_ sender: Any) {
-        
-    }
+ 
     
     @IBAction func printQR(_ sender: Any) {
 
-        // make a url from pdf file path
+        // make a url from global pdf path
         let pdfURL = NSURL.fileURL(withPath: pathGlobal)
 
         let uiViewController = UIActivityViewController(activityItems: [pdfURL], applicationActivities: [])
@@ -77,6 +78,35 @@ class QRCodeGenViewController: UIViewController {
         
     }
     
+    @IBAction func addPageNumbers(_ sender: Any) {
+        let cgImageArraySize = cgImageArray.count
+        
+        //requires PDFKit import
+        //makes Text widget
+        var pageNumber = PDFAnnotation(bounds: CGRect(x: 230, y: 600, width: 235, height: 180), forType: .widget, withProperties: nil)
+        pageNumber.widgetFieldType = .text
+        pageNumber.backgroundColor = UIColor.white
+        pageNumber.fontColor = UIColor.black
+        pageNumber.font = UIFont.systemFont(ofSize: 180, weight: UIFont.Weight.bold)
+        pageNumber.widgetStringValue = "\(cgImageArraySize)"
+        
+        
+        //get PDFDocument from URL and add the Text widget
+        let inUrl: URL = URL(fileURLWithPath: pathGlobal)
+        let doc: PDFDocument = PDFDocument(url: inUrl)!
+        let page: PDFPage = doc.page(at: 0)!
+        page.addAnnotation(pageNumber)
+        
+        do {
+            try doc.write(toFile: pathGlobal)
+            print("Wrote to file.")
+        } catch {
+            print("Could not save!")
+        }
+    }
+        
+
+    
     func generateQRCode(from string: String) -> CGImage? {
         let data = string.data(using: String.Encoding.ascii)
         
@@ -86,11 +116,10 @@ class QRCodeGenViewController: UIViewController {
             //makes the CIImage larger/smaller
             let transform = CGAffineTransform(scaleX: 11, y: 11)
             
-            //ciImage
-            if let output = filter.outputImage?.transformed(by: transform) {
+            if let output: CIImage = filter.outputImage?.transformed(by: transform) {
 
                 return convertCIImageToCGImage(inputImage: output)
-//                return UIImage(ciImage: output)
+
             }
         }
         
@@ -125,11 +154,13 @@ class QRCodeGenViewController: UIViewController {
         //container dimensions the CGImage is drawn onto
         var blankPieceOfPaper = CGRect.init(x:0, y:0, width: 614, height: 794)
        
+        
         //drawing multiple pdf pages
         for tempCGImage in cgImageArray{
             //begins a new page
             pdfContext.beginPage(mediaBox: &blankPieceOfPaper)
             //drawing UIImage in CGRect
+            pdfContext.draw(tempCGImage, in: imageDrawing)
             pdfContext.draw(tempCGImage, in: imageDrawing)
             //end the current page
             pdfContext.endPage()
@@ -137,5 +168,7 @@ class QRCodeGenViewController: UIViewController {
 
         return pdfData
     }
-    
+
 }
+
+

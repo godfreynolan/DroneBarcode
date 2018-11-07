@@ -419,24 +419,20 @@
                                     <action selector="printQR:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="6tF-lj-IMF"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m70-GX-kZs">
-                                <rect key="frame" x="143" y="224" width="365" height="299"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPc-VN-5cw">
+                                <rect key="frame" x="378" y="146" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4N-1Y-FD6">
-                                <rect key="frame" x="409" y="97" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Make PDF"/>
+                                <state key="normal" title="Add Page Numbers"/>
                                 <connections>
-                                    <action selector="makePDF:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="8ht-2C-hbd"/>
+                                    <action selector="addPageNumbers:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="4E9-Dz-joG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Utb-gg-DKv">
-                                <rect key="frame" x="538" y="97" width="64" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwm-ib-Mns">
+                                <rect key="frame" x="400" y="91" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="print PDF"/>
+                                <state key="normal" title="make PDF"/>
                                 <connections>
-                                    <action selector="printPDF:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="t4V-68-bux"/>
+                                    <action selector="makePDF:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="g94-R9-SDi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -445,7 +441,6 @@
                     </view>
                     <connections>
                         <outlet property="editTextQRNum" destination="v9J-cs-kfB" id="6w8-tP-qkr"/>
-                        <outlet property="qrImageView" destination="m70-GX-kZs" id="LOF-Yj-oaH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="His-10-Wvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
