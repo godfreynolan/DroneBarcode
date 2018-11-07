@@ -396,13 +396,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v9J-cs-kfB">
-                                <rect key="frame" x="269" y="34" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aA7-zr-hel">
                                 <rect key="frame" x="412" y="34" width="64" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -419,28 +412,27 @@
                                     <action selector="printQR:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="6tF-lj-IMF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPc-VN-5cw">
-                                <rect key="frame" x="378" y="146" width="133" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Jt-Fz-MnS">
+                                <rect key="frame" x="234" y="40" width="33" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Page Numbers"/>
-                                <connections>
-                                    <action selector="addPageNumbers:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="4E9-Dz-joG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwm-ib-Mns">
-                                <rect key="frame" x="400" y="91" width="70" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="n9V-IV-mkJ">
+                                <rect key="frame" x="192" y="84" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="make PDF"/>
                                 <connections>
-                                    <action selector="makePDF:" destination="fqS-d4-Ay4" eventType="touchUpInside" id="g94-R9-SDi"/>
+                                    <action selector="userInputStepperAction:" destination="fqS-d4-Ay4" eventType="valueChanged" id="7GL-7V-ELD"/>
                                 </connections>
-                            </button>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YFH-xx-o5l"/>
                     </view>
                     <connections>
-                        <outlet property="editTextQRNum" destination="v9J-cs-kfB" id="6w8-tP-qkr"/>
+                        <outlet property="qrQuantityNumber" destination="8Jt-Fz-MnS" id="hiV-TU-cis"/>
+                        <outlet property="userInputStepper" destination="n9V-IV-mkJ" id="T2S-jl-Ota"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="His-10-Wvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
