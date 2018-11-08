@@ -16,6 +16,8 @@ class StartupViewController: UIViewController {
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var openButton: UIButton!
     
+    private var down = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.resetUI()
@@ -125,4 +127,5 @@ class StartupViewController: UIViewController {
         
         return nil
     }
+    
 }

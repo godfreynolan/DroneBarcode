@@ -22,6 +22,7 @@ class FlightReplayer {
     
     /// Creates an angle-based pitch/roll/yaw command to send to the drone.
     private func createCommand(from measurement: FlightRecorder.Measurement) -> DJIVirtualStickFlightControlData {
+        print("PITCH \(measurement.attitude!.pitch) ROLL \(measurement.attitude!.roll) YAW \(measurement.attitude!.yaw)")
         return DJIVirtualStickFlightControlData(pitch: measurement.attitude!.pitch, roll: measurement.attitude!.roll, yaw: measurement.attitude!.yaw, verticalThrottle: -1 * measurement.altitude!)
     }
     
@@ -52,7 +53,6 @@ class FlightReplayer {
         let roll = NSNumber(value: measurement.attitude!.roll)
         let yaw = NSNumber(value: measurement.attitude!.yaw)
         let rotation = DJIGimbalRotation(pitchValue: pitch, rollValue: roll, yawValue: yaw, time: TimeInterval(1.0), mode: .absoluteAngle)
-        print("PITCH ROLL YAW \(pitch) \(roll) \(yaw)")
         gimbal.rotate(with: rotation, completion: { (err) in
             if err != nil {
                 print("Error rotating gimbal: " + err.debugDescription)
