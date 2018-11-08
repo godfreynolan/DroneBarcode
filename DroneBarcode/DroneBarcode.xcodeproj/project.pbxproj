@@ -23,7 +23,6 @@
 		84C283742191C92E0073F81D /* LeggedFlightRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C283732191C92E0073F81D /* LeggedFlightRecorder.swift */; };
 		84C283772191E98C0073F81D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C283752191E98C0073F81D /* Main.storyboard */; };
 		84E280BE218B335F00A33B9A /* ScanditBarcodeScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */; };
-		84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E58EEF217A4AAE004F076E /* TrackManager.swift */; };
 		84F49C11218B39B60021CF94 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C10218B39B60021CF94 /* AudioToolbox.framework */; };
 		84F49C13218B39BD0021CF94 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C12218B39BD0021CF94 /* CoreText.framework */; };
 		84F49C15218B39C40021CF94 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F49C14218B39C40021CF94 /* OpenGLES.framework */; };
@@ -120,7 +119,6 @@
 		84C283732191C92E0073F81D /* LeggedFlightRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeggedFlightRecorder.swift; sourceTree = "<group>"; };
 		84C283762191E98C0073F81D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84E280BD218B335E00A33B9A /* ScanditBarcodeScanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ScanditBarcodeScanner.framework; sourceTree = "<group>"; };
-		84E58EEF217A4AAE004F076E /* TrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
 		84F49C10218B39B60021CF94 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		84F49C12218B39BD0021CF94 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		84F49C14218B39C40021CF94 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -245,7 +243,6 @@
 		84E58EEE217A4A77004F076E /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				84E58EEF217A4AAE004F076E /* TrackManager.swift */,
 				8486E2F3217E06C70066491D /* Benchmark.swift */,
 			);
 			path = Util;
@@ -628,7 +625,6 @@
 				FFA8B7BD2063F27C00676B06 /* DroneConnectionManager.swift in Sources */,
 				FF54F2EF2065755D00F8DBDF /* Utils.swift in Sources */,
 				FF54F2F12065758A00F8DBDF /* FlightPlanner.swift in Sources */,
-				84E58EF0217A4AAE004F076E /* TrackManager.swift in Sources */,
 				FFA3754E20693A2D0031ACED /* BarcodeScanCallback.swift in Sources */,
 				84C283742191C92E0073F81D /* LeggedFlightRecorder.swift in Sources */,
 				FFA8B7C02063FC7B00676B06 /* StartupViewController.swift in Sources */,
