@@ -60,7 +60,6 @@ class QRCodeGenViewController: UIViewController {
     @IBAction func userInputStepperAction(_ sender: Any) {
         qrQuantityNumber.text = Int(userInputStepper.value).description
     }
-    
 
     @IBAction func generateQR(_ sender: Any) {
         // number of QR from userInput stepper widget

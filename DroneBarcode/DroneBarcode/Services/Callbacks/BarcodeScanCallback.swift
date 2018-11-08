@@ -11,6 +11,5 @@ import CoreGraphics
 
 protocol BarcodeScanCallback {
     func onError(error: Error?)
-    func onScanSuccess(barcodeData: String)
-    func scanSuccess(rect: CGRect, color: UIColor)
+    func onScanSuccess(rect: CGRect, color: UIColor)
 }

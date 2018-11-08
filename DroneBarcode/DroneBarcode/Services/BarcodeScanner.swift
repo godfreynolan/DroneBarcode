@@ -41,7 +41,7 @@ class BarcodeScanner: SBSScanDelegate {
                 let y1 = result.topLeft.y * image.size.height
                 let y2 = result.bottomLeft.y * image.size.height
                 let rect = CGRect(x: x1, y: image.size.height - y2, width: x2 - x1, height: y2 - y1)
-                self.callback.scanSuccess(rect: rect, color: .blue)
+                self.callback.onScanSuccess(rect: rect, color: .blue)
             }
             
             self.appleCount += results.count
@@ -78,6 +78,5 @@ class BarcodeScanner: SBSScanDelegate {
     
     func barcodePicker(_ picker: SBSBarcodePicker, didScan session: SBSScanSession) {
         guard let code = session.newlyRecognizedCodes.first else { return }
-        self.callback.onScanSuccess(barcodeData: code.data!)
     }
 }
