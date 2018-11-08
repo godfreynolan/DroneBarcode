@@ -10,7 +10,7 @@ import DJISDK
 import UIKit
 import VideoPreviewer
 
-class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  DJIVideoFeedListener, BarcodeScanCallback, PositionMonitorDelegate, DJIGimbalDelegate {
+class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  DJIVideoFeedListener, BarcodeScanCallback, PositionMonitorDelegate, DJIGimbalDelegate, DJIFlightAssistantDelegate {
 
     private var barcodeScanner: BarcodeScanner!
     private var positionMonitor: PositionMonitor? = nil
@@ -50,10 +50,15 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         self.fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
         self.fc?.flightAssistant?.setCollisionAvoidanceEnabled(false, withCompletion: nil)
         self.fc?.setVisionAssistedPositioningEnabled(true, withCompletion: nil)
-        self.fc?.yawControlMode = .angularVelocity
+        self.fc?.yawControlMode = .angle
         self.fc?.rollPitchControlMode = .velocity
         self.fc?.verticalControlMode = .velocity
+        self.fc?.rollPitchCoordinateSystem = DJIVirtualStickFlightCoordinateSystem.ground
+        self.fc?.isVirtualStickAdvancedModeEnabled = true
         self.fc?.delegate = self
+
+        self.fc?.flightAssistant?.delegate = self
+
         self.positionMonitor = PositionMonitor(qr: CGRect(x:0, y:0, width:0, height:0), target: rectDrawView.getTargetRect(), flightController: fc!)
         self.positionMonitor!.delegate = self
     }
@@ -106,7 +111,7 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
             correct_directions.append(switchWallMode.isOn ? PositionUtil.translateFloorDirectionToWall(direction) : direction)
         }
         self.rectDrawView.setHelperArrows(correct_directions)
-        if !self.allowPositioning { return }
+        //if !self.allowPositioning { return }
         self.shouldWait = true
         if directions.count > 0 {
             let command = PositionUtil.translateDirectionToCommand(correct_directions[0], isOnWall: false, verticalSpeed: 0.05, horizontalSpeed: slider.value)
@@ -151,13 +156,18 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
     
     @IBAction func recordLegPressed(_ sender: Any) {
         if self.recorder!.isRecording() {
-            self.recorder.finishRecordingLeg()
-            self.positionMonitor?.startRecentering()
-            self.recordLeg!.setTitle("Record Leg", for: .normal)
+            self.fc?.setVirtualStickModeEnabled(true, withCompletion: { (err) in
+                self.recorder.finishRecordingLeg()
+                self.fc?.yawControlMode = .angularVelocity
+                self.positionMonitor?.startRecentering()
+                self.recordLeg!.setTitle("Record Leg", for: .normal)
+            })
         } else {
-            self.recorder.startRecordingLeg()
-            self.recordLeg!.setTitle("Finish Leg", for: .normal)
-            self.positionMonitor?.stopRecentering()
+            self.fc?.setVirtualStickModeEnabled(false, withCompletion: { (err) in
+                self.positionMonitor?.stopRecentering()
+                self.recorder.startRecordingLeg()
+                self.recordLeg!.setTitle("Finish Leg", for: .normal)
+            })
         }
     }
 
@@ -165,33 +175,42 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         self.fc?.startTakeoff(completion: nil)
     }
     
+    // this actually stops positioning.
     @IBAction func startPositioning(_ sender: Any) {
         self.positionMonitor?.stopRecentering()
-        if !self.allowPositioning {
-            self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
-        } else {
-            self.fc?.setVirtualStickModeEnabled(true, withCompletion: nil)
-        }
+        self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
     }
     
     @IBAction func playbackBtn(_ sender: Any) {
-        self.legs = self.recorder.getLegs()
-        executeNextLeg()
+        self.fc?.setVirtualStickModeEnabled(true, withCompletion: {(err) in
+            usleep(200000)
+            self.legs = self.recorder.getLegs()
+            self.positionMonitor?.startRecentering {
+                self.executeNextLeg()
+            }
+        })
     }
     
     private func executeNextLeg() {
+        // make sure that we are "not targeted" so that it guarantees we wont
+        // be automatically targeted when we get to the other code and its not detected immediately.
+        self.positionMonitor?.resetTargeting()
         let leg = self.legs.removeFirst()
         self.replayer = FlightReplayer(commands: leg)
+        self.fc?.yawControlMode = .angle
+        print("Starting leg...")
         self.replayer?.executeCommandQueue(controller: self.fc!, cameraGimbal: self.gimbal, callback: {
+            print("Finished leg...Recentering")
             if self.legs.count > 0 {
                 DispatchQueue.main.async {
+                    self.fc?.yawControlMode = .angularVelocity
                     self.positionMonitor?.startRecentering(withCompletion: {() in
+                        print("Finished recentering...Next leg.")
                         self.executeNextLeg()
                     })
-                    //while !self.positionMonitor!.isPositioned() {}
                 }
             } else {
-                self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
+               self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
             }
         })
         
@@ -216,7 +235,7 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         }
         
         VideoPreviewer.instance().start()
-        self.scanningTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(takePhoto)), userInfo: nil, repeats: true)
+        self.scanningTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: (#selector(takePhoto)), userInfo: nil, repeats: true)
     }
     
     private func resetVideoPreview() {
@@ -232,6 +251,37 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         
         if self.scanningTimer.isValid {
             self.scanningTimer.invalidate()
+        }
+    }
+    
+    func flightAssistant(_ assistant: DJIFlightAssistant, didUpdate state: DJIVisionDetectionState) {
+        var posStr = ""
+        switch state.position {
+        case .left:
+            posStr = "left"
+            break
+        case .right:
+            posStr = "right"
+            break
+        case .nose:
+            posStr = "nose"
+            break
+        case .tail:
+            posStr = "tail"
+            break
+        case .unknown:
+            posStr = "unknown"
+            break
+        }
+        
+        if state.position != .nose { return }
+        
+        guard let sectors = state.detectionSectors, sectors != nil else {
+            return
+        }
+        
+        for sector in sectors {
+            //print("sector dist \(sector.obstacleDistanceInMeters)")
         }
     }
 }

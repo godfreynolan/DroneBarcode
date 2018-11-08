@@ -60,9 +60,9 @@ class BarcodeScanner: SBSScanDelegate {
         }
     }
     
-    func scanScandit(_ image: UIImage) {
+    func scanScandit() {
         let scanSettings = SBSScanSettings.default()
-        scanSettings.cameraFacingPreference = .front
+        scanSettings.cameraFacingPreference = .back
         scanSettings.setSymbology(.aztec, enabled: true)
         scanSettings.setSymbology(.qr, enabled: true)
         scanSettings.setSymbology(.microQR, enabled: true)

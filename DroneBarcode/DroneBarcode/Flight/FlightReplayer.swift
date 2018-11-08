@@ -22,6 +22,7 @@ class FlightReplayer {
     
     /// Creates an angle-based pitch/roll/yaw command to send to the drone.
     private func createCommand(from measurement: FlightRecorder.Measurement) -> DJIVirtualStickFlightControlData {
+        print("PITCH \(measurement.attitude!.pitch) ROLL \(measurement.attitude!.roll) YAW \(measurement.attitude!.yaw)")
         return DJIVirtualStickFlightControlData(pitch: measurement.attitude!.pitch, roll: measurement.attitude!.roll, yaw: measurement.attitude!.yaw, verticalThrottle: -1 * measurement.altitude!)
     }
     

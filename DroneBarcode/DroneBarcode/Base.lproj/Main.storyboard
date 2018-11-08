@@ -38,7 +38,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Open"/>
                                 <connections>
-                                    <segue destination="YoL-zv-PPK" kind="show" id="ocT-W1-Xfc"/>
+                                    <segue destination="YoL-zv-PPK" kind="show" id="m0i-dU-wXe"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -100,13 +100,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3m-l5-XOf">
-                                <rect key="frame" x="782" y="723" width="112" height="30"/>
-                                <state key="normal" title="start positioning"/>
+                                <rect key="frame" x="782" y="723" width="110" height="30"/>
+                                <state key="normal" title="stop positioning"/>
                                 <connections>
                                     <action selector="startPositioning:" destination="YoL-zv-PPK" eventType="touchUpInside" id="Szg-9W-4To"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.074999999999999997" minValue="0.0" maxValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-Xq-NZ9">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.059999999999999998" minValue="0.0" maxValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-Xq-NZ9">
                                 <rect key="frame" x="149" y="723" width="118" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="6wj-dg-Phn"/>
@@ -115,7 +115,7 @@
                                     <action selector="sliderValueChanged:" destination="YoL-zv-PPK" eventType="valueChanged" id="PeH-Vy-eOJ"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.075" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vST-Kb-Xmi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vST-Kb-Xmi">
                                 <rect key="frame" x="86" y="728" width="43" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4j-Fg-Oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468.74999999999994" y="89.84375"/>
+            <point key="canvasLocation" x="456" y="-48"/>
         </scene>
     </scenes>
     <resources>

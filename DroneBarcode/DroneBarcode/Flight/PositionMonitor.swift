@@ -62,17 +62,24 @@ public class PositionMonitor {
         return self.qrIsTargeted
     }
     
+    func resetTargeting() {
+        self.qrIsTargeted = false
+    }
+
     func updateQRPosition(_ qrRect: CGRect) {
         self.qrRect = qrRect
         
-        if !self.isRecentering { return }
-        
+
         let intersect = calculateOverlap(first: self.targetRect, second: self.qrRect)
         let coverage = calculateOverlap(first: self.qrRect, second: self.targetRect)
         
         // Check if inside/outside boundaries are met, then send update.
         self.qrIsTargeted = intersect >= 1.0 && coverage >= PositionMonitor.QR_TARGET_THRESHOLD
-        print("Running if statement")
+        self.delegate?.positionMonitorStatusUpdated(self.qrIsTargeted)
+        
+        // ignore target status if not targeting.
+        if !self.isRecentering { self.delegate?.directionHelper([]); return }
+        
         if !self.qrIsTargeted {
             self.delegate?.directionHelper(getDirectionHelper(intersect: intersect, coverage: coverage))
         } else {
@@ -80,7 +87,6 @@ public class PositionMonitor {
             self.targetingCompleteCallback = nil
             self.delegate?.directionHelper([])
         }
-        self.delegate?.positionMonitorStatusUpdated(self.qrIsTargeted)
     }
     
     private func getDirectionHelper(intersect: Float, coverage: Float) -> [Direction] {
