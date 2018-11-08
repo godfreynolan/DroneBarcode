@@ -90,7 +90,8 @@ class StartupViewController: UIViewController {
         
         controller?.setVisionAssistedPositioningEnabled(true, withCompletion: { (error) in
             if error != nil {
-                // Handle error
+                let alert = UIAlertController(title: "Error", message: "Could not enable vision assisted positioning!", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
             } else {
                 self.showDroneConnected()
             }
@@ -124,7 +125,6 @@ class StartupViewController: UIViewController {
         if (DJISDKManager.product() is DJIAircraft) {
             return (DJISDKManager.product() as? DJIAircraft)?.camera
         }
-        
         return nil
     }
     

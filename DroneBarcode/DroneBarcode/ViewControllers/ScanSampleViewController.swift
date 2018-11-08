@@ -134,8 +134,11 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         case .level1:
             self.ivWind.image = UIImage(named: "wind-moderate")
             break
-        case .level2, .unknown:
+        case .level2:
             self.ivWind.image = UIImage(named: "wind-heavy")
+            break
+        case .unknown:
+            self.ivWind.image = nil
             break
         }
     }
