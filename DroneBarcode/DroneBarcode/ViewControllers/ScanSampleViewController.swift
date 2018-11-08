@@ -198,19 +198,21 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         let leg = self.legs.removeFirst()
         self.replayer = FlightReplayer(commands: leg)
         self.fc?.yawControlMode = .angle
-        print("Starting leg...")
         self.replayer?.executeCommandQueue(controller: self.fc!, cameraGimbal: self.gimbal, callback: {
-            print("Finished leg...Recentering")
             if self.legs.count > 0 {
                 DispatchQueue.main.async {
                     self.fc?.yawControlMode = .angularVelocity
                     self.positionMonitor?.startRecentering(withCompletion: {() in
-                        print("Finished recentering...Next leg.")
                         self.executeNextLeg()
                     })
                 }
             } else {
-               self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
+                self.positionMonitor?.startRecentering {
+                    self.fc?.startLanding(completion: { (err) in
+                        self.fc?.confirmLanding(completion: nil)
+                    })
+                }
+                self.fc?.setVirtualStickModeEnabled(false, withCompletion: nil)
             }
         })
         
@@ -225,6 +227,7 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
     
     private func setUpVideoPreview() {
         VideoPreviewer.instance().setView(self.videoPreviewerView)
+            VideoPreviewer.instance().enableHardwareDecode = true
         
         let product = DJISDKManager.product()
         if ((product?.model?.isEqual(DJIAircraftModelNameA3))! || (product?.model?.isEqual(DJIAircraftModelNameN3))! ||
