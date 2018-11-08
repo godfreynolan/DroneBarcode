@@ -256,33 +256,6 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
     }
     
     func flightAssistant(_ assistant: DJIFlightAssistant, didUpdate state: DJIVisionDetectionState) {
-        var posStr = ""
-        switch state.position {
-        case .left:
-            posStr = "left"
-            break
-        case .right:
-            posStr = "right"
-            break
-        case .nose:
-            posStr = "nose"
-            break
-        case .tail:
-            posStr = "tail"
-            break
-        case .unknown:
-            posStr = "unknown"
-            break
-        }
-        
-        if state.position != .nose { return }
-        
-        guard let sectors = state.detectionSectors, sectors != nil else {
-            return
-        }
-        
-        for sector in sectors {
-            //print("sector dist \(sector.obstacleDistanceInMeters)")
-        }
+        // TODO: Handle vision state and obstacle detection
     }
 }
