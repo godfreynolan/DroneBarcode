@@ -180,10 +180,6 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         })
     }
     
-    @IBAction func increasePitch(_ sender: Any?) {
-        self.flightPlanner.changePitch()
-    }
-    
     @IBAction func startFlight(_ sender: Any?) {
         self.recorder.startMeasurements()
         logTV(text: "Recording...")
