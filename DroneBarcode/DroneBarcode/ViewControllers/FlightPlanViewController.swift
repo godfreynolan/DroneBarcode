@@ -1,11 +1,3 @@
-//
-//  FlightPlanViewController.swift
-//  DroneBarcode
-//
-//  Created by Tom Kocik on 3/23/18.
-//  Copyright © 2018 Tom Kocik. All rights reserved.
-//
-
 import DJISDK
 import DJIWidget
 import CoreLocation
@@ -23,7 +15,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     private var lastYaw: Float = 0.0
     private var recorder: FlightRecorder = FlightRecorder()
     private var gimbal: DJIGimbal?
-
+    
     private var appDelegate: AppDelegate! = UIApplication.shared.delegate as? AppDelegate
     
     @IBOutlet weak var latitudeLabel: UILabel!
@@ -60,7 +52,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.logTextView.layoutManager.allowsNonContiguousLayout = false //needed for auto scrolling to bottom
         self.flightController = (DJISDKManager.product() as? DJIAircraft)?.flightController
         self.gimbal = (DJISDKManager.product() as? DJIAircraft)?.gimbal
         
@@ -75,27 +67,27 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         // Enable collision avoidance (not all models)
         self.flightController?.flightAssistant?.setCollisionAvoidanceEnabled(false, withCompletion: {(err) in
             if err == nil {
-                self.logTextView.text = self.logTextView.text + "\nDisabled collision avoidance."
+                self.logTV(text: "Disabled collision avoidance.")
             } else {
-                self.logTextView.text = self.logTextView.text + "\nCould not set collision avoidance: " + err!.localizedDescription
+                self.logTV(text: "Could not set collision avoidance: " + err!.localizedDescription)
             }
         })
         
         // Enable upwards avoidance
         self.flightController?.flightAssistant?.setUpwardsAvoidanceEnabled(true, withCompletion: {(err) in
             if err == nil {
-                self.logTextView.text = self.logTextView.text + "\nSet upwards avoidance."
+                self.logTV(text: "Set upwards avoidance.")
             } else {
-                self.logTextView.text = self.logTextView.text + "\nCould not set upwards avoidance: " + err!.localizedDescription
+                self.logTV(text: "Could not set upwards avoidance: " + err!.localizedDescription)
             }
         })
         
         // Enable vision positioning
         self.flightController?.setVisionAssistedPositioningEnabled(true, withCompletion: { (err) in
             if err == nil {
-                self.logTextView.text = self.logTextView.text + "\nSet vision assisted positioning."
+                self.logTV(text: "Set vision assisted positioning.")
             } else {
-                self.logTextView.text = self.logTextView.text + "\nCould not set vision assisted positioning: " + err!.localizedDescription
+                self.logTV(text: "Could not set vision assisted positioning: " + err!.localizedDescription)
             }
         })
         
@@ -104,7 +96,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         // Make sure the camera is pointing straight ahead
         DJISDKManager.product()?.gimbal?.rotate(with: DJIGimbalRotation(pitchValue: 0, rollValue: 0, yawValue: 0, time: 1, mode: DJIGimbalRotationMode.relativeAngle), completion: { (error) in
             if error != nil {
-                self.logTextView.text = self.logTextView.text + "\nGimbal: " + (error?.localizedDescription)!
+                self.logTV(text: "Gimbal: " + (error?.localizedDescription)!)
             }
         })
     }
@@ -114,11 +106,19 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         DJISDKManager.keyManager()?.stopAllListening(ofListeners: self)
     }
     
+    //sets logTextView text and auto scrolls to bottom
+    func logTV(text: String){
+        //Insert text
+        logTextView.text.append("\n"+text)
+        let btm = NSMakeRange(logTextView.text.count-1, 0)
+        logTextView.scrollRangeToVisible(btm)
+    }
+    
     private var firstLoad = false
     
     // DJIFlightControllerDelegate
     func flightController(_ fc: DJIFlightController, didUpdate state: DJIFlightControllerState) {
-
+        
         self.pitchLabel.text = String(format: "Pitch: %.2f", state.attitude.pitch)
         self.yawLabel.text = String(format: "Yaw: %.2f", state.attitude.yaw)
         self.rollLabel.text = String(format: "Roll: %.2f", state.attitude.roll)
@@ -151,11 +151,11 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
             }
             
             if state.isUltrasonicBeingUsed {
-                self.logTextView.text = self.logTextView.text + "\nIsUltrasonicBeingUsed: \(state.isUltrasonicBeingUsed)"
+                self.logTV(text : "IsUltrasonicBeingUsed: \(state.isUltrasonicBeingUsed)")
             }
             
-            self.logTextView.text = self.logTextView.text + "\nController State: " + message
-            self.logTextView.text = self.logTextView.text + "\nController State Info: \(state.attitude.yaw)"
+            self.logTV(text: "Controller State: " + message)
+            self.logTV(text: "Controller State Info: \(state.attitude.yaw)")
         }
     }
     
@@ -166,14 +166,14 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     @IBAction func turn(_ sender: Any?) {
         self.flightController?.setVirtualStickModeEnabled(true, withCompletion: { (error) in
             if error != nil {
-                self.logTextView.text = self.logTextView.text + "\nVSME: " + (error?.localizedDescription)!
+                self.logTV(text: "VSME: " + (error?.localizedDescription)!)
             } else {
-                self.logTextView.text += "\nSet virtual stick mode. Disabling collision avoidance..."
+                self.logTV(text: "Set virtual stick mode. Disabling collision avoidance...")
                 self.flightController?.flightAssistant?.setCollisionAvoidanceEnabled(false, withCompletion: { (error) in
                     if error != nil {
-                        self.logTextView.text += "\nCollision Avoidance couldn't be disabled."
+                        self.logTV(text: "Collision Avoidance couldn't be disabled.")
                     } else {
-                        self.logTextView.text += "\nCollision Avoidance disabled."
+                        self.logTV(text: "Collision Avoidance disabled.")
                     }
                 })
             }
@@ -186,7 +186,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     
     @IBAction func startFlight(_ sender: Any?) {
         self.recorder.startMeasurements()
-        self.logTextView.text += "\nRecording..."
+        logTV(text: "Recording...")
     }
     
     //MARK: - Helpers
@@ -203,7 +203,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         let caps = self.gimbal!.capabilities
         for (key, value) in caps {
             if value is DJIParamCapabilityMinMax {
-                self.logTextView.text += "\n\(key): \((value as! DJIParamCapabilityMinMax).min), \((value as! DJIParamCapabilityMinMax).max)"
+                self.logTV(text: "\(key): \((value as! DJIParamCapabilityMinMax).min), \((value as! DJIParamCapabilityMinMax).max)")
             }
         }
     }
@@ -211,9 +211,9 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     @IBAction func leftBtnClick(_ sender: Any) {
         (DJISDKManager.product() as! DJIAircraft).gimbal!.startCalibration { (err) in
             if err != nil {
-                self.logTextView.text += "\nCalibrated camera gimbal."
+                self.logTV(text: "Calibrated camera gimbal.")
             } else {
-                self.logTextView.text += "\nCould not calibrate gimbal."
+                self.logTV(text: "Could not calibrate gimbal.")
             }
         }
     }
@@ -222,11 +222,11 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         self.cameraView.isHidden = false
         self.flightController?.setVirtualStickModeEnabled(true, withCompletion: { (error) in
             if error != nil {
-                self.logTextView.text = self.logTextView.text + "\nVSME: " + (error?.localizedDescription)!
+                self.logTV(text: "VSME: " + (error?.localizedDescription)!)
             } else {
                 self.flightController?.startTakeoff(completion: { (error) in
                     if error != nil {
-                        self.logTextView.text = self.logTextView.text + "\nST: " + (error?.localizedDescription)!
+                        self.logTV(text: "ST: " + (error?.localizedDescription)!)
                     } else {
                         self.firstLoad = false
                     }
@@ -238,30 +238,30 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     @IBAction func backBtnClick(_ sender: Any) {
         DispatchQueue.main.async {
             self.flightPlanner.saveTimes()
-            self.logTextView.text = self.logTextView.text + "\nSaved times to file."
+            self.logTV(text: "Saved times to file.")
         }
     }
     
     @IBAction func upClicked(_ sender: Any) {
-        self.logTextView.text += "\nAdding commands to replayer"
+        self.logTV(text: "Adding commands to replayer")
         let replayer = FlightReplayer(commands: recorder.getMeasurements())
-        self.logTextView.text += "\nExecuting " + String(recorder.getMeasurements().count) + " commands."
+        self.logTV(text: "Executing " + String(recorder.getMeasurements().count) + " commands.")
         self.recorder.resetMeasurements()
         self.recorder.startMeasurements()
         replayer.executeCommandQueue(controller: self.flightController!, cameraGimbal: self.gimbal!, callback: {() in
             DispatchQueue.main.async {
                 self.recorder.finalizeMeasurements()
-                self.logTextView.text += "\nFlight replay complete. Saving to flightplan-autonomous.csv"
+                self.logTV(text: "Flight replay complete. Saving to flightplan-autonomous.csv")
                 self.recorder.saveFile(with: "flightplan-autonomous.csv")
             }
         })
     }
     
     @IBAction func downClicked(_ sender: Any) {
-        self.logTextView.text += "\nFinalizing measurements..."
+        self.logTV(text: "Finalizing measurements...")
         recorder.finalizeMeasurements()
         recorder.saveFile(with: "flightplan-human.csv")
-        self.logTextView.text += "\nSaved measurements to file."
+        self.logTV(text: "Saved measurements to file.")
     }
     
     func setupVideoPreviewer() {
@@ -282,7 +282,7 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
         let yaw = state.attitudeInDegrees.yaw - self.lastYaw
         self.recorder.addCameraMeasurement(pitch: pitch, yaw: yaw, roll: roll)
     }
-
+    
     //MARK: STICK UPDATES
     func remoteController(_ rc: DJIRemoteController, didUpdate state: DJIRCHardwareState) {
         let left_h = Float(state.leftStick.horizontalPosition)
@@ -296,16 +296,16 @@ class FlightPlanViewController: UIViewController, DJIGimbalDelegate, DJIFlightCo
     func onCommandSuccess() {
         self.fetchCamera()?.startShootPhoto(completion: { (error) in
             if error != nil {
-                self.logTextView.text = self.logTextView.text + "\nShoot Photo: " + (error?.localizedDescription)!
+                self.logTV(text: "Shoot Photo: " + (error?.localizedDescription)!)
             }
         })
     }
     
     func onError(error: Error?) {
         if error != nil {
-            self.logTextView.text = self.logTextView.text + "\nFlight Control: " + (error?.localizedDescription)!
+            self.logTV(text: "Flight Control: " + (error?.localizedDescription)!)
         } else {
-            self.logTextView.text = self.logTextView.text + "\nUnknown Error has occured"
+            self.logTV(text: "Unknown Error has occured")
         }
     }
     
