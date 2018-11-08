@@ -177,9 +177,6 @@ class QRCodeGenViewController: UIViewController {
         
         // getting the printing GUI to pop open
         self.present(uiViewController, animated: true)
-//        self.present(uiViewController, animated: true, completion: {() in
-//
-//        })
         if let popOver = uiViewController.popoverPresentationController {
             popOver.sourceView = self.view
             
@@ -190,8 +187,6 @@ class QRCodeGenViewController: UIViewController {
         // Create a FileManager instance
         
         let fileManager = FileManager.default
-        
-        // Delete 'hello.swift' file
         
         do {
             try fileManager.removeItem(atPath: urlGlobal)
@@ -214,10 +209,6 @@ class QRCodeGenViewController: UIViewController {
         // need firstPage mediaBox
         let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &imageDrawing, nil)!
 
-    //   used to approximate blankPieceOfPaper dimensions when loaded in google chrome
-    //   let defaultPaper = UIPrintPaper.init()
-    //   defaultPaper.paperSize.width, height: defaultPaper.paperSize.height
-        
         //container dimensions the CGImage is drawn onto
         var blankPieceOfPaper = CGRect.init(x:blankPieceOfPaperXGlobal, y:blankPieceOfPaperYGlobal, width: blankPieceOfPaperWidthGlobal, height: blankPieceOfPaperHeightGlobal)
        

@@ -14,7 +14,6 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
 
     private var barcodeScanner: BarcodeScanner!
     private var positionMonitor: PositionMonitor? = nil
-    //private var recorder: FlightRecorder!
     private var recorder: LeggedFlightRecorder!
     private var replayer: FlightReplayer?
     private let fc = (DJISDKManager.product() as! DJIAircraft).flightController
@@ -96,9 +95,9 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
     func positionMonitorStatusUpdated(_ qrIsTargeted: Bool) {
         // Update the UI
         self.rectDrawView.setShouldBeGreenTarget(qrIsTargeted)
-        if qrIsTargeted {
-            self.positionMonitor?.stopRecentering() // stop recentering
-        }
+//        if qrIsTargeted {
+//            self.positionMonitor?.stopRecentering() // stop recentering
+//        }
     }
     
     @IBAction func sliderValueChanged(_ sender: Any) {
@@ -111,17 +110,11 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
             correct_directions.append(switchWallMode.isOn ? PositionUtil.translateFloorDirectionToWall(direction) : direction)
         }
         self.rectDrawView.setHelperArrows(correct_directions)
-        //if !self.allowPositioning { return }
+        
         self.shouldWait = true
         if directions.count > 0 {
             let command = PositionUtil.translateDirectionToCommand(correct_directions[0], isOnWall: false, verticalSpeed: 0.05, horizontalSpeed: slider.value)
-            fc?.send(command, withCompletion: { (err) in
-                if err != nil {
-                    print("Send error: \(err.debugDescription)")
-                } else {
-                    print("Send success")
-                }
-            })
+            fc?.send(command, withCompletion: nil)
             usleep(100000) // 100ms
         }
         
@@ -159,7 +152,9 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
             self.fc?.setVirtualStickModeEnabled(true, withCompletion: { (err) in
                 self.recorder.finishRecordingLeg()
                 self.fc?.yawControlMode = .angularVelocity
-                self.positionMonitor?.startRecentering()
+                self.positionMonitor?.startRecentering(withCompletion: {() in
+                    self.positionMonitor?.stopRecentering()
+                })
                 self.recordLeg!.setTitle("Record Leg", for: .normal)
             })
         } else {
@@ -185,9 +180,10 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
         self.fc?.setVirtualStickModeEnabled(true, withCompletion: {(err) in
             usleep(200000)
             self.legs = self.recorder.getLegs()
-            self.positionMonitor?.startRecentering {
+            self.positionMonitor?.startRecentering(withCompletion:{ () in
+                self.positionMonitor?.stopRecentering()
                 self.executeNextLeg()
-            }
+            })
         })
     }
     
@@ -203,11 +199,13 @@ class ScanSampleViewController: UIViewController, DJIFlightControllerDelegate,  
                 DispatchQueue.main.async {
                     self.fc?.yawControlMode = .angularVelocity
                     self.positionMonitor?.startRecentering(withCompletion: {() in
+                        self.positionMonitor?.stopRecentering()
                         self.executeNextLeg()
                     })
                 }
             } else {
                 self.positionMonitor?.startRecentering {
+                    self.positionMonitor?.stopRecentering()
                     self.fc?.startLanding(completion: { (err) in
                         self.fc?.confirmLanding(completion: nil)
                     })
